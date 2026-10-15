@@ -275,6 +275,7 @@ section.calcsec .cobro p{margin:6px 0}
 .rep2 span{display:block;font-weight:800;font-size:13px;text-transform:uppercase}
 .rep2 b{display:block;font-size:26px}.rep2 small{display:block;font-size:12px}
 @media(max-width:760px){.rep2{grid-template-columns:1fr}}
+.reparto .repn{margin:10px 0 0;font-size:14px;font-weight:600}
 </style>
 </head>
 <body>
@@ -333,7 +334,7 @@ section.calcsec .cobro p{margin:6px 0}
 <div class="modelos">
   <div class="mod mal"><b class="mt">🏥 Clínica · autónomo · falso autónomo</b>
     <ul>
-      <li><b>Se queda entre el 40 % y el 50 %</b> de la facturación.</li>
+      <li><b>Se queda en torno al 45-50 %</b> de la facturación.</li>
       <li>Si te pones malo, <b>no cobras</b>.</li>
       <li>Las <b>vacaciones no se pagan</b>.</li>
       <li>Poca flexibilidad si tienes un problema personal.</li>
@@ -342,25 +343,25 @@ section.calcsec .cobro p{margin:6px 0}
     </ul></div>
   <div class="mod bien"><b class="mt">🐴 Fundación Pegasus</b>
     <ul>
-      <li><b>Casi el 70 %</b> de la facturación va a tu nómina. Pegasus se queda <b>aprox. el 30 %</b> para sostener el proyecto.</li>
+      <li><b>En torno al 65 %</b> de la facturación va a tu nómina. Pegasus se queda <b>aprox. el 33-36 %</b> para sostener el proyecto.</li>
       <li>Contrato fijo: <b>bajas y vacaciones pagadas</b>.</li>
       <li>Flexibilidad y un equipo detrás si te pasa algo.</li>
       <li>Pegasus paga tu <b>Seguridad Social</b> y gestiona tus impuestos.</li>
       <li>Precios más bajos, así que más familias pueden acceder a la terapia.</li>
     </ul></div>
 </div>
-<div class="caja treinta"><b>¿En qué se usa ese 30 %?</b>
+<div class="caja treinta"><b>¿En qué se usa la parte de Pegasus?</b>
   <div class="chips"><span>🤝 Coordinación y apoyo a profesionales</span><span>🧭 Dirección</span><span>🏠 Espacios y mantenimiento</span><span>💡 Suministros</span><span>📣 Publicidad y captación de familias</span><span>💻 Digitalización (CRM y herramientas)</span><span>📊 Contabilidad</span><span>📑 Gestoría laboral</span><span>🎯 Calidad metodológica</span><span>🧸 Materiales</span></div>
 </div>
 <div class="caja nomina"><b>ℹ️ ¿Qué paga Pegasus por ti?</b>
   <p>En tu nómina verás un importe llamado <b>coste empresa</b>: es todo lo que Pegasus paga por ti, no solo tu sueldo. Incluye la parte de Seguridad Social que paga la empresa, que en un modelo autónomo pagarías tú.</p>
-  <p class="ejn">Ejemplo real · jornada de 26 h · <b>1.427,56 € brutos</b> al mes (con la prorrata de pagas extra)</p>
+  <p class="ejn">Ejemplo · jornada de 26 h · <b>1.427,56 € brutos</b> al mes (con la prorrata de pagas extra) e IRPF del 5 %</p>
   <div class="nom3">
     <div><span>Tu sueldo bruto</span><b>1.427,56 €</b><small>total devengado en la nómina</small></div>
-    <div class="liq"><span>Te llega al banco (líquido)</span><b>1.163,45 €</b><small>− 92,80 € de Seguridad Social (6,5 %) y − 171,31 € de IRPF (12 %)</small></div>
+    <div class="liq"><span>Te llega al banco (líquido)</span><b>1.263,38 €</b><small>− 92,80 € de Seguridad Social (6,5 %) y − 71,38 € de IRPF (5 %)</small></div>
     <div class="ce"><span>Coste empresa (lo que paga Pegasus)</span><b>1.886,52 €</b><small>1.427,56 € + 458,96 € de Seguridad Social que paga la empresa (≈ 32 %)</small></div>
   </div>
-  <p class="nota" style="margin-top:8px">El IRPF depende de la situación personal de cada profesional: en este ejemplo es del 12 %.</p>
+  <p class="nota" style="margin-top:8px">El IRPF depende de la situación personal de cada profesional: en este ejemplo usamos un 5 %.</p>
 </div>
 </section>
 
@@ -877,7 +878,7 @@ function calc(){const p=PR[SC];let slots=0,real=0;const av=[];
  cV2.className='veredicto '+(ex?'si':'gris');
  cV2.innerHTML=ex?'💰 '+ex+' plaza'+(ex>1?'s':'')+' extra: '+(30*ex)+' €<small>('+eur(real)+' − '+eur(pot)+') ÷ '+eur(plazaMes)+' = '+ex+'</small>':'Sin plaza extra<small>Hace falta facturar '+eur(plazaMes)+' por encima del potencial (eso sería una plaza extra). Es decir, llegar a <b>'+eur(pot+plazaMes)+'</b> = potencial '+eur(pot)+' + '+eur(plazaMes)+'.</small>';
  const t=(ok?65:0)+30*ex;cTot.innerHTML='Total de pluses este mes: <b>'+t+' €</b> brutos';
- cRep.innerHTML='<b class="rt">💡 ¿A dónde va la facturación?</b>De tu facturación real de <b>'+eur(real)+'</b>, aproximadamente:<div class="rep2"><div><span>≈ 70 % · tu nómina</span><b>'+eur(real*0.7)+'</b></div><div><span>≈ 30 % · Pegasus</span><b>'+eur(real*0.3)+'</b><small>coordinación, espacios, suministros, gestoría, digitalización, metodología, materiales…</small></div></div>'}
+ cRep.innerHTML='<b class="rt">💡 ¿A dónde va la facturación?</b>De la facturación real de <b>'+eur(real)+'</b>, aproximadamente:<div class="rep2"><div><span>≈ 65 % · tu nómina</span><b>'+eur(real*0.65)+'</b></div><div><span>≈ 35 % · Pegasus</span><b>'+eur(real*0.35)+'</b><small>coordinación, espacios, suministros, gestoría, digitalización, metodología, materiales…</small></div></div><p class="repn">Son términos aproximados: el reparto real depende de cada caso, de los pluses, etc.</p>'}
 document.querySelectorAll('input[name=cns]').forEach(r=>r.onchange=()=>{CN=+r.value;pintaTab()});
 cEj.onclick=()=>{CW=EJ();pintaTab()};
 cVac.onclick=()=>{CW=[{},{},{},{},{}];pintaTab()};
