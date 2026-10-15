@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Tetris de la ocupación · Logopedia y T.O.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--morado:#974694;--rosa:#E45E9B;--verde:#08B75B;--azul:#007EC3;--rojo:#D6191B;--tinta:#1f2a37;--suave:#5f6b7a;--borde:#e8e0ee;--caja:#faf7fc;
+--c-ind:#FBE77A;--c-vac:#C9A3DA;--c-par:#5fd394;--c-tri:#F59E5B;--c-gru:#F07FB3;--c-cer:#d9dde3;--c-tra:#a9b0ba}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:#fff;color:var(--tinta);font-family:'Barlow',system-ui,sans-serif;font-size:17px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px 60px}
+body.proy .wrap{zoom:1.18}
+header{background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff;border-radius:0 0 44px 44px;padding:34px 26px 34px;margin:0 -18px 0;position:relative;overflow:hidden}
+header .eti{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;padding:4px 14px;font-weight:600;font-size:14px}
+header h1{font-size:44px;line-height:1.02;margin:14px 0 8px;font-weight:900;letter-spacing:-.5px}
+header p{margin:0;font-size:19px;max-width:620px}
+header .proyb{position:absolute;top:18px;right:18px;border:2px solid rgba(255,255,255,.7);background:transparent;color:#fff;border-radius:999px;padding:5px 12px;font:700 13px 'Barlow',sans-serif;cursor:pointer}
+header .deco{position:absolute;right:26px;bottom:18px;display:grid;grid-template-columns:repeat(4,22px);gap:4px;opacity:.9}
+header .deco i{width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.25)}
+header .deco i.y{background:var(--c-ind)}header .deco i.g{background:var(--c-par)}header .deco i.o{background:var(--c-tri)}
+/* índice fijo */
+nav.barra-niv{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--borde);margin:0 -18px;padding:8px 18px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav.barra-niv a{flex:0 0 auto;text-decoration:none;color:var(--suave);font-weight:700;font-size:14px;border:2px solid var(--borde);border-radius:999px;padding:4px 12px;white-space:nowrap}
+nav.barra-niv a.vis{border-color:var(--rosa);color:var(--morado)}
+nav.barra-niv a.ok{background:linear-gradient(120deg,var(--morado),var(--rosa));border-color:transparent;color:#fff}
+.indice{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0 6px}
+.indice a{display:block;text-decoration:none;color:var(--tinta);background:var(--caja);border:2px solid var(--borde);border-radius:22px;padding:14px;transition:transform .15s,border-color .15s}
+.indice a:hover{transform:translateY(-2px);border-color:var(--rosa)}
+.indice .n{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;color:#fff;font-weight:800;background:linear-gradient(135deg,var(--morado),var(--rosa));margin-bottom:6px}
+.indice b{display:block;font-size:17px;line-height:1.2}
+.indice small{display:block;color:var(--suave);font-size:14px;line-height:1.3;margin-top:3px}
+.indice a.pend{background:#fff6e0;border-color:#f5d27a}.indice a.pend .n{background:#e2a400}
+section{padding-top:8px}
+h2{font-size:29px;margin:44px 0 4px;font-weight:900;color:var(--morado);line-height:1.15}
+h2 .paso{display:inline-flex;min-width:40px;height:40px;border-radius:999px;align-items:center;justify-content:center;color:#fff;font-size:15px;padding:0 12px;margin-right:10px;vertical-align:4px;background:linear-gradient(135deg,var(--morado),var(--rosa));letter-spacing:.5px}
+h3{font-size:20px;margin:24px 0 8px;color:var(--morado)}
+.sub{color:var(--suave);margin:0 0 14px;font-size:18px}
+.caja{background:var(--caja);border:1px solid var(--borde);border-radius:24px;padding:18px 20px;margin:12px 0}
+.regla{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;font-size:22px;font-weight:800;text-align:center;padding:18px}
+.regla .pill{border-radius:999px;padding:8px 18px;background:#fff;border:2px solid var(--borde)}
+.regla .pill.m{border-color:var(--morado);color:var(--morado)}
+/* nivel 0 */
+.negocio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.negocio>div{border-radius:22px;padding:16px;text-align:center;border:3px solid transparent;background:#f6f7f9;transition:all .2s;opacity:.55}
+.negocio>div.on{opacity:1;transform:scale(1.03)}
+.negocio b{display:block;font-size:34px;font-weight:900;line-height:1}
+.negocio span{display:block;font-size:13px;font-weight:700;color:var(--suave);text-transform:uppercase}
+.negocio p{margin:8px 0 0;font-weight:800}
+.negocio .r.on{border-color:#e9a0a0;background:#fdecec}.negocio .r p{color:#b42318}
+.negocio .a.on{border-color:#f5c27a;background:#fff3df}.negocio .a p{color:#a35a00}
+.negocio .v.on{border-color:#8fdcb3;background:#e7f8ef}.negocio .v p{color:#067a3e}
+.slider{display:flex;align-items:center;gap:14px;margin:16px 4px 4px;font-weight:700}
+.slider input{flex:1;accent-color:var(--morado)}
+/* piezas */
+.ley{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ley>div{border-radius:18px;padding:12px;text-align:center;font-weight:700;font-size:15px;position:relative;overflow:hidden}
+.ley b{display:block;font-size:28px;line-height:1.1;position:relative}
+.ley small{display:block;font-weight:500;color:#374151;font-size:14px;line-height:1.3;margin-top:4px;position:relative}
+.ley span{position:relative}
+.t-ind{background:var(--c-ind)}.t-vac{background:var(--c-vac)}.t-par{background:var(--c-par)}.t-tri{background:var(--c-tri)}.t-gru{background:var(--c-gru)}
+.t-lt,.t-ga{background:var(--c-cer);color:#6b7480!important;background-image:repeating-linear-gradient(45deg,transparent 0 6px,rgba(255,255,255,.6) 6px 9px)}
+.t-tra{background:var(--c-tra);color:#fff!important;background-image:repeating-linear-gradient(45deg,transparent 0 6px,rgba(255,255,255,.25) 6px 9px)}
+.dv{position:absolute;top:0;bottom:0;border-left:2px dashed rgba(255,255,255,.95);z-index:0}
+.cerr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.cerr>div{border-radius:16px;padding:10px 12px;font-size:15px}
+.cerr b{display:block;font-size:17px}
+/* mini reto */
+.reto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pieza{background:#fff;border:2px solid var(--borde);border-radius:20px;padding:12px;text-align:center;transition:border-color .2s}
+.pieza .muestra{height:52px;border-radius:12px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px}
+.pieza .muestra span{position:relative}
+.ops{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+.ops button{border:2px solid var(--borde);background:#fff;border-radius:999px;padding:3px 10px;font:700 14px 'Barlow',sans-serif;cursor:pointer;color:var(--tinta)}
+.ops button:hover{border-color:var(--rosa)}
+.ops button.bien{background:#08B75B;border-color:#08B75B;color:#fff}
+.ops button.mal{background:#fdecec;border-color:#f3c4c4;color:#b42318;text-decoration:line-through}
+.pieza.ok{border-color:#8fdcb3}
+.pieza .fb{font-size:13px;color:var(--suave);min-height:18px;margin-top:6px}
+.marcador{display:flex;justify-content:center;gap:10px;align-items:center;font-weight:800;margin-top:14px;font-size:18px}
+.marcador .pts{background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff;border-radius:999px;padding:4px 16px}
+/* semana */
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.botones button,.btn{border:2px solid var(--morado);background:#fff;color:var(--morado);border-radius:999px;padding:6px 14px;font:700 14px 'Barlow',sans-serif;cursor:pointer}
+.botones button.on{background:var(--morado);color:#fff}
+.btn.grande{font-size:18px;padding:10px 22px;background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff;border:0;box-shadow:0 6px 16px rgba(151,70,148,.25)}
+.btn.grande:disabled{opacity:.5;cursor:default}
+.acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 4px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.dia{text-align:center;font-weight:800;color:var(--suave);font-size:14px}
+.col{display:flex;flex-direction:column;gap:6px}
+.cel{position:relative;overflow:hidden;border:0;border-radius:12px;height:48px;font:700 14px 'Barlow',sans-serif;cursor:pointer;color:#2b2b2b;display:flex;align-items:center;justify-content:center;gap:4px;transition:transform .15s,box-shadow .2s,opacity .3s}
+.cel:hover{transform:scale(1.03)}
+.cel span{position:relative;z-index:1}
+.cel .s{font-size:18px}
+.cel.tap{background:#FDF4C4!important;border:2px dashed #F2D65A;color:#8a6d00}
+.cel.cl.t-ind{background:#FDF4C4}.cel.cl.t-par{background:#C3F0D7}.cel.cl.t-tri{background:#FBD5B8}
+.cel.usada{opacity:.55}
+.cel.sobra{box-shadow:0 0 0 3px #08B75B,0 0 16px rgba(8,183,91,.6);animation:late 1s ease-in-out 3}
+.cel.falta{box-shadow:0 0 0 3px var(--rojo);animation:late 1s ease-in-out 3}
+@keyframes late{50%{transform:scale(1.07)}}
+.ficha{position:fixed;z-index:50;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:10px;background:#08B75B;color:#fff;font:900 16px 'Barlow',sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,.25);pointer-events:none}
+.bal{margin-top:4px;text-align:center;font-weight:800;border-radius:10px;padding:4px 0;background:#fff;border:2px solid var(--borde)}
+.bal.neg{color:var(--rojo);border-color:#f3c4c4}.bal.pos{color:#067a3e;border-color:#b6ebcc}
+.pista{font-size:14px;color:var(--suave);margin:8px 0 0}
+#pal{position:absolute;z-index:40;background:#fff;border:2px solid var(--borde);border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.15);padding:8px;display:none;grid-template-columns:repeat(2,1fr);gap:5px;width:230px}
+#pal.on{display:grid}
+#pal button{position:relative;overflow:hidden;border:0;border-radius:10px;padding:7px 6px;font:700 13px 'Barlow',sans-serif;cursor:pointer;text-align:left}
+#pal button span{position:relative}
+#pal .tit{grid-column:1/-1;font-size:12px;font-weight:800;color:var(--suave);text-transform:uppercase;padding:2px 4px}
+.calc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.dato{background:#fff;border:2px solid var(--borde);border-radius:20px;padding:10px;text-align:center}
+.dato span{display:block;font-size:12px;font-weight:700;color:var(--suave);text-transform:uppercase;letter-spacing:.4px}
+.dato b{font-size:32px;line-height:1.1}
+.dato.meta{border-color:var(--morado)}.dato.meta b{color:var(--morado)}
+.ver2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.veredicto{border-radius:20px;padding:14px 18px;font-weight:800;font-size:18px;text-align:center}
+.veredicto small{display:block;font-weight:600;font-size:15px;margin-top:2px}
+.veredicto.si{background:#e7f8ef;color:#067a3e}.veredicto.no{background:#fdecec;color:#b42318}.veredicto.meh{background:#fff6e0;color:#8a5a00}.veredicto.gris{background:#f3f4f6;color:var(--suave)}
+.nota{margin:12px 0 0;text-align:center;font-size:15px;color:var(--suave)}.nota a{color:var(--morado);font-weight:700}
+.tmsg{min-height:28px;text-align:center;font-weight:800;font-size:19px;margin:10px 0 0;color:var(--morado)}
+/* mes */
+.cal{display:grid;grid-template-columns:auto repeat(7,1fr) auto;gap:4px;align-items:center;max-width:560px;margin:10px auto}
+.cal .h{font-size:12px;font-weight:800;color:var(--suave);text-align:center}
+.cal .d{text-align:center;border-radius:8px;padding:5px 0;font-weight:700;font-size:15px;background:#f3f4f6;color:#9aa3ae}
+.cal .d.en{background:#fff;border:2px solid var(--borde);color:var(--tinta)}
+.cal .d.ju{position:relative}
+.cal .d.ju::after{content:'';position:absolute;inset:-3px;border:2px solid var(--rosa);border-radius:10px}
+.cal .d.cu{background:#f6ecf6;border-color:#d9b5d8}
+.cal .etq{font-size:13px;font-weight:800;padding-left:6px;white-space:nowrap}
+.cal .etq.si{color:#067a3e}.cal .etq.no{color:#9aa3ae}
+.cal .num{font-size:12px;font-weight:800;color:var(--suave);padding-right:4px}
+.semanas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.semanas.c5{grid-template-columns:repeat(5,1fr)}
+.sem{background:#fff;border:2px solid var(--borde);border-radius:20px;padding:10px;text-align:center}
+.sem h4{margin:0 0 6px;font-size:15px}
+.mini{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:8px}
+.mini i{display:block;height:14px;border-radius:4px;position:relative;overflow:hidden;font-style:normal;color:#fff;font-size:9px;font-weight:800;line-height:14px}
+.mini i .dv,.gridm i .dv{border-left-width:1.5px}
+.mini i span,.gridm i span{position:relative}
+.edit{display:flex;gap:4px;justify-content:center;margin-top:6px}
+.edit button{border:0;border-radius:999px;padding:3px 8px;font:800 12px 'Barlow',sans-serif;cursor:pointer}
+.edit .ep{background:var(--c-par)}.edit .eh{background:var(--c-vac)}.edit .er{background:#eef0f3;color:var(--suave)}
+.suma{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:21px;font-weight:800;margin:16px 0 8px}
+.suma .ch{border-radius:14px;padding:5px 11px;background:#fff;border:2px solid var(--borde)}
+.suma .ch.neg{color:var(--rojo)}.suma .ch.pos{color:#067a3e}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ojo{background:#fff6e0;border:2px solid #f5d27a;border-radius:24px;padding:16px 20px;margin:12px 0;font-size:18px}
+.ojo b.t{display:block;font-size:20px;margin-bottom:4px}
+.ej{background:#fff;border:2px solid var(--borde);border-radius:22px;padding:14px}
+.ej h4{margin:0 0 8px;font-size:17px}
+.gridm{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.gridm>div{display:flex;flex-direction:column;gap:4px}
+.gridm i{display:block;height:22px;border-radius:7px;position:relative;overflow:hidden;font-style:normal;color:#fff;font-weight:800;font-size:11px;line-height:22px;text-align:center}
+.ej .linea{font-weight:700;margin:10px 0 6px;text-align:center}
+/* reto final */
+.caso{background:#fff;border:2px solid var(--borde);border-radius:24px;padding:16px;margin:14px 0}
+.caso h4{margin:0 0 4px;font-size:19px}
+.caso .q{font-weight:700;margin:12px 0 6px}
+.caso .ops button{font-size:15px;padding:5px 14px}
+.caso .exp{display:none;margin-top:10px;border-radius:16px;padding:10px 14px;background:var(--caja);font-size:16px}
+.caso .exp.on{display:block}
+.caso .rec{margin-top:6px;padding-top:6px;border-top:1px dashed var(--borde);color:var(--morado);font-size:15px}
+.caso .mini{max-width:150px;margin:0 auto 6px}
+.caso .semanas .bal{font-size:15px}
+.medalla{display:none;text-align:center;border-radius:28px;padding:24px;margin-top:16px;background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff}
+.medalla.on{display:block}
+.medalla .m{font-size:64px;line-height:1}
+.medalla b{display:block;font-size:26px;margin:6px 0}
+.pend{background:#fff6e0;border:2px dashed #e2a400;border-radius:24px;padding:18px 22px;margin:12px 0}
+.pend .tag{display:inline-block;background:#e2a400;color:#fff;border-radius:999px;padding:3px 12px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+.pend ul{margin:8px 0 0;padding-left:20px}
+footer{margin-top:48px;font-size:14px;color:var(--suave);text-align:center}
+@media(max-width:760px){.indice{grid-template-columns:repeat(2,1fr)}.ley{grid-template-columns:repeat(2,1fr)}.cerr,.reto{grid-template-columns:1fr 1fr}.calc{grid-template-columns:1fr 1fr}.semanas,.semanas.c5{grid-template-columns:repeat(2,1fr)}.dos,.ver2,.negocio{grid-template-columns:1fr}.cel{height:40px;font-size:11px}.cel .s{font-size:14px}header h1{font-size:33px}header .deco{display:none}.grid{gap:4px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* calculadora logo/to */
+.vista{display:flex;justify-content:center;gap:0}
+.vista button{border:2px solid var(--morado);background:#fff;color:var(--morado);padding:7px 16px;font:800 15px 'Barlow',sans-serif;cursor:pointer}
+.vista button:first-child{border-radius:999px 0 0 999px}.vista button:last-child{border-radius:0 999px 999px 0;border-left:0}
+.vista button.on{background:var(--morado);color:#fff}
+
+.cpasos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px}
+.cpasos>div{display:flex;gap:10px;align-items:flex-start;font-size:16px}
+.cpasos>div>b{flex:0 0 auto;min-width:42px;text-align:center;border-radius:10px;padding:4px 6px;font-weight:900}
+.cbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:12px}
+.cbar .vista{margin:0}
+.ksem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ksem.c5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.kw{background:#fff;border:2px solid var(--borde);border-radius:20px;padding:10px;text-align:center}
+.kw h4{margin:0 0 6px;font-size:16px}
+.kf{display:flex;align-items:center;justify-content:space-between;gap:4px;margin:5px 0;border-radius:12px;padding:3px 4px}
+.kf label{font-size:13px;font-weight:800;text-align:left;flex:1}
+.kf button{width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,255,255,.75);font:900 16px 'Barlow',sans-serif;cursor:pointer;color:var(--tinta)}
+.kf input{width:38px;text-align:center;font:800 17px 'Barlow',sans-serif;border:0;background:transparent;color:var(--tinta)}
+.kf input::-webkit-inner-spin-button{display:none}
+.kfichas{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;min-height:18px;margin:8px 0 6px}
+.kfichas i{width:14px;height:14px;border-radius:4px;display:block}
+.kwhy{background:#fff;border:2px dashed var(--borde);border-radius:18px;padding:12px 16px;margin-top:12px;font-size:16px}
+.kwhy p{margin:4px 0}
+.total{text-align:center;font-size:22px;font-weight:800;margin-top:14px}.total b{color:var(--morado);font-size:30px}
+@media(max-width:760px){.cpasos{grid-template-columns:1fr}.ksem,.ksem.c5{grid-template-columns:repeat(2,minmax(0,1fr))}.kf{flex-wrap:wrap;justify-content:center}.kf label{flex-basis:100%;text-align:center}}
+
+/* calculadoras en oscuro */
+section.calcsec{background:#1d1824;color:#f3eef6;border-radius:32px;padding:6px 24px 28px;margin-top:48px}
+section.calcsec h2{color:#fff}
+section.calcsec .sub{color:#cfc6d9}
+section.calcsec>.caja{background:#2a2333;border-color:#3b3247;color:#f3eef6}
+section.calcsec .caja a{color:#f7a8cb}
+section.calcsec .suma{color:#fff}
+section.calcsec .total{color:#fff}section.calcsec .total b{color:#f7a8cb}
+section.calcsec .btn{background:transparent;color:#fff;border-color:#f7a8cb}
+section.calcsec .vista button{background:transparent;color:#fff;border-color:#f7a8cb}
+section.calcsec .vista button.on{background:#E45E9B;border-color:#E45E9B}
+section.calcsec .chk{color:#fff}
+section.calcsec .kwhy{background:#2a2333;border-color:#4a3f58;color:#f3eef6}
+section.calcsec .kw,section.calcsec .dato,section.calcsec .tabla{color:var(--tinta)}
+nav.barra-niv a.calcbtn{background:#1d1824;border-color:#1d1824;color:#fff}
+nav.barra-niv a.calcbtn.ok{background:#1d1824;color:#fff;box-shadow:0 0 0 2px #E45E9B inset}
+section.calcsec .cobro{margin-top:16px;border-radius:20px;padding:14px 18px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);font-size:16px}
+section.calcsec .cobro .ct{display:block;font-size:19px;margin-bottom:2px}
+section.calcsec .cobro p{margin:6px 0}
+
+/* modelo clínica vs Pegasus */
+.modelos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mod{border-radius:22px;padding:14px 18px;border:2px solid}
+.mod .mt{display:block;font-size:18px;margin-bottom:4px}
+.mod ul{margin:4px 0 0;padding-left:20px}.mod li{margin:4px 0}
+.mod.mal{background:#fdecec;border-color:#f3c4c4}.mod.mal .mt{color:#b42318}
+.mod.bien{background:#e7f8ef;border-color:#8fdcb3}.mod.bien .mt{color:#067a3e}
+.treinta .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.treinta .chips span{background:#fff;border:1px solid var(--borde);border-radius:999px;padding:4px 10px;font-size:14px;font-weight:600}
+.nomina p{margin:6px 0}.nomina .ejn{font-weight:700;color:var(--morado)}
+.nom3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.nom3>div{background:#fff;border:2px solid var(--borde);border-radius:18px;padding:10px;text-align:center}
+.nom3 span{display:block;font-size:12px;font-weight:800;color:var(--suave);text-transform:uppercase}
+.nom3 b{display:block;font-size:28px}.nom3 small{display:block;font-size:13px;color:var(--suave)}
+.nom3 .liq{border-color:#8fdcb3}.nom3 .ce{border-color:var(--morado)}.nom3 .ce b{color:var(--morado)}
+@media(max-width:760px){.modelos,.nom3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <button class="proyb" id="proyb" type="button">🖥️ Modo proyector</button>
+  <span class="eti">Terapia Para Tod@s · Logopedia y Terapia Ocupacional</span>
+  <h1>El Tetris<br>de la ocupación</h1>
+  <p>Formación del <b>plus de productividad (65 €)</b> y la <b>plaza extra (30 €)</b>. Juega con tu horario y descubre cómo se calcula.</p>
+  <div class="deco" aria-hidden="true"><i class="y"></i><i class="y"></i><i class="g"></i><i></i><i class="y"></i><i class="o"></i><i class="y"></i><i class="y"></i></div>
+</header>
+
+<nav class="barra-niv" id="nav" aria-label="Niveles">
+  <a href="#inicio">Índice</a><a href="#n6" class="calcbtn">🧮 Calculadora</a><a href="#n0">0 · Por qué</a><a href="#n1">1 · Piezas</a><a href="#n2">2 · Semana</a><a href="#n3">3 · Mes</a><a href="#n4">4 · Plaza extra</a><a href="#n5">5 · Reto final</a><a href="#pend">Pendiente</a>
+</nav>
+
+<section id="inicio">
+<h2>🎮 Índice del juego</h2>
+<p class="sub">Seis niveles cortos y una calculadora. Puedes ir en orden o saltar al que necesites. Los niveles con reto se marcan en el menú de arriba cuando los superas.</p>
+<div class="indice">
+  <a href="#n0"><span class="n">0</span><b>¿Por qué existe el plus?</b><small>Qué significa llenar el horario.</small></a>
+  <a href="#n1"><span class="n">1</span><b>Las piezas</b><small>Slots abiertos, cerrados y plazas. Mini‑reto.</small></a>
+  <a href="#n2"><span class="n">2</span><b>Juega una semana</b><small>Monta un horario y haz el Tetris.</small></a>
+  <a href="#n3"><span class="n">3</span><b>El mes</b><small>Qué semanas cuentan y cómo se suman.</small></a>
+  <a href="#n4"><span class="n">4</span><b>La plaza extra</b><small>Cuándo se ganan los 30 € de más.</small></a>
+  <a href="#n5"><span class="n">5</span><b>Reto final</b><small>6 casos y 10 preguntas. ¿Te llevas el oro?</small></a>
+  <a href="#n6"><span class="n">🧮</span><b>Tu calculadora</b><small>Mete tus huecos, parejas y tríos de cada semana.</small></a>
+  <a href="#pend" class="pend"><span class="n">!</span><b>Medida pendiente</b><small>Mínimo 1 pareja.</small></a>
+</div>
+</section>
+
+<!-- NIVEL 0 -->
+<section id="n0">
+<h2><span class="paso">NIVEL 0</span>¿Por qué existe el plus?</h2>
+<p class="sub">Imagina un horario de 30 huecos a la semana. No es lo mismo tener 20 ocupados que 30: cada hueco vacío es una sesión que no llega a ninguna familia y que la fundación sigue pagando.</p>
+<div class="caja">
+  <div class="negocio" id="neg">
+    <div class="r"><span>Ocupación</span><b>20/30</b><p>No es sostenible</p></div>
+    <div class="a"><span>Ocupación</span><b>25/30</b><p>Riesgo de no ser sostenible</p></div>
+    <div class="v"><span>Ocupación</span><b>30/30</b><p>Sostenible: Pegasus puede crecer y mejorar condiciones</p></div>
+  </div>
+  <div class="slider"><span>Mueve la barra:</span><input type="range" min="18" max="30" value="25" id="negR" aria-label="Slots ocupados"><span id="negV" style="min-width:64px">25/30</span></div>
+</div>
+<p class="sub">Por eso el plus premia que tu horario esté <b>lleno</b>. Y si consigues meter a más personas que huecos (parejas, tríos…), cada plaza de más también se premia.</p>
+<h3>⚖️ Modelo clínica frente a modelo Pegasus</h3>
+<p class="sub">¿Y por qué funciona así? Porque en Pegasus apostamos por un modelo distinto al de una clínica normal. Así se ve la diferencia:</p>
+<div class="modelos">
+  <div class="mod mal"><b class="mt">🏥 Clínica · autónomo · falso autónomo</b>
+    <ul>
+      <li><b>Se queda entre el 40 % y el 50 %</b> de la facturación.</li>
+      <li>Si te pones malo, <b>no cobras</b>.</li>
+      <li>Las <b>vacaciones no se pagan</b>.</li>
+      <li>Poca flexibilidad si tienes un problema personal.</li>
+      <li>Tú pagas la <b>cuota de autónomos</b> y los impuestos.</li>
+      <li>Tú pagas la <b>gestoría</b>.</li>
+    </ul></div>
+  <div class="mod bien"><b class="mt">🐴 Fundación Pegasus</b>
+    <ul>
+      <li><b>Casi el 70 %</b> de la facturación va a tu nómina. Pegasus se queda <b>aprox. el 30 %</b> para sostener el proyecto.</li>
+      <li>Contrato fijo: <b>bajas y vacaciones pagadas</b>.</li>
+      <li>Flexibilidad y un equipo detrás si te pasa algo.</li>
+      <li>Pegasus paga tu <b>Seguridad Social</b> y gestiona tus impuestos.</li>
+      <li>Precios más bajos, así que más familias pueden acceder a la terapia.</li>
+    </ul></div>
+</div>
+<div class="caja treinta"><b>¿En qué se usa ese 30 %?</b>
+  <div class="chips"><span>🤝 Coordinación y apoyo a profesionales</span><span>🧭 Dirección</span><span>🏠 Espacios y mantenimiento</span><span>💡 Suministros</span><span>📣 Publicidad y captación de familias</span><span>💻 Digitalización (CRM y herramientas)</span><span>📊 Contabilidad</span><span>📑 Gestoría laboral</span><span>🎯 Calidad metodológica</span><span>🧸 Materiales</span></div>
+</div>
+<div class="caja nomina"><b>ℹ️ ¿Qué paga Pegasus por ti?</b>
+  <p>En tu nómina verás un importe llamado <b>coste empresa</b>: es todo lo que Pegasus paga por ti, no solo tu sueldo. Incluye la parte de Seguridad Social que paga la empresa, que en un modelo autónomo pagarías tú.</p>
+  <p class="ejn">Ejemplo real · jornada de 26 h · <b>1.427,56 € brutos</b> al mes (con la prorrata de pagas extra)</p>
+  <div class="nom3">
+    <div><span>Tu sueldo bruto</span><b>1.427,56 €</b><small>total devengado en la nómina</small></div>
+    <div class="liq"><span>Te llega al banco (líquido)</span><b>1.163,45 €</b><small>− 92,80 € de Seguridad Social (6,5 %) y − 171,31 € de IRPF (12 %)</small></div>
+    <div class="ce"><span>Coste empresa (lo que paga Pegasus)</span><b>1.886,52 €</b><small>1.427,56 € + 458,96 € de Seguridad Social que paga la empresa (≈ 32 %)</small></div>
+  </div>
+  <p class="nota" style="margin-top:8px">El IRPF depende de la situación personal de cada profesional: en este ejemplo es del 12 %.</p>
+</div>
+</section>
+
+<!-- NIVEL 1 -->
+<section id="n1">
+<h2><span class="paso">NIVEL 1</span>Las piezas del juego</h2>
+<p class="sub">Tu horario es como un Tetris. Cada <b>slot</b> es un hueco de 40 minutos. Lo que importa es si lo llenas, si lo dejas vacío o si metes a más de una persona.</p>
+<h3>🟨 Slots abiertos: sí puede haber sesión</h3>
+<p class="sub">La pregunta es siempre la misma: <b>¿cuántas personas hay en el hueco comparado con 1?</b> Si hay justo 1, vale 0. Si no hay nadie, falta 1. Si hay más de 1, lo que sobra suma.</p>
+<div class="ley" id="ley"></div>
+<div class="ojo vacio"><b class="t">💡 ¿Qué cuenta como hueco vacío?</b>Aquí va un matiz importante: un hueco cuenta como <b>vacío</b> siempre que no haya una sesión que esté <b>pagando el usuario</b> (individual, pareja, trío o grupo). Por ejemplo, una <b>prueba gratuita</b> o una <b>recuperación</b> ocupan tu hueco, pero para el plus cuentan como vacío. 👀<br><br>Pero ojo, que no por eso dejan de ser importantes: una <b>prueba gratuita</b> puede convertirse en un alta y en un futuro hueco ocupado, y una <b>recuperación</b> evita tener que hacer una devolución económica que pondría en riesgo la sostenibilidad del proyecto.</div>
+<h3>⬜ Slots cerrados: no hay sesión y no cuentan</h3>
+<div class="cerr">
+  <div class="t-lt" style="color:var(--tinta)!important"><b>LT · Libre temporal</b>No estás trabajando en ese hueco. No se mete a nadie, salvo que haya demanda y se decida abrirlo.</div>
+  <div class="t-tra"><b>Traslado</b>Te estás desplazando de un centro a otro.</div>
+  <div class="t-ga" style="color:var(--tinta)!important"><b>GA · Gestión adicional</b>Hueco reservado para gestión adicional.</div>
+</div>
+<p class="sub" style="margin-top:10px">Una idea clave: un <b>slot cerrado no suma ni resta</b>. Es como si no estuviera en el tablero.</p>
+<h3>🧠 Mini‑reto: ¿cuánto vale cada pieza?</h3>
+<div class="reto" id="reto1"></div>
+<div class="marcador">Aciertos: <span class="pts" id="reto1P">0 / 6</span></div>
+</section>
+
+<!-- NIVEL 2 -->
+<section id="n2">
+<h2><span class="paso">NIVEL 2</span>Juega una semana</h2>
+<p class="sub">Para el plus de <b>65 €</b>, cada semana tus plazas tienen que llegar a <b>todos tus slots abiertos menos uno</b>. Es decir, te puedes permitir <b>un hueco vacío</b> por semana. Le llamamos «el 100 % menos 1».</p>
+<div class="caja regla"><span class="pill">Plazas</span> ≥ <span class="pill m">Slots abiertos − 1</span></div>
+<p class="sub" style="text-align:center">Truco del Tetris: no hace falta contarlo todo. Las parejas y tríos <b>tapan</b> los huecos vacíos. Si al final te queda <b>como mucho un hueco</b> sin tapar, cumples.</p>
+<div class="caja">
+  <div class="botones" id="presets"></div>
+  <div class="grid" id="semana"></div>
+  <p class="pista">👆 Toca cualquier hueco para cambiar la pieza y monta tu propia semana.</p>
+  <div class="acciones">
+    <button class="btn grande" id="btnTetris" type="button">🧩 ¡Hacer el Tetris!</button>
+    <button class="btn" id="btnReset" type="button">↺ Deshacer</button>
+  </div>
+  <div class="tmsg" id="tmsg"></div>
+  <div class="calc">
+    <div class="dato"><span>Slots abiertos</span><b id="sA"></b></div>
+    <div class="dato meta"><span>Meta (slots − 1)</span><b id="sM"></b></div>
+    <div class="dato"><span>Plazas</span><b id="sP"></b></div>
+    <div class="dato"><span>Saldo</span><b id="sS"></b></div>
+  </div>
+  <div class="ver2">
+    <div class="veredicto" id="sV1"></div>
+    <div class="veredicto" id="sV2"></div>
+  </div>
+  <p class="nota">ℹ️ Estos importes son del <b>plus mensual</b>: se cobran si se cumplen las condiciones durante <b>todo el mes</b>. <a href="#n3">Ver nivel 3</a>.</p>
+</div>
+</section>
+
+<!-- NIVEL 3 -->
+<section id="n3">
+<h2><span class="paso">NIVEL 3</span>El mes</h2>
+<p class="sub">El plus se paga <b>una vez al mes</b>, con lo que pasó en el mes anterior. Se hace lo mismo que en la semana, pero sumando todas las semanas del mes.</p>
+<h3>➕ Sumar las semanas</h3>
+<p class="sub">Se permite <b>un hueco por cada semana</b>. En un mes estándar de <b>4 semanas</b> puedes llegar hasta <b>−4</b>. Una semana floja se compensa con otra buena.</p>
+<div class="caja regla" id="mesAF"><span class="pill">Plazas del mes</span> ≥ <span class="pill m">Slots del mes − 4</span></div>
+<div class="caja" id="mesA">
+  <div class="botones"></div>
+  <div class="semanas"></div>
+  <p class="pista" style="text-align:center">Usa los botones de cada semana para añadir parejas o huecos vacíos.</p>
+  <div class="suma"></div>
+  <div class="ver2"><div class="veredicto v1"></div><div class="veredicto v2"></div></div>
+</div>
+<h3>📅 ¿Qué semanas cuentan en cada mes?</h3>
+<p class="sub">Ojo: <b>no todos los meses tienen 4 semanas</b>. Se cuentan <b>semanas completas</b> (de lunes a domingo), no del día 1 al 30. Si una semana está entre dos meses, cuenta para el mes que tiene <b>más días</b> de esa semana. Truco rápido: mira dónde cae el <b>jueves</b>.</p>
+<div class="caja">
+  <div class="botones" id="calB"></div>
+  <div class="cal" id="cal"></div>
+  <div class="veredicto meh" id="calV" style="margin-top:10px"></div>
+  <div class="regla" id="calF" style="padding:12px 0 0"></div>
+</div>
+</section>
+
+<!-- NIVEL 4 -->
+<section id="n4">
+<h2><span class="paso">NIVEL 4</span>La plaza extra: +30 €</h2>
+<p class="sub">Si superas tus slots abiertos, cada plaza de más vale <b>30 €</b>. Pero ojo, que aquí está el error más común.</p>
+<div class="ojo"><b class="t">⚠️ Tener una pareja no es tener una plaza extra</b>
+La pareja primero <b>tapa huecos vacíos</b>. Solo cuando el horario ya está lleno, lo que sobra cuenta como plaza extra. Si tienes una pareja y también un hueco vacío, se anulan y te quedas en 0.</div>
+<h3>En una semana</h3>
+<div class="dos">
+  <div class="ej" id="exA"></div>
+  <div class="ej" id="exB"></div>
+</div>
+<h3>En el mes</h3>
+<p class="sub">El saldo del mes se reparte entre las semanas y <b>solo cuentan las plazas enteras</b>. Para 1 plaza extra en un mes de 4 semanas necesitas <b>+4</b> (de media, +1 cada semana); en uno de 5, <b>+5</b>.</p>
+<div class="caja regla"><span class="pill">(Plazas − Slots del mes) ÷ nº de semanas</span> = plazas extra</div>
+<div class="caja" id="mesX">
+  <div class="botones"></div>
+  <div class="semanas"></div>
+  <div class="suma"></div>
+  <div class="ver2"><div class="veredicto v1"></div><div class="veredicto v2"></div></div>
+</div>
+</section>
+
+<!-- NIVEL 5 -->
+<section id="n5">
+<h2><span class="paso">NIVEL 5</span>Reto final</h2>
+<p class="sub">Ahora te toca a ti. Mira cada caso y responde. Cada horario es de 30 slots por semana (5 días × 6 slots) salvo que haya cerrados.</p>
+<div id="casos"></div>
+<div class="marcador">Puntos: <span class="pts" id="retoP">0 / 0</span></div>
+<div class="medalla" id="medalla"></div>
+</section>
+
+<!-- CALCULADORA -->
+<section id="n6" class="calcsec">
+<h2><span class="paso">🧮 CALCULADORA</span>¿Llego al plus este mes?</h2>
+<p class="sub">Solo necesitas tres datos de cada semana. Todo lo demás son individuales, que valen 0, así que no hace falta contar tus slots.</p>
+<div class="caja cpasos">
+  <div><b class="t-vac">−1</b><span><b>Huecos vacíos:</b> slots abiertos donde podía ir un usuario y no había una sesión pagada. <b>Sí cuentan</b> las pruebas gratuitas y las recuperaciones. <b>No cuentes</b> los LT, los traslados ni las GA.</span></div>
+  <div><b class="t-par">+1</b><span><b>Parejas:</b> cuántos slots con pareja tuviste.</span></div>
+  <div><b class="t-tri">+2</b><span><b>Tríos:</b> cuántos slots con trío tuviste.</span></div>
+  <div><b class="t-gru">+3</b><span><b>Grupos de 4</b> (si los tienes).</span></div>
+</div>
+<div class="caja">
+  <div class="cbar">
+    <div class="vista"><button type="button" data-n="4" class="on">Mes de 4 semanas</button><button type="button" data-n="5">Mes de 5 semanas</button></div>
+    <button type="button" class="btn" id="kEj">Cargar ejemplo</button><button type="button" class="btn" id="kVac">Vaciar</button>
+  </div>
+  <div class="ksem" id="kSem"></div>
+  <div class="suma" id="kSuma"></div>
+  <div class="ver2"><div class="veredicto" id="kV1"></div><div class="veredicto" id="kV2"></div></div>
+  <div class="kwhy" id="kWhy"></div>
+  <div class="total" id="kTot"></div>
+  <div class="cobro"><b class="ct">📅 ¿Cuándo lo cobro?</b>
+  <p>El plus se cobra <b>a mes vencido</b>. ¿Por qué? Para calcularlo hay que esperar a que se cierre el mes, y las nóminas se mandan a la gestoría antes de que el mes termine.</p>
+  <p>Por ejemplo: tu agenda de <b>septiembre</b> se cierra el <b>1 de octubre</b>. Ese día calculamos los pluses y los repasamos con vosotros por si hay algún error que ajustar. Para entonces, la nómina de septiembre ya está preparada con la gestoría.</p>
+  <p>Así que el plus de septiembre te llega en la <b>nómina de octubre</b>, que en Pegasus cobras <b>entre el 1 y el 5 de noviembre</b>.</p>
+</div>
+</div>
+</section>
+
+<!-- PENDIENTE -->
+<section id="pend">
+<h2><span class="paso" style="background:#e2a400">PENDIENTE</span>Mínimo 1 pareja</h2>
+<div class="pend">
+  <span class="tag">🕓 Medida pendiente de aplicación</span>
+  <p style="margin:10px 0 0">Desde que se creó este sistema de pluses, en <b>verano de 2025</b>, existe esta medida pendiente: para optar a los pluses (el de 65 € y la plaza extra), habría que tener <b>al menos una pareja</b>, <b>siempre que el triaje de los usuarios lo permita</b>. Si por triaje no se puede hacer ninguna pareja, sí se podría optar a los pluses.</p>
+  <ul>
+    <li>Habrá formación y apoyo para crear parejas y grupos.</li>
+    <li>Se evaluará y registrará el triaje de todos los usuarios.</li>
+    <li>Los coordinadores supervisarán los casos en los que no sea posible hacer parejas.</li>
+  </ul>
+  <p style="margin:10px 0 0;color:var(--suave)">Ahora mismo no se aplica y los cálculos de esta formación no la tienen en cuenta, pero lleva tiempo pendiente y es posible que se aplique más adelante.</p>
+</div>
+</section>
+
+<footer>Fundación Pegasus · El Tetris de la ocupación · Logopedia y Terapia Ocupacional · Octubre 2026</footer>
+</div>
+<div id="pal" role="menu"></div>
+
+<script>
+const T={
+ ind:{l:'Individual',v:0,p:1,d:1},
+ par:{l:'Pareja',v:1,p:2,d:2,k:'P'},
+ tri:{l:'Trío',v:2,p:3,d:3,k:'T'},
+ gru:{l:'Grupo 4',v:3,p:4,d:4,k:'G'},
+ vac:{l:'Vacío',v:-1,p:0,d:1},
+ lt:{l:'LT',v:null,p:0,d:1},
+ tra:{l:'Traslado',v:null,p:0,d:1},
+ ga:{l:'GA',v:null,p:0,d:1}};
+const ABIERTOS=['ind','par','tri','gru','vac'],CERRADOS=['lt','tra','ga'];
+const SIG=v=>v>0?'+'+v:v<0?'−'+(-v):'0';
+const DIAS=['Lunes','Martes','Miércoles','Jueves','Viernes'];
+const divs=t=>{let h='';for(let k=1;k<T[t].d;k++)h+='<b class="dv" style="left:'+(k*100/T[t].d)+'%"></b>';return h};
+const clone=o=>JSON.parse(JSON.stringify(o));
+const vis=new Set(),hecho=new Set();
+function marcaNav(){[...nav.children].forEach(a=>{const id=a.getAttribute('href').slice(1);a.classList.toggle('vis',vis.has(id));a.classList.toggle('ok',hecho.has(id))})}
+
+/* modo proyector */
+proyb.onclick=()=>{document.body.classList.toggle('proy');proyb.textContent=document.body.classList.contains('proy')?'🖥️ Salir de proyector':'🖥️ Modo proyector'};
+
+/* NIVEL 0 */
+function pintaNeg(){const v=+negR.value;negV.textContent=v+'/30';const [r,a,g]=neg.children;
+ r.classList.toggle('on',v<=22);a.classList.toggle('on',v>22&&v<27);g.classList.toggle('on',v>=27)}
+negR.oninput=pintaNeg;pintaNeg();
+
+/* NIVEL 1 · leyenda */
+ley.innerHTML=[['ind','0','Individual','1 persona en 1 hueco. Ni sobra ni falta nadie: cuadra justo, por eso vale 0.'],['vac','−1','Vacío','El hueco está abierto pero no hay nadie. Falta 1 persona para llenarlo, por eso resta 1.'],['par','+1','Pareja','2 personas en 1 solo hueco. Una llena el hueco y la otra es de más: suma 1.'],['tri','+2','Trío','3 personas en 1 hueco. Una lo llena y sobran 2: suma 2.'],['gru','+3','Grupo de 4','4 personas en 1 hueco. Una lo llena y sobran 3: suma 3.']]
+ .map(([t,b,n,s])=>'<div class="t-'+t+'">'+divs(t)+'<b>'+b+'</b><span>'+n+'</span><small>'+s+'</small></div>').join('');
+
+/* NIVEL 1 · mini reto */
+const R1=[['par','+1','2 personas en 1 hueco: sobra una.'],['vac','−1','Abierto y sin nadie: falta una.'],['ind','0','1 persona, 1 hueco: cuadra.'],['lt','No cuenta','Libre temporal: es un slot cerrado.'],['tri','+2','3 personas en 1 hueco: sobran dos.'],['tra','No cuenta','Traslado: slot cerrado.']];
+const OPS=['−1','0','+1','+2','+3','No cuenta'];let r1ok=0;
+reto1.innerHTML=R1.map(([t],i)=>'<div class="pieza" id="p'+i+'"><div class="muestra t-'+t+'">'+divs(t)+'<span>'+T[t].l+'</span></div><div class="ops">'+OPS.map(o=>'<button type="button" data-i="'+i+'">'+o+'</button>').join('')+'</div><div class="fb"></div></div>').join('');
+reto1.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i,p=document.getElementById('p'+i);if(p.classList.contains('ok'))return;
+ if(b.textContent===R1[i][1]){b.classList.add('bien');p.classList.add('ok');p.querySelector('.fb').textContent='✅ '+R1[i][2];r1ok++;reto1P.textContent=r1ok+' / 6';if(r1ok===6){hecho.add('n1');marcaNav();reto1P.textContent='6 / 6 · ¡Nivel superado! 🎉'}}
+ else{b.classList.add('mal');p.querySelector('.fb').textContent='Casi. Prueba otra.'}});
+
+/* NIVEL 2 · semana */
+function base(){return DIAS.map(()=>Array(6).fill('ind'))}
+function pre(m){const g=base();m.forEach(([d,r,t])=>g[d][r]=t);return g}
+const PRESETS={
+ 'Ejemplo 1 · justo':pre([[1,2,'vac']]),
+ 'Ejemplo 2 · +1':pre([[1,2,'vac'],[3,0,'vac'],[3,3,'par'],[4,1,'tri']]),
+ 'Ejemplo 3 · con traslado':pre([[0,3,'par'],[1,2,'vac'],[3,3,'tri'],[4,0,'tra']]),
+ 'Caso real · +8':pre([[0,1,'par'],[0,5,'lt'],[1,1,'vac'],[1,3,'tri'],[2,0,'par'],[2,5,'gru'],[3,1,'tri'],[3,4,'vac'],[4,2,'par'],[4,4,'lt'],[4,5,'lt']]),
+ 'Ejemplo 5 · no llega':pre([[0,4,'vac'],[2,1,'vac'],[3,5,'ga']]),
+ 'Semana en blanco':base()};
+let PN='Ejemplo 1 · justo',G=clone(PRESETS[PN]),busy=false;
+function celHTML(t){const v=T[t].v;return divs(t)+'<span>'+T[t].l+'</span>'+(v?'<span class="s">'+SIG(v)+'</span>':'')}
+function cuentas(g){let a=0,p=0;g.forEach(c=>c.forEach(t=>{if(T[t].v!==null){a++;p+=T[t].p}}));return{a,p,s:p-a}}
+function pintaSemana(){
+ semana.innerHTML='';tmsg.textContent='';
+ G.forEach((col,d)=>{const c=document.createElement('div');c.className='col';c.innerHTML='<div class="dia">'+DIAS[d]+'</div>';let bd=0;
+  col.forEach((t,r)=>{const b=document.createElement('button');b.type='button';b.className='cel t-'+t;b.dataset.d=d;b.dataset.r=r;b.dataset.t=t;
+   b.innerHTML=celHTML(t);b.setAttribute('aria-label',DIAS[d]+' slot '+(r+1)+': '+T[t].l);
+   b.onclick=e=>{e.stopPropagation();if(!busy)abrePal(b)};c.appendChild(b);if(T[t].v!==null)bd+=T[t].v});
+  const k=document.createElement('div');k.className='bal'+(bd<0?' neg':bd>0?' pos':'');k.textContent=SIG(bd);c.appendChild(k);semana.appendChild(c)});
+ const {a,p,s}=cuentas(G),m=a-1;sA.textContent=a;sM.textContent=m;sP.textContent=p;sS.textContent=SIG(s);
+ sS.style.color=s<0?'var(--rojo)':s>0?'#067a3e':'';
+ const ok=s>=-1;
+ sV1.className='veredicto '+(ok?'si':'no');
+ sV1.innerHTML=ok?'✅ Plus 65 €<small>'+p+' plazas ≥ '+m+' · saldo '+SIG(s)+' ≥ −1</small>':'❌ No llega a la meta<small>'+p+' plazas &lt; '+m+' · le faltan '+(m-p)+'</small>';
+ sV2.className='veredicto '+(s>0?'si':'gris');
+ sV2.innerHTML=s>0?'💰 '+s+' plaza'+(s>1?'s':'')+' por encima<small>Si todo el mes fuera así: '+s+' × 30 € = '+(30*s)+' € extra</small>':'Plaza extra: no<small>Hace falta saldo por encima de 0</small>';
+ [...presets.children].forEach(b=>b.classList.toggle('on',b.textContent===PN));
+}
+Object.keys(PRESETS).forEach(n=>{const b=document.createElement('button');b.type='button';b.textContent=n;b.onclick=()=>{if(busy)return;PN=n;G=clone(PRESETS[n]);pintaSemana()};presets.appendChild(b)});
+/* paleta */
+pal.innerHTML='<div class="tit">Slot abierto</div>'+ABIERTOS.map(t=>'<button type="button" class="t-'+t+'" data-t="'+t+'">'+divs(t)+'<span>'+T[t].l+(T[t].v!==null?' ('+SIG(T[t].v)+')':'')+'</span></button>').join('')+
+ '<div class="tit">Slot cerrado (no cuenta)</div>'+CERRADOS.map(t=>'<button type="button" class="t-'+t+'" data-t="'+t+'"><span>'+T[t].l+'</span></button>').join('');
+let celAct=null;
+function abrePal(b){celAct=b;const r=b.getBoundingClientRect();pal.classList.add('on');
+ let x=r.left+window.scrollX;if(x+230>document.documentElement.clientWidth-8)x=document.documentElement.clientWidth-238;
+ pal.style.left=Math.max(8,x)+'px';pal.style.top=(r.bottom+window.scrollY+6)+'px'}
+pal.onclick=e=>{const b=e.target.closest('button');if(!b||!celAct)return;G[+celAct.dataset.d][+celAct.dataset.r]=b.dataset.t;PN=null;cierraPal();pintaSemana()};
+function cierraPal(){pal.classList.remove('on');celAct=null}
+document.addEventListener('click',e=>{if(!pal.contains(e.target))cierraPal()});
+/* animación Tetris */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const espera=ms=>new Promise(r=>setTimeout(r,ms));
+async function vuela(de,a){
+ const r1=de.getBoundingClientRect(),r2=a.getBoundingClientRect();
+ const f=document.createElement('div');f.className='ficha';f.textContent='+1';
+ f.style.left=(r1.left+r1.width/2)+'px';f.style.top=(r1.top+r1.height/2)+'px';document.body.appendChild(f);
+ const dx=r2.left+r2.width/2-(r1.left+r1.width/2),dy=r2.top+r2.height/2-(r1.top+r1.height/2);
+ if(!reduce&&f.animate){await f.animate([{transform:'translate(0,0) scale(1)'},{transform:'translate('+dx*.5+'px,'+(dy*.5-40)+'px) scale(1.2)'},{transform:'translate('+dx+'px,'+dy+'px) scale(.8)'}],{duration:650,easing:'ease-in-out'}).finished}
+ f.remove()}
+btnTetris.onclick=async()=>{
+ if(busy)return;cierraPal();pintaSemana();busy=true;btnTetris.disabled=true;
+ const cels=[...semana.querySelectorAll('.cel')];
+ const huecos=cels.filter(c=>c.dataset.t==='vac');
+ const fichas=cels.filter(c=>T[c.dataset.t].v>0).map(c=>({el:c,n:T[c.dataset.t].v}));
+ cels.filter(c=>T[c.dataset.t].v===null).forEach(c=>c.classList.add('usada'));
+ tmsg.textContent=huecos.length?'Las piezas que sobran bajan a tapar los huecos…':'No hay huecos vacíos que tapar.';
+ const sin=[];
+ for(const h of huecos){const f=fichas.find(x=>x.n>0);if(!f){sin.push(h);continue}
+  await vuela(f.el,h);f.n--;
+  h.classList.add('tap');h.innerHTML='<span>✓ tapado</span>';
+  const nt=['ind','par','tri','gru'][f.n];f.el.className='cel cl t-'+nt;f.el.dataset.t=nt;
+  f.el.innerHTML=divs(nt)+'<span>'+T[nt].l+'</span>'+(f.n?'<span class="s">+'+f.n+'</span>':'');
+  await espera(reduce?0:120)}
+ const sobran=fichas.reduce((s,x)=>s+x.n,0);
+ fichas.filter(x=>x.n>0).forEach(x=>x.el.classList.add('sobra'));
+ sin.forEach(h=>h.classList.add('falta'));
+ tmsg.innerHTML=sobran?'🟩 ¡Te '+(sobran>1?'sobran':'sobra')+' <b>+'+sobran+'</b>! Todo tapado y vas por encima.':sin.length===0?'🎯 Todo encaja: saldo 0. ¡Cumples justo!':sin.length===1?'🟪 Queda <b>1 hueco</b> sin tapar: es el que se permite. ¡Cumples!':'🟥 Quedan <b>'+sin.length+'</b> huecos sin tapar: solo se permite 1.';
+ if(sin.length<=1){hecho.add('n2');marcaNav()}
+ busy=false;btnTetris.disabled=false};
+btnReset.onclick=()=>{if(!busy)pintaSemana()};
+pintaSemana();
+
+/* NIVEL 3 · calendario */
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const CALM=[[2026,8],[2026,9],[2026,10],[2026,11],[2027,0],[2027,1],[2027,2],[2027,3],[2027,4],[2027,5],[2027,6]];
+let calSel=1;
+function pintaCal(){
+ const [y,m]=CALM[calSel];const d1=new Date(y,m,1),dl=new Date(y,m+1,0);
+ let lun=new Date(d1);lun.setDate(1-((d1.getDay()+6)%7));
+ let h='<div></div>'+['L','M','X','J','V','S','D'].map(x=>'<div class="h">'+x+'</div>').join('')+'<div></div>';let n=0;
+ while(lun<=dl){const ju=new Date(lun);ju.setDate(lun.getDate()+3);const cuenta=ju.getMonth()===m;if(cuenta)n++;
+  let fila='';for(let k=0;k<7;k++){const d=new Date(lun);d.setDate(lun.getDate()+k);fila+='<div class="d'+(d.getMonth()===m?' en':'')+(d.getMonth()===m&&cuenta?' cu':'')+(k===3?' ju':'')+'">'+d.getDate()+'</div>'}
+  h+='<div class="num">'+(cuenta?'S'+n:'')+'</div>'+fila+'<div class="etq '+(cuenta?'si':'no')+'">'+(cuenta?'✓ cuenta':'→ '+MESES[ju.getMonth()])+'</div>';
+  lun.setDate(lun.getDate()+7)}
+ cal.innerHTML=h;
+ calV.innerHTML='📆 '+MESES[m][0].toUpperCase()+MESES[m].slice(1)+' '+y+' tiene <b>'+n+' semanas</b> → puedes tener hasta <b>'+n+' huecos</b> en el mes (−'+n+')'+(n===5?'. Uno más que en un mes estándar.':'.');
+ calF.innerHTML='<span class="pill">Plazas del mes</span> ≥ <span class="pill m">Slots del mes − '+n+'</span>';
+ [...calB.children].forEach((b,i)=>b.classList.toggle('on',i===calSel))}
+CALM.forEach(([y,m],i)=>{const b=document.createElement('button');b.type='button';b.textContent=MESES[m].slice(0,3)+' '+String(y).slice(2);b.onclick=()=>{calSel=i;pintaCal()};calB.appendChild(b)});
+pintaCal();
+
+/* mini semanas */
+function miniHTML(mods){const g=Array(30).fill('ind');let i=7;mods.forEach(([t,n])=>{for(let k=0;k<n;k++){g[i%30]=t;i+=7}});
+ return g.map(t=>'<i class="t-'+t+'">'+divs(t)+(T[t].k?'<span>'+T[t].k+'</span>':'')+'</i>').join('')}
+const bal=mods=>mods.reduce((s,[t,n])=>s+T[t].v*n,0);
+const chip=b=>'<span class="ch'+(b<0?' neg':b>0?' pos':'')+'">'+SIG(b)+'</span>';
+function addMod(w,t){const f=w.find(x=>x[0]===t);if(f)f[1]++;else w.push([t,1])}
+function Mes(root,presets,modo){
+ const [bot,sem,suma,v1,v2]=[root.querySelector('.botones'),root.querySelector('.semanas'),root.querySelector('.suma'),root.querySelector('.v1'),root.querySelector('.v2')];
+ let N=Object.keys(presets)[0],W=clone(presets[N]);
+ function pinta(){
+  const n=W.length;sem.className='semanas'+(n===5?' c5':'');
+  const bs=W.map(bal),tot=bs.reduce((x,y)=>x+y,0);
+  sem.innerHTML=W.map((w,k)=>'<div class="sem"><h4>Semana '+(k+1)+'</h4><div class="mini">'+miniHTML(w)+'</div><div class="bal'+(bs[k]<0?' neg':bs[k]>0?' pos':'')+'">'+SIG(bs[k])+'</div><div class="edit"><button type="button" class="ep" data-k="'+k+'" data-a="par">+ pareja</button><button type="button" class="eh" data-k="'+k+'" data-a="vac">+ hueco</button><button type="button" class="er" data-k="'+k+'" data-a="r" aria-label="Vaciar semana">↺</button></div></div>').join('');
+  const ok=tot>=-n,ex=Math.floor(Math.max(0,tot)/n);
+  if(modo==='plus')suma.innerHTML='Suma: '+bs.map(chip).join(' ')+' = '+chip(tot)+' '+(ok?'≥ −'+n+' ✅':'&lt; −'+n+' ❌');
+  else suma.innerHTML='Suma: '+bs.map(chip).join(' ')+' = '+chip(tot)+' → '+SIG(Math.max(0,tot))+' ÷ '+n+' = '+(Math.max(0,tot)/n).toFixed(2).replace('.',',').replace(',00','')+' → <span class="ch'+(ex?' pos':'')+'">'+ex+' plaza'+(ex===1?'':'s')+' extra</span>';
+  if(root.id==='mesA'){mesAF.innerHTML='<span class="pill">Plazas del mes</span> ≥ <span class="pill m">Slots del mes − '+n+'</span>'+(n===5?'<span style="flex-basis:100%;font-size:15px;font-weight:600;color:var(--suave)">Este mes tiene 5 semanas, así que se permiten 5 huecos. Más abajo ves qué meses tienen 5 semanas.</span>':'')}
+  v1.className='veredicto v1 '+(ok?'si':'no');
+  v1.innerHTML=ok?'✅ Plus 65 €<small>Saldo del mes '+SIG(tot)+' ≥ −'+n+' ('+n+' semanas)</small>':'❌ Este mes no hay plus<small>Saldo '+SIG(tot)+' por debajo de −'+n+'</small>';
+  v2.className='veredicto v2 '+(ex?'si':ok&&tot>0?'meh':'gris');
+  v2.innerHTML=ex?'💰 '+ex+' plaza'+(ex>1?'s':'')+' extra<small>Total del mes: 65 € + '+ex+' × 30 € = '+(65+30*ex)+' €</small>':ok&&tot>0?'Sin plaza extra todavía<small>'+SIG(tot)+' no llega a +'+n+' (1 por semana)</small>':'Sin plaza extra<small>Las parejas solo están tapando huecos</small>';
+  [...bot.children].forEach(b=>b.classList.toggle('on',b.textContent===N))}
+ Object.keys(presets).forEach(n=>{const b=document.createElement('button');b.type='button';b.textContent=n;b.onclick=()=>{N=n;W=clone(presets[n]);pinta()};bot.appendChild(b)});
+ sem.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const w=W[+b.dataset.k];
+  if(b.dataset.a==='r')W[+b.dataset.k]=[];else if(w.reduce((s,x)=>s+x[1],0)<12)addMod(w,b.dataset.a);N=null;pinta()});
+ pinta()}
+Mes(mesA,{
+ 'Cumple (una semana floja)':[[['vac',1]],[['vac',1],['par',1]],[['par',1]],[['vac',2]]],
+ 'Se compensa':[[['vac',3]],[['par',2]],[['vac',2],['tri',1]],[['vac',1]]],
+ 'No llega':[[['vac',2]],[['vac',1]],[['vac',2]],[]],
+ 'Mes de 5 semanas':[[['vac',2]],[['vac',1]],[['vac',1]],[['vac',1]],[]]},'plus');
+
+/* NIVEL 4 · semana */
+function gridM(mods){const g=base();mods.forEach(([d,r,t])=>g[d][r]=t);
+ return '<div class="gridm">'+g.map(col=>'<div>'+col.map(t=>'<i class="t-'+t+'">'+divs(t)+(T[t].k?'<span>'+T[t].k+'</span>':t==='vac'?'<span>−1</span>':'')+'</i>').join('')+'</div>').join('')+'</div>'}
+exA.innerHTML='<h4>❌ Una pareja… y un hueco vacío</h4>'+gridM([[1,2,'vac'],[3,3,'par']])+
+ '<div class="linea">30 slots · 30 plazas → 30 − 30 = <b>0</b></div><div class="veredicto meh">La pareja (+1) tapa el hueco (−1). Cumples los 65 €, pero <b>0 plazas extra</b>.</div>';
+exB.innerHTML='<h4>✅ Una pareja con todo lo demás lleno</h4>'+gridM([[3,3,'par']])+
+ '<div class="linea">30 slots · 31 plazas → 31 − 30 = <b>+1</b></div><div class="veredicto si">Esta semana va <b>1 plaza por encima</b> de tus slots.</div>';
+Mes(mesX,{
+ 'Todas las semanas +1':[[['par',1]],[['par',1]],[['par',1]],[['par',1]]],
+ 'Una semana se cae':[[['par',1]],[['par',1]],[['par',1]],[['par',1],['vac',2]]],
+ 'Se compensa entre semanas':[[['par',2]],[['tri',1]],[],[]],
+ 'Parejas pero con huecos':[[['par',1],['vac',1]],[['par',2],['vac',1]],[['par',1],['vac',1]],[['par',1]]],
+ 'Dos plazas extra':[[['par',2]],[['tri',1]],[['par',1],['gru',1]],[]]},'extra');
+
+/* NIVEL 5 · reto final */
+const CASOS=[
+ {tit:'Caso 1 · Semana de Lucía',sem:pre([[0,2,'vac'],[2,4,'vac'],[3,1,'par'],[4,4,'lt'],[4,5,'lt']]),
+  qs:[['¿Esta semana llega a la meta (slots − 1)?',['Sí','No'],'Sí','Los 2 LT no cuentan: 28 slots abiertos. La pareja tapa un hueco y queda 1 sin tapar, que es el que se permite. Saldo −1 ≥ −1.']]},
+ {tit:'Caso 2 · Semana de Pablo',sem:pre([[0,0,'vac'],[1,3,'vac'],[2,5,'vac'],[4,2,'par']]),
+  qs:[['¿Esta semana llega a la meta (slots − 1)?',['Sí','No'],'No','3 huecos y 1 pareja: −3 + 1 = −2. Quedan 2 huecos sin tapar y solo se permite 1.']]},
+ {tit:'Caso 3 · Mes de Marta (4 semanas)',mes:[[['par',1]],[['par',1]],[],[['vac',2]]],
+  qs:[['¿Cobra el plus de 65 €?',['Sí','No'],'Sí','+1 +1 + 0 − 2 = 0. Está muy por encima de −4.'],['¿Cuántas plazas extra?',['0','1','2'],'0','0 ÷ 4 = 0. Las parejas han tapado los huecos de la semana 4.']]},
+ {tit:'Caso 4 · Mes de Andrés (4 semanas)',mes:[[['par',2]],[['tri',1],['par',1]],[['par',1]],[['par',2]]],
+  qs:[['¿Cobra el plus de 65 €?',['Sí','No'],'Sí','Todas las semanas van en positivo.'],['¿Cuántas plazas extra?',['0','1','2'],'2','+2 +3 +1 +2 = +8 → 8 ÷ 4 = 2 plazas extra → 65 € + 60 € = 125 €.']]},
+ {tit:'Caso 5 · Mes de Irene (4 semanas)',mes:[[['vac',2]],[['vac',1]],[['vac',1]],[['vac',1]]],
+  qs:[['¿Cobra el plus de 65 €?',['Sí','No'],'No','−2 −1 −1 −1 = −5. Se permite hasta −4 en un mes de 4 semanas.'],['¿Cuántas plazas extra?',['0','1','2'],'0','Si no hay plus, tampoco hay plaza extra.']]},
+ {tit:'Caso 6 · Mes de Hugo (5 semanas)',mes:[[['par',1]],[['par',1]],[['par',1]],[['par',1]],[['par',1]]],
+  qs:[['¿Cobra el plus de 65 €?',['Sí','No'],'Sí','Saldo +5, muy por encima de −5.'],['¿Cuántas plazas extra?',['0','1','2'],'1','+5 ÷ 5 semanas = 1 plaza extra → 65 € + 30 € = 95 €. Con +4 en un mes de 5 semanas no llegaría.']]}];
+let pts=0,tot=0,resp=0;CASOS.forEach(c=>tot+=c.qs.length);retoP.textContent='0 / '+tot;
+casos.innerHTML=CASOS.map((c,i)=>{
+ let vis='';
+ if(c.sem){vis='<div class="gridm">'+c.sem.map(col=>'<div>'+col.map(t=>'<i class="t-'+t+'">'+divs(t)+(T[t].k?'<span>'+T[t].k+'</span>':t==='vac'?'<span>−1</span>':CERRADOS.includes(t)?'<span>'+T[t].l+'</span>':'')+'</i>').join('')+'</div>').join('')+'</div>'}
+ else vis='<div class="semanas'+(c.mes.length===5?' c5':'')+'">'+c.mes.map((w,k)=>'<div class="sem"><h4>Semana '+(k+1)+'</h4><div class="mini">'+miniHTML(w)+'</div><div class="bal">?</div></div>').join('')+'</div>';
+ return '<div class="caso" id="c'+i+'"><h4>'+c.tit+'</h4>'+vis+c.qs.map((q,j)=>'<div class="q">'+q[0]+'</div><div class="ops">'+q[1].map(o=>'<button type="button" data-c="'+i+'" data-q="'+j+'">'+o+'</button>').join('')+'</div><div class="exp" id="e'+i+'_'+j+'"></div>').join('')+'</div>'}).join('');
+casos.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.c,j=+b.dataset.q,q=CASOS[i].qs[j];
+ const grp=b.parentElement;if(grp.dataset.done)return;grp.dataset.done=1;resp++;
+ const ok=b.textContent===q[2];if(ok)pts++;
+ [...grp.children].forEach(x=>{if(x.textContent===q[2])x.classList.add('bien');else if(x===b)x.classList.add('mal')});
+ const ex=document.getElementById('e'+i+'_'+j);ex.classList.add('on');const nS=CASOS[i].mes?CASOS[i].mes.length:0;
+ const rec=CASOS[i].sem?'Tus plazas tienen que llegar a tus <b>slots abiertos − 1</b>.':j===0?'Tus plazas del mes tienen que llegar a tus <b>slots del mes − '+nS+'</b> (1 hueco por semana, '+nS+' semanas).':'<b>Plazas extra = (plazas − slots del mes) ÷ '+nS+' semanas</b>, y solo cuentan las enteras.';
+ ex.innerHTML=(ok?'✅ <b>¡Bien!</b> ':'❌ <b>La respuesta es «'+q[2]+'».</b> ')+q[3]+'<div class="rec">📌 Recuerda: '+rec+'</div>';
+ if(CASOS[i].mes&&j===0){const bs=CASOS[i].mes.map(bal);[...document.querySelectorAll('#c'+i+' .bal')].forEach((x,k)=>{x.textContent=SIG(bs[k]);x.className='bal'+(bs[k]<0?' neg':bs[k]>0?' pos':'')})}
+ retoP.textContent=pts+' / '+tot;
+ if(resp===tot){const m=pts===tot?['🥇','¡Medalla de oro!','Dominas el Tetris de la ocupación.']:pts>=tot-2?['🥈','¡Medalla de plata!','Casi perfecto. Repasa los casos que has fallado.']:['🥉','Medalla de bronce','Vuelve a los niveles 2 a 4 y repite el reto.'];
+  medalla.className='medalla on';medalla.innerHTML='<div class="m">'+m[0]+'</div><b>'+m[1]+'</b>'+pts+' de '+tot+' aciertos · '+m[2];
+  if(pts>=tot-2){hecho.add('n5');marcaNav()}}});
+
+/* índice: niveles visitados */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){vis.add(e.target.id);if(['n0','n3','n4','n6','pend'].includes(e.target.id))hecho.add(e.target.id);marcaNav()}}),{threshold:.25});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+
+/* CALCULADORA */
+(()=>{
+const KF=[['vac','Huecos vacíos',-1],['par','Parejas',1],['tri','Tríos',2],['gru','Grupos de 4',3]];
+const KEJ=[{vac:2,par:1},{vac:1,par:2,tri:1},{vac:3},{vac:1,par:1}];
+let KN=4,KW=[...KEJ.map(x=>({...x})),{}];
+const g=(w,k)=>+(w[k]||0),sal=w=>KF.reduce((s,[k,,v])=>s+v*g(w,k),0);
+const sg=v=>v>0?'+'+v:v<0?'−'+(-v):'0';
+function pinta(){
+ kSem.className='ksem'+(KN===5?' c5':'');
+ kSem.innerHTML=KW.slice(0,KN).map((w,i)=>{const b=sal(w);
+  return '<div class="kw"><h4>Semana '+(i+1)+'</h4>'+KF.map(([k,l])=>'<div class="kf t-'+k+'"><label>'+l+'</label><button type="button" data-i="'+i+'" data-k="'+k+'" data-d="-1" aria-label="Menos">−</button><input type="number" min="0" data-i="'+i+'" data-k="'+k+'" value="'+g(w,k)+'" aria-label="'+l+' semana '+(i+1)+'"><button type="button" data-i="'+i+'" data-k="'+k+'" data-d="1" aria-label="Más">+</button></div>').join('')+
+  '<div class="kfichas">'+KF.map(([k,,v])=>Array(g(w,k)).fill('<i class="t-'+k+'" title="'+sg(v)+'"></i>').join('')).join('')+'</div><div class="bal'+(b<0?' neg':b>0?' pos':'')+'">'+sg(b)+'</div></div>'}).join('');
+ calc()}
+function calc(){
+ const ws=KW.slice(0,KN),bs=ws.map(sal),t=bs.reduce((x,y)=>x+y,0),ok=t>=-KN,ex=ok?Math.floor(Math.max(0,t)/KN):0;
+ const pos=ws.reduce((s,w)=>s+g(w,'par')+2*g(w,'tri')+3*g(w,'gru'),0),neg=ws.reduce((s,w)=>s+g(w,'vac'),0);
+ kSuma.innerHTML='Suma: '+bs.map(b=>'<span class="ch'+(b<0?' neg':b>0?' pos':'')+'">'+sg(b)+'</span>').join(' ')+' = <span class="ch'+(t<0?' neg':t>0?' pos':'')+'">'+sg(t)+'</span> '+(ok?'≥ −'+KN+' ✅':'&lt; −'+KN+' ❌');
+ kV1.className='veredicto '+(ok?'si':'no');
+ kV1.innerHTML=ok?'✅ Plus de ocupación: 65 €<small>Saldo '+sg(t)+' ≥ −'+KN+'</small>':'❌ Sin plus de ocupación<small>Saldo '+sg(t)+' por debajo de −'+KN+'</small>';
+ kV2.className='veredicto '+(ex?'si':'gris');
+ kV2.innerHTML=ex?'💰 '+ex+' plaza'+(ex>1?'s':'')+' extra: '+(30*ex)+' €<small>'+sg(t)+' ÷ '+KN+' semanas = '+ex+'</small>':'Sin plaza extra<small>Hace falta +'+KN+' en el mes (+1 por semana de media)</small>';
+ let w='<p>🟪 '+(neg?'Tus huecos vacíos restan <b>−'+neg+'</b>':'No tienes huecos vacíos')+' y '+(pos?'tus parejas, tríos y grupos suman <b>+'+pos+'</b>':'no tienes parejas ni tríos')+'. Saldo del mes: <b>'+sg(t)+'</b>.</p>';
+ w+=ok?'<p>✅ <b>Cobras el plus</b> porque en un mes de '+KN+' semanas se permiten hasta '+KN+' huecos sin tapar (1 por semana) y tu saldo no baja de −'+KN+'.</p>':'<p>❌ <b>No llegas al plus</b> porque en un mes de '+KN+' semanas solo se permiten '+KN+' huecos sin tapar (1 por semana) y tu saldo es '+sg(t)+'. Te faltan <b>'+(-KN-t)+'</b>: por ejemplo, '+(-KN-t)+' hueco'+(-KN-t>1?'s':'')+' menos o '+(-KN-t)+' pareja'+(-KN-t>1?'s':'')+' más.</p>';
+ if(ok)w+=ex?'<p>💰 <b>'+ex+' plaza'+(ex>1?'s':'')+' extra</b>: '+sg(t)+' ÷ '+KN+' = '+(t/KN).toFixed(2).replace('.',',').replace(',00','')+'. Solo cuentan las enteras. Para la siguiente necesitas '+sg(KN*(ex+1))+'.</p>':'<p>Para tener <b>1 plaza extra</b> necesitas un saldo de <b>+'+KN+'</b>. Te faltan <b>'+(KN-t)+'</b>.</p>';
+ kWhy.innerHTML=w;
+ kTot.innerHTML='Total de pluses este mes: <b>'+((ok?65:0)+30*ex)+' €</b> brutos'}
+kSem.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const w=KW[+b.dataset.i],k=b.dataset.k;w[k]=Math.max(0,Math.min(40,g(w,k)+ +b.dataset.d));pinta()});
+kSem.addEventListener('change',e=>{const i=e.target;if(i.tagName!=='INPUT')return;KW[+i.dataset.i][i.dataset.k]=Math.max(0,Math.min(40,Math.floor(+i.value||0)));pinta()});
+document.querySelectorAll('#n6 .vista button').forEach(b=>b.onclick=()=>{KN=+b.dataset.n;document.querySelectorAll('#n6 .vista button').forEach(x=>x.classList.toggle('on',x===b));pinta()});
+kEj.onclick=()=>{KW=[...KEJ.map(x=>({...x})),{}];pinta()};
+kVac.onclick=()=>{KW=[{},{},{},{},{}];pinta()};
+pinta();
+})();
+</script>
+</body>
+</html>

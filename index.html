@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pluses de productividad · Fundación Pegasus</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--morado:#974694;--rosa:#E45E9B;--verde:#08B75B;--azul:#007EC3;--tinta:#1f2a37;--suave:#5f6b7a;--borde:#ece6f0}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--tinta);font-family:'Barlow',system-ui,sans-serif;font-size:17px;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:32px 18px 56px}
+h1{font-size:40px;line-height:1.05;margin:0 0 8px;font-weight:900}
+p{margin:0 0 24px;color:var(--suave);font-size:19px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+a.card{display:block;text-decoration:none;color:#fff;border-radius:26px;padding:22px 20px;min-height:170px;transition:transform .15s}
+a.card:hover,a.card:focus-visible{transform:translateY(-3px)}
+a.card:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+a.card small{display:inline-block;background:rgba(255,255,255,.25);border-radius:999px;padding:3px 12px;font-weight:600;font-size:13px}
+a.card b{display:block;font-size:24px;line-height:1.15;margin:12px 0 6px;font-weight:900}
+a.card span{font-size:15px}
+.tpt{background:linear-gradient(130deg,var(--morado),var(--rosa))}
+.is{background:linear-gradient(130deg,var(--verde),var(--azul))}
+footer{margin-top:40px;font-size:14px;color:var(--suave)}
+@media(max-width:720px){.cards{grid-template-columns:1fr}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Pluses de productividad</h1>
+  <p>Elige tu servicio para ver la formación y usar la calculadora.</p>
+  <div class="cards">
+    <a class="card tpt" href="logo-to.html"><small>Terapia Para Tod@s</small><b>Logopedia y T.O.</b><span>El Tetris de la ocupación</span></a>
+    <a class="card tpt" href="fisio-psico.html"><small>Terapia Para Tod@s</small><b>Fisioterapia y Psicología</b><span>El Tetris de la ocupación, en euros</span></a>
+    <a class="card is" href="inclusive-sport.html"><small>Inclusive Sport</small><b>Inclusive Sport</b><span>La escalera de la ocupación</span></a>
+  </div>
+  <footer>Fundación Pegasus · Octubre 2026</footer>
+</div>
+</body>
+</html>

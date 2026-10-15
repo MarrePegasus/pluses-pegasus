@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La escalera de la ocupación · Inclusive Sport</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--morado:#08B75B;--rosa:#007EC3;--verde:#08B75B;--azul:#007EC3;--rojo:#D6191B;--tinta:#1f2a37;--suave:#5f6b7a;--borde:#dfe9ef;--caja:#f6fafc;
+--c-ind:#FBE77A;--c-vac:#C9A3DA;--c-par:#5fd394;--c-tri:#F59E5B;--c-gru:#5fb6e8;--c-cer:#d9dde3;--c-tra:#a9b0ba}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:#fff;color:var(--tinta);font-family:'Barlow',system-ui,sans-serif;font-size:17px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px 60px}
+body.proy .wrap{zoom:1.18}
+header{background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff;border-radius:0 0 44px 44px;padding:34px 26px 34px;margin:0 -18px 0;position:relative;overflow:hidden}
+header .eti{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;padding:4px 14px;font-weight:600;font-size:14px}
+header h1{font-size:44px;line-height:1.02;margin:14px 0 8px;font-weight:900;letter-spacing:-.5px}
+header p{margin:0;font-size:19px;max-width:620px}
+header .proyb{position:absolute;top:18px;right:18px;border:2px solid rgba(255,255,255,.7);background:transparent;color:#fff;border-radius:999px;padding:5px 12px;font:700 13px 'Barlow',sans-serif;cursor:pointer}
+header .deco{position:absolute;right:26px;bottom:18px;display:grid;grid-template-columns:repeat(4,22px);gap:4px;opacity:.9}
+header .deco i{width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.25)}
+header .deco i.y{background:var(--c-ind)}header .deco i.g{background:var(--c-par)}header .deco i.o{background:var(--c-tri)}
+/* índice fijo */
+nav.barra-niv{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--borde);margin:0 -18px;padding:8px 18px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav.barra-niv a{flex:0 0 auto;text-decoration:none;color:var(--suave);font-weight:700;font-size:14px;border:2px solid var(--borde);border-radius:999px;padding:4px 12px;white-space:nowrap}
+nav.barra-niv a.vis{border-color:var(--rosa);color:var(--morado)}
+nav.barra-niv a.ok{background:linear-gradient(120deg,var(--morado),var(--rosa));border-color:transparent;color:#fff}
+.indice{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0 6px}
+.indice a{display:block;text-decoration:none;color:var(--tinta);background:var(--caja);border:2px solid var(--borde);border-radius:22px;padding:14px;transition:transform .15s,border-color .15s}
+.indice a:hover{transform:translateY(-2px);border-color:var(--rosa)}
+.indice .n{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;color:#fff;font-weight:800;background:linear-gradient(135deg,var(--morado),var(--rosa));margin-bottom:6px}
+.indice b{display:block;font-size:17px;line-height:1.2}
+.indice small{display:block;color:var(--suave);font-size:14px;line-height:1.3;margin-top:3px}
+.indice a.pend{background:#fff6e0;border-color:#f5d27a}.indice a.pend .n{background:#e2a400}
+section{padding-top:8px}
+h2{font-size:29px;margin:44px 0 4px;font-weight:900;color:var(--morado);line-height:1.15}
+h2 .paso{display:inline-flex;min-width:40px;height:40px;border-radius:999px;align-items:center;justify-content:center;color:#fff;font-size:15px;padding:0 12px;margin-right:10px;vertical-align:4px;background:linear-gradient(135deg,var(--morado),var(--rosa));letter-spacing:.5px}
+h3{font-size:20px;margin:24px 0 8px;color:var(--morado)}
+.sub{color:var(--suave);margin:0 0 14px;font-size:18px}
+.caja{background:var(--caja);border:1px solid var(--borde);border-radius:24px;padding:18px 20px;margin:12px 0}
+.regla{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;font-size:22px;font-weight:800;text-align:center;padding:18px}
+.regla .pill{border-radius:999px;padding:8px 18px;background:#fff;border:2px solid var(--borde)}
+.regla .pill.m{border-color:var(--morado);color:var(--morado)}
+/* nivel 0 */
+.negocio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.negocio>div{border-radius:22px;padding:16px;text-align:center;border:3px solid transparent;background:#f6f7f9;transition:all .2s;opacity:.55}
+.negocio>div.on{opacity:1;transform:scale(1.03)}
+.negocio b{display:block;font-size:34px;font-weight:900;line-height:1}
+.negocio span{display:block;font-size:13px;font-weight:700;color:var(--suave);text-transform:uppercase}
+.negocio p{margin:8px 0 0;font-weight:800}
+.negocio .r.on{border-color:#e9a0a0;background:#fdecec}.negocio .r p{color:#b42318}
+.negocio .a.on{border-color:#f5c27a;background:#fff3df}.negocio .a p{color:#a35a00}
+.negocio .v.on{border-color:#8fdcb3;background:#e7f8ef}.negocio .v p{color:#067a3e}
+.slider{display:flex;align-items:center;gap:14px;margin:16px 4px 4px;font-weight:700}
+.slider input{flex:1;accent-color:var(--morado)}
+/* piezas */
+.ley{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ley>div{border-radius:18px;padding:12px;text-align:center;font-weight:700;font-size:15px;position:relative;overflow:hidden}
+.ley b{display:block;font-size:28px;line-height:1.1;position:relative}
+.ley small{display:block;font-weight:500;color:#374151;font-size:14px;line-height:1.3;margin-top:4px;position:relative}
+.ley span{position:relative}
+.t-ind{background:var(--c-ind)}.t-vac{background:var(--c-vac)}.t-par{background:var(--c-par)}.t-tri{background:var(--c-tri)}.t-gru{background:var(--c-gru)}
+.t-lt,.t-ga{background:var(--c-cer);color:#6b7480!important;background-image:repeating-linear-gradient(45deg,transparent 0 6px,rgba(255,255,255,.6) 6px 9px)}
+.t-tra{background:var(--c-tra);color:#fff!important;background-image:repeating-linear-gradient(45deg,transparent 0 6px,rgba(255,255,255,.25) 6px 9px)}
+.dv{position:absolute;top:0;bottom:0;border-left:2px dashed rgba(255,255,255,.95);z-index:0}
+.cerr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.cerr>div{border-radius:16px;padding:10px 12px;font-size:15px}
+.cerr b{display:block;font-size:17px}
+/* mini reto */
+.reto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pieza{background:#fff;border:2px solid var(--borde);border-radius:20px;padding:12px;text-align:center;transition:border-color .2s}
+.pieza .muestra{height:52px;border-radius:12px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px}
+.pieza .muestra span{position:relative}
+.ops{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+.ops button{border:2px solid var(--borde);background:#fff;border-radius:999px;padding:3px 10px;font:700 14px 'Barlow',sans-serif;cursor:pointer;color:var(--tinta)}
+.ops button:hover{border-color:var(--rosa)}
+.ops button.bien{background:#08B75B;border-color:#08B75B;color:#fff}
+.ops button.mal{background:#fdecec;border-color:#f3c4c4;color:#b42318;text-decoration:line-through}
+.pieza.ok{border-color:#8fdcb3}
+.pieza .fb{font-size:13px;color:var(--suave);min-height:18px;margin-top:6px}
+.marcador{display:flex;justify-content:center;gap:10px;align-items:center;font-weight:800;margin-top:14px;font-size:18px}
+.marcador .pts{background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff;border-radius:999px;padding:4px 16px}
+/* semana */
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.botones button,.btn{border:2px solid var(--morado);background:#fff;color:var(--morado);border-radius:999px;padding:6px 14px;font:700 14px 'Barlow',sans-serif;cursor:pointer}
+.botones button.on{background:var(--morado);color:#fff}
+.btn.grande{font-size:18px;padding:10px 22px;background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff;border:0;box-shadow:0 6px 16px rgba(151,70,148,.25)}
+.btn.grande:disabled{opacity:.5;cursor:default}
+.acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 4px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.dia{text-align:center;font-weight:800;color:var(--suave);font-size:14px}
+.col{display:flex;flex-direction:column;gap:6px}
+.cel{position:relative;overflow:hidden;border:0;border-radius:12px;height:48px;font:700 14px 'Barlow',sans-serif;cursor:pointer;color:#2b2b2b;display:flex;align-items:center;justify-content:center;gap:4px;transition:transform .15s,box-shadow .2s,opacity .3s}
+.cel:hover{transform:scale(1.03)}
+.cel span{position:relative;z-index:1}
+.cel .s{font-size:18px}
+.cel.tap{background:#FDF4C4!important;border:2px dashed #F2D65A;color:#8a6d00}
+.cel.cl.t-ind{background:#FDF4C4}.cel.cl.t-par{background:#C3F0D7}.cel.cl.t-tri{background:#FBD5B8}
+.cel.usada{opacity:.55}
+.cel.sobra{box-shadow:0 0 0 3px #08B75B,0 0 16px rgba(8,183,91,.6);animation:late 1s ease-in-out 3}
+.cel.falta{box-shadow:0 0 0 3px var(--rojo);animation:late 1s ease-in-out 3}
+@keyframes late{50%{transform:scale(1.07)}}
+.ficha{position:fixed;z-index:50;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:10px;background:#08B75B;color:#fff;font:900 16px 'Barlow',sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,.25);pointer-events:none}
+.bal{margin-top:4px;text-align:center;font-weight:800;border-radius:10px;padding:4px 0;background:#fff;border:2px solid var(--borde)}
+.bal.neg{color:var(--rojo);border-color:#f3c4c4}.bal.pos{color:#067a3e;border-color:#b6ebcc}
+.pista{font-size:14px;color:var(--suave);margin:8px 0 0}
+#pal{position:absolute;z-index:40;background:#fff;border:2px solid var(--borde);border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.15);padding:8px;display:none;grid-template-columns:repeat(2,1fr);gap:5px;width:230px}
+#pal.on{display:grid}
+#pal button{position:relative;overflow:hidden;border:0;border-radius:10px;padding:7px 6px;font:700 13px 'Barlow',sans-serif;cursor:pointer;text-align:left}
+#pal button span{position:relative}
+#pal .tit{grid-column:1/-1;font-size:12px;font-weight:800;color:var(--suave);text-transform:uppercase;padding:2px 4px}
+.calc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.dato{background:#fff;border:2px solid var(--borde);border-radius:20px;padding:10px;text-align:center}
+.dato span{display:block;font-size:12px;font-weight:700;color:var(--suave);text-transform:uppercase;letter-spacing:.4px}
+.dato b{font-size:32px;line-height:1.1}
+.dato.meta{border-color:var(--morado)}.dato.meta b{color:var(--morado)}
+.ver2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.veredicto{border-radius:20px;padding:14px 18px;font-weight:800;font-size:18px;text-align:center}
+.veredicto small{display:block;font-weight:600;font-size:15px;margin-top:2px}
+.veredicto.si{background:#e7f8ef;color:#067a3e}.veredicto.no{background:#fdecec;color:#b42318}.veredicto.meh{background:#fff6e0;color:#8a5a00}.veredicto.gris{background:#f3f4f6;color:var(--suave)}
+.nota{margin:12px 0 0;text-align:center;font-size:15px;color:var(--suave)}.nota a{color:var(--morado);font-weight:700}
+.tmsg{min-height:28px;text-align:center;font-weight:800;font-size:19px;margin:10px 0 0;color:var(--morado)}
+/* mes */
+.cal{display:grid;grid-template-columns:auto repeat(7,1fr) auto;gap:4px;align-items:center;max-width:560px;margin:10px auto}
+.cal .h{font-size:12px;font-weight:800;color:var(--suave);text-align:center}
+.cal .d{text-align:center;border-radius:8px;padding:5px 0;font-weight:700;font-size:15px;background:#f3f4f6;color:#9aa3ae}
+.cal .d.en{background:#fff;border:2px solid var(--borde);color:var(--tinta)}
+.cal .d.ju{position:relative}
+.cal .d.ju::after{content:'';position:absolute;inset:-3px;border:2px solid var(--rosa);border-radius:10px}
+.cal .d.cu{background:#f6ecf6;border-color:#d9b5d8}
+.cal .etq{font-size:13px;font-weight:800;padding-left:6px;white-space:nowrap}
+.cal .etq.si{color:#067a3e}.cal .etq.no{color:#9aa3ae}
+.cal .num{font-size:12px;font-weight:800;color:var(--suave);padding-right:4px}
+.semanas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.semanas.c5{grid-template-columns:repeat(5,1fr)}
+.sem{background:#fff;border:2px solid var(--borde);border-radius:20px;padding:10px;text-align:center}
+.sem h4{margin:0 0 6px;font-size:15px}
+.mini{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:8px}
+.mini i{display:block;height:14px;border-radius:4px;position:relative;overflow:hidden;font-style:normal;color:#fff;font-size:9px;font-weight:800;line-height:14px}
+.mini i .dv,.gridm i .dv{border-left-width:1.5px}
+.mini i span,.gridm i span{position:relative}
+.edit{display:flex;gap:4px;justify-content:center;margin-top:6px}
+.edit button{border:0;border-radius:999px;padding:3px 8px;font:800 12px 'Barlow',sans-serif;cursor:pointer}
+.edit .ep{background:var(--c-par)}.edit .eh{background:var(--c-vac)}.edit .er{background:#eef0f3;color:var(--suave)}
+.suma{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:21px;font-weight:800;margin:16px 0 8px}
+.suma .ch{border-radius:14px;padding:5px 11px;background:#fff;border:2px solid var(--borde)}
+.suma .ch.neg{color:var(--rojo)}.suma .ch.pos{color:#067a3e}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ojo{background:#fff6e0;border:2px solid #f5d27a;border-radius:24px;padding:16px 20px;margin:12px 0;font-size:18px}
+.ojo b.t{display:block;font-size:20px;margin-bottom:4px}
+.ej{background:#fff;border:2px solid var(--borde);border-radius:22px;padding:14px}
+.ej h4{margin:0 0 8px;font-size:17px}
+.gridm{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.gridm>div{display:flex;flex-direction:column;gap:4px}
+.gridm i{display:block;height:22px;border-radius:7px;position:relative;overflow:hidden;font-style:normal;color:#fff;font-weight:800;font-size:11px;line-height:22px;text-align:center}
+.ej .linea{font-weight:700;margin:10px 0 6px;text-align:center}
+/* reto final */
+.caso{background:#fff;border:2px solid var(--borde);border-radius:24px;padding:16px;margin:14px 0}
+.caso h4{margin:0 0 4px;font-size:19px}
+.caso .q{font-weight:700;margin:12px 0 6px}
+.caso .ops button{font-size:15px;padding:5px 14px}
+.caso .exp{display:none;margin-top:10px;border-radius:16px;padding:10px 14px;background:var(--caja);font-size:16px}
+.caso .exp.on{display:block}
+.caso .rec{margin-top:6px;padding-top:6px;border-top:1px dashed var(--borde);color:var(--morado);font-size:15px}
+.caso .mini{max-width:150px;margin:0 auto 6px}
+.caso .semanas .bal{font-size:15px}
+.medalla{display:none;text-align:center;border-radius:28px;padding:24px;margin-top:16px;background:linear-gradient(120deg,var(--morado),var(--rosa));color:#fff}
+.medalla.on{display:block}
+.medalla .m{font-size:64px;line-height:1}
+.medalla b{display:block;font-size:26px;margin:6px 0}
+.pend{background:#fff6e0;border:2px dashed #e2a400;border-radius:24px;padding:18px 22px;margin:12px 0}
+.pend .tag{display:inline-block;background:#e2a400;color:#fff;border-radius:999px;padding:3px 12px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+.pend ul{margin:8px 0 0;padding-left:20px}
+footer{margin-top:48px;font-size:14px;color:var(--suave);text-align:center}
+@media(max-width:760px){.indice{grid-template-columns:repeat(2,1fr)}.ley{grid-template-columns:repeat(2,1fr)}.cerr,.reto{grid-template-columns:1fr 1fr}.calc{grid-template-columns:1fr 1fr}.semanas,.semanas.c5{grid-template-columns:repeat(2,1fr)}.dos,.ver2,.negocio{grid-template-columns:1fr}.cel{height:40px;font-size:11px}.cel .s{font-size:14px}header h1{font-size:33px}header .deco{display:none}.grid{gap:4px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+/* IS */
+h2,h3,.tmsg{color:var(--azul)}
+.indice a:hover{border-color:var(--azul)}
+.btn.grande{box-shadow:0 6px 16px rgba(0,126,195,.25)}
+.dato.meta{border-color:var(--azul)}.dato.meta b{color:var(--azul)}
+.regla .pill.m{border-color:var(--azul);color:var(--azul)}
+.grid.g6{grid-template-columns:repeat(6,1fr)}
+.grid.g6 .cel{height:38px;font-size:13px}
+.cel .l{position:relative}
+.cel.cl.t-ind{background:#FDF4C4}.cel.cl.t-par{background:#C3F0D7}.cel.cl.t-tri{background:#FBD5B8}.cel.cl.t-gru{background:#CBE7F7}
+.tramos3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tr{border-radius:22px;padding:16px;text-align:center;background:#fff;border:2px solid var(--borde)}
+.tr b{display:block;font-size:30px;color:var(--azul);line-height:1.1}
+.tr .q{font-size:15px;color:var(--suave)}
+.barra{position:relative;height:26px;border-radius:999px;background:#eef1f5;margin:34px 4px 36px}
+.barra .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transition:width .3s}
+.barra .mk{position:absolute;top:-10px;bottom:-10px;width:3px;background:var(--tinta);border-radius:3px}
+.barra .mk em{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:13px;font-weight:800;white-space:nowrap}
+.barra .mk.b em{top:auto;bottom:-24px}
+.peld,.esc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.pl{border-radius:20px;padding:12px;text-align:center;border:2px solid var(--borde);background:#fff;opacity:.5;transition:all .25s}
+.pl.on{opacity:1;border-color:var(--verde);background:#e9f9f0}
+.pl b{display:block;font-size:24px;color:var(--azul)}
+.pl small{display:block;color:var(--suave)}
+.sem label{display:block;font-size:13px;font-weight:700;color:var(--suave);margin-top:6px}
+.sem input{width:100%;font:800 22px 'Barlow',sans-serif;text-align:center;border:2px solid var(--borde);border-radius:12px;padding:4px;color:var(--tinta)}
+.sem .pc{margin-top:8px;font-weight:800;border-radius:10px;padding:4px;background:#f1f6f9}
+.chk{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:4px 0 10px;font-weight:600}
+.chk label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.chk input{accent-color:var(--azul)}
+.imp3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.imp3 .caja{margin:0}.imp3 p{margin:6px 0 0}
+.gridm.g6{grid-template-columns:repeat(6,1fr)}
+.gridm.g6 i{height:16px;line-height:16px;font-size:10px}
+.gridm i span{color:#2b2b2b}
+.mini2{font-size:15px;line-height:1.35;margin:6px 0 8px}
+.slider input{accent-color:var(--azul)}
+@media(max-width:760px){.tramos3,.peld,.esc,.imp3{grid-template-columns:1fr}.grid.g6 .cel{height:32px}.cel .l{display:none}.grid.g6{gap:3px}}
+
+.cel.pnd{opacity:.45}
+.cel.contado{opacity:1;box-shadow:0 0 0 3px var(--azul);animation:late .35s ease-in-out 1}
+.tabla{overflow-x:auto;border-radius:16px;border:1px solid var(--borde);background:#fff}
+.tabla table{border-collapse:collapse;width:100%;font-size:16px;min-width:520px}
+.tabla th,.tabla td{padding:8px 10px;border-bottom:1px solid #e8f0f4;text-align:center}
+.tabla td:first-child,.tabla th:first-child{text-align:left}
+.tabla th{background:#eaf5fb;color:var(--azul);font-weight:800}
+.tabla td small{color:var(--suave)}
+.tabla tr.tuyo td{background:#e9f9f0;font-weight:700}
+
+/* calculadora IS */
+section.calcsec{background:#14232c;color:#eef6fa;border-radius:32px;padding:6px 24px 28px;margin-top:48px}
+section.calcsec h2{color:#fff}section.calcsec .sub{color:#c6d8e2}
+section.calcsec>.caja{background:#1e323e;border-color:#2e4756;color:#eef6fa}
+section.calcsec .btn{background:transparent;color:#fff;border-color:#5fd3a0}
+section.calcsec .barra{background:#2e4756}section.calcsec .barra .mk{background:#fff}section.calcsec .barra .mk em{color:#fff}
+section.calcsec .total{color:#fff}section.calcsec .total b{color:#5fd3a0}
+nav.barra-niv a.calcbtn{background:#14232c;border-color:#14232c;color:#fff}
+nav.barra-niv a.calcbtn.ok{background:#14232c;color:#fff;box-shadow:0 0 0 2px #08B75B inset}
+.cpasos2 p{margin:6px 0}
+.cbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:12px}
+.vista{display:flex}
+.vista button{border:2px solid #5fd3a0;background:transparent;color:#fff;padding:7px 14px;font:800 14px 'Barlow',sans-serif;cursor:pointer}
+.vista button:first-child{border-radius:999px 0 0 999px}.vista button:last-child{border-radius:0 999px 999px 0;border-left:0}
+.vista button.on{background:#08B75B;border-color:#08B75B}
+.q21{display:flex;gap:6px;align-items:center;font-weight:700;cursor:pointer}.q21 input{accent-color:#08B75B}
+.ksem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.ksem.c5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.kw{background:#fff;color:var(--tinta);border-radius:20px;padding:10px;text-align:center}
+.kw h4{margin:0 0 6px;font-size:16px}
+.kf{display:flex;align-items:center;justify-content:space-between;gap:4px;margin:5px 0;border-radius:12px;padding:3px 4px}
+.kf.t-tot{background:#eaf5fb}
+.kf label{font-size:13px;font-weight:800;text-align:left;flex:1}
+.kf button{width:26px;height:26px;border-radius:50%;border:0;background:rgba(255,255,255,.75);font:900 15px 'Barlow',sans-serif;cursor:pointer;color:var(--tinta)}
+.kf input{width:38px;text-align:center;font:800 16px 'Barlow',sans-serif;border:0;background:transparent;color:var(--tinta)}
+.kf input::-webkit-inner-spin-button{display:none}
+.kw .res{margin-top:8px;border-radius:10px;padding:5px;background:#f1f6f9;font-weight:800;font-size:14px}
+.qres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.qres div{background:#fff;color:var(--tinta);border-radius:20px;padding:10px;text-align:center}
+.qres span{display:block;font-size:12px;font-weight:700;color:var(--suave);text-transform:uppercase}
+.qres b{font-size:30px}.qres .big b{color:var(--azul);font-size:36px}
+.kwhy{background:#1e323e;border:2px dashed #3b5868;border-radius:18px;padding:12px 16px;margin-top:12px;font-size:16px}.kwhy p{margin:4px 0}
+.total{text-align:center;font-size:22px;font-weight:800;margin-top:14px}.total b{font-size:30px}
+@media(max-width:760px){.ksem,.ksem.c5{grid-template-columns:repeat(2,minmax(0,1fr))}.kf{flex-wrap:wrap;justify-content:center}.kf label{flex-basis:100%;text-align:center}.qres{grid-template-columns:1fr}}
+.modal{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin:0 0 14px;padding:12px;border-radius:18px;background:#14232c;font-weight:800;font-size:17px}
+.modal small{flex-basis:100%;text-align:center;font-weight:600;color:#c6d8e2;font-size:14px}
+.kf label small{font-weight:700;color:#0b5e8f}
+section.calcsec .pl{color:var(--tinta)}section.calcsec .pl small{color:var(--suave)}section.calcsec .pl:not(.on){opacity:.6}
+section.calcsec .cobro{margin-top:16px;border-radius:20px;padding:14px 18px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);font-size:16px}
+section.calcsec .cobro .ct{display:block;font-size:19px;margin-bottom:2px}
+section.calcsec .cobro p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <button class="proyb" id="proyb" type="button">🖥️ Modo proyector</button>
+  <span class="eti">Inclusive Sport</span>
+  <h1>La escalera<br>de la ocupación</h1>
+  <p>Formación de los <b>pluses de productividad</b> de Inclusive Sport. Cuenta tus plazas, divide entre tus slots abiertos y mira a qué escalón llegas.</p>
+  <div class="deco" aria-hidden="true"><i class="y"></i><i class="y"></i><i class="g"></i><i></i><i class="y"></i><i class="o"></i><i class="y"></i><i class="y"></i></div>
+</header>
+
+<nav class="barra-niv" id="nav" aria-label="Niveles">
+  <a href="#inicio">Índice</a><a href="#calc" class="calcbtn">🧮 Calculadora</a><a href="#n0">0 · Por qué</a><a href="#n1">1 · Piezas</a><a href="#n2">2 · Semana y escalones</a><a href="#n3">3 · Mes</a><a href="#n5">4 · Reto final</a><a href="#pend">Pendiente</a>
+</nav>
+
+<section id="inicio">
+<h2>🎮 Índice del juego</h2>
+<p class="sub">Cinco niveles cortos y una calculadora. Puedes ir en orden o saltar al que necesites. Los niveles se marcan en el menú de arriba cuando los superas.</p>
+<div class="indice">
+  <a href="#n0"><span class="n">0</span><b>¿Por qué existe el plus?</b><small>Qué significa llenar el horario.</small></a>
+  <a href="#n1"><span class="n">1</span><b>Las piezas</b><small>Cuántas plazas tiene cada slot. Mini‑reto.</small></a>
+  <a href="#n2"><span class="n">2</span><b>Tu semana y tus escalones</b><small>Cuenta tus plazas, sube la escalera e importes.</small></a>
+  <a href="#n3"><span class="n">3</span><b>El mes</b><small>Cómo se suman las semanas y cuáles cuentan.</small></a>
+  <a href="#n5"><span class="n">4</span><b>Reto final</b><small>7 casos y 11 preguntas. ¿Te llevas el oro?</small></a>
+  <a href="#calc"><span class="n">🧮</span><b>Tu calculadora</b><small>Mete tus datos y mira tu % y tus pluses.</small></a>
+  <a href="#pend" class="pend"><span class="n">!</span><b>Medida pendiente</b><small>Mínimo 1 pareja.</small></a>
+</div>
+</section>
+
+<!-- NIVEL 0 -->
+<section id="n0">
+<h2><span class="paso">NIVEL 0</span>¿Por qué existe el plus?</h2>
+<p class="sub">Imagina un horario de 48 slots a la semana. No es lo mismo tener 38 ocupados que 44 o 48: cada hueco vacío es una sesión que no llega a ninguna familia y que la fundación sigue pagando.</p>
+<div class="caja">
+  <div class="negocio" id="neg">
+    <div class="r"><span>Ocupación</span><b>≤ 38/48</b><p>No es sostenible</p></div>
+    <div class="a"><span>Ocupación</span><b>39–43/48</b><p>Riesgo de no ser sostenible</p></div>
+    <div class="v"><span>Ocupación</span><b>≥ 44/48</b><p>Sostenible: Pegasus puede crecer y mejorar condiciones</p></div>
+  </div>
+  <div class="slider"><span>Mueve la barra:</span><input type="range" min="30" max="48" value="41" id="negR" aria-label="Slots ocupados"><span id="negV" style="min-width:64px">41/48</span></div>
+</div>
+<p class="sub">Por eso el plus premia que tu horario esté <b>lleno</b>. Y en Inclusive Sport, donde hay muchos grupos, cuanto más por encima del 100 % llegues, más escalones de plus subes.</p>
+</section>
+
+<!-- NIVEL 1 -->
+<section id="n1">
+<h2><span class="paso">NIVEL 1</span>Las piezas del juego</h2>
+<p class="sub">Cada <b>slot</b> es un hueco de 30 minutos. En Inclusive Sport lo que cuenta es muy sencillo: <b>¿cuántas personas hay en cada slot?</b> Esas son sus plazas.</p>
+<h3>🟨 Slots abiertos: sí puede haber sesión</h3>
+<div class="ley" id="ley"></div>
+<div class="ojo vacio"><b class="t">💡 ¿Qué cuenta como hueco vacío?</b>Aquí va un matiz importante: un hueco cuenta como <b>vacío</b> siempre que no haya una sesión que esté <b>pagando el usuario</b> (individual, pareja, trío o grupo). Por ejemplo, una <b>prueba gratuita</b> o una <b>recuperación</b> ocupan tu hueco, pero para el plus cuentan como vacío. 👀<br><br>Pero ojo, que no por eso dejan de ser importantes: una <b>prueba gratuita</b> puede convertirse en un alta y en un futuro hueco ocupado, y una <b>recuperación</b> evita tener que hacer una devolución económica que pondría en riesgo la sostenibilidad del proyecto.</div>
+<div class="ojo"><b class="t">👥 Ojo con los grupos que llevan dos profesionales</b>Las plazas son las personas que atiende <b>cada profesional</b>. Si un grupo de <b>5 usuarios</b> lo llevan <b>2 profesionales</b>, no son 5 plazas para cada uno: son <b>5 ÷ 2 = 2,5 plazas</b> para cada profesional, y ese slot cuenta como <b>1 slot abierto</b> para cada uno. Pasa sobre todo en piscina, con los grupos compartidos.</div>
+<h3>⬜ Slots cerrados: no hay sesión y no cuentan</h3>
+<div class="cerr">
+  <div class="t-lt" style="color:var(--tinta)!important"><b>LT · Libre temporal</b>No estás trabajando en ese hueco. No se mete a nadie, salvo que haya demanda y se decida abrirlo.</div>
+  <div class="t-tra"><b>Traslado</b>Te estás desplazando de un centro a otro.</div>
+  <div class="t-ga" style="color:var(--tinta)!important"><b>GA · Gestión adicional</b>Hueco reservado para gestión adicional.</div>
+</div>
+<p class="sub" style="margin-top:10px">Una idea clave: un <b>slot cerrado no cuenta</b>, ni como slot ni como plaza. Tu % se calcula solo con <b>tus</b> slots abiertos, sean los que sean.</p>
+<h3>🧠 Mini‑reto: ¿cuántas plazas hay en cada slot?</h3>
+<div class="reto" id="reto1"></div>
+<div class="marcador">Aciertos: <span class="pts" id="reto1P">0 / 6</span></div>
+</section>
+
+<!-- NIVEL 2 -->
+<section id="n2">
+<h2><span class="paso">NIVEL 2</span>Tu semana y tus escalones</h2>
+<p class="sub">Suma todas las plazas de tu semana y divídelas entre tus slots abiertos. Ese es tu % de ocupación. Según el % al que llegues, subes uno, dos o tres escalones de plus.</p>
+<div class="caja regla"><span class="pill">% ocupación</span> = <span class="pill m">Plazas totales ÷ Slots abiertos × 100</span></div>
+<div class="tramos3">
+  <div class="tr"><b>106 €</b>Plus 1<div class="q">desde el <b>100 %</b></div></div>
+  <div class="tr"><b>+75 €</b>Plus 2<div class="q">desde el <b>120 %</b></div></div>
+  <div class="tr"><b>+75 €</b>Plus 3<div class="q">desde el <b>130 %</b></div></div>
+</div>
+<p class="sub" style="text-align:center;margin-top:10px">Estos importes son para jornadas de <b>26 h y 30 h</b>. Con <b>jornada de 21 h</b> y en los <b>sabaderos</b>, los pluses cambian:</p>
+<div class="imp3">
+  <div class="caja"><b>Jornada de 26 h y 30 h</b><p>106 € + 75 € + 75 € = <b>256 €</b> al 130 %.</p></div>
+  <div class="caja"><b>Jornada de 21 h</b><p>El Plus 2 y el Plus 3 son de <b>66,50 €</b> cada uno: 106 € + 66,50 € + 66,50 € = <b>239 €</b> al 130 %.</p></div>
+  <div class="caja"><b>Sabaderos</b><p>Tienen un <b>plus único de 50 €</b> al llegar al 130 %.</p></div>
+</div>
+<p class="pista" style="text-align:center">Los escalones se acumulan. Importes brutos al mes.</p>
+<div class="ojo"><b class="t">👉🏼 Partimos del 100 % de ocupación</b>El Plus 1 empieza <b>justo en el 100 %</b>: necesitas tantas plazas como slots abiertos. Con 40 slots y 39 plazas estás al 97,5 % y no hay plus.</div>
+<h3>🎮 Cuenta tu semana</h3>
+<div class="caja">
+  <div class="botones" id="presets"></div>
+  <div class="grid g6" id="semana"></div>
+  <p class="pista">👆 Toca cualquier hueco para cambiar la pieza. Marca como cerrado lo que no tengas abierto.</p>
+  <div class="acciones">
+    <button class="btn grande" id="btnContar" type="button">▶ Contar plazas</button>
+    <button class="btn" id="btnReset" type="button">↺ Reiniciar</button>
+  </div>
+  <div class="tmsg" id="tmsg"></div>
+  <div class="calc">
+    <div class="dato"><span>Slots abiertos</span><b id="sA"></b></div>
+    <div class="dato"><span>Plazas totales</span><b id="sP"></b></div>
+    <div class="dato meta"><span>Ocupación</span><b id="sO"></b></div>
+    <div class="dato"><span>Siguiente escalón</span><b id="sN" style="font-size:20px"></b></div>
+  </div>
+  <div class="barra" id="sBar"></div>
+  <div class="peld" id="sPeld"></div>
+  <p class="nota">ℹ️ Estos importes son del <b>plus mensual</b>: se cobran si se llega a ese % con <b>todo el mes</b>. <a href="#n3">Ver nivel 3</a>.</p>
+</div>
+<h3>🪜 ¿Cuántas plazas necesito para cada escalón?</h3>
+<p class="sub">Depende de tus slots abiertos. Multiplica tus slots por 1,2 o por 1,3 y redondea hacia arriba.</p>
+<div class="caja">
+  <div class="tabla"><table id="escT"></table></div>
+  <div class="slider"><span>Prueba con tus slots abiertos:</span><input type="range" min="8" max="60" value="32" id="escR" aria-label="Slots abiertos"><span id="escV" style="min-width:40px;font-size:22px;font-weight:900"></span></div>
+</div>
+</section>
+
+<!-- NIVEL 3 -->
+<section id="n3">
+<h2><span class="paso">NIVEL 3</span>El mes</h2>
+<p class="sub">El plus se paga <b>una vez al mes</b>, con lo que pasó en el mes anterior. Es el mismo cálculo, pero con todas las semanas juntas: todas las plazas del mes entre todos los slots abiertos del mes.</p>
+<h3>➕ Sumar las semanas</h3>
+<p class="sub">No se hace la media de los %. Se suman los slots y las plazas de todas las semanas y se divide al final. Así, una semana floja se compensa con otra buena.</p>
+<div class="caja regla"><span class="pill">Plazas del mes</span> ÷ <span class="pill m">Slots abiertos del mes</span> × 100</div>
+<div class="caja">
+  <div class="botones" id="mPresets"></div>
+  <div class="chk">
+    <label><input type="radio" name="ns" value="4" checked> Mes de 4 semanas</label>
+    <label><input type="radio" name="ns" value="5"> Mes de 5 semanas</label>
+    <label><input type="checkbox" id="j21"> Mi jornada es de 21 h</label>
+  </div>
+  <div class="semanas" id="mes"></div>
+  <p class="pista" style="text-align:center">Escribe tus slots abiertos y tus plazas de cada semana.</p>
+  <div class="suma" id="mSuma"></div>
+  <div class="barra" id="mBar"></div>
+  <div class="peld" id="mPeld"></div>
+  <div class="veredicto" id="mVer"></div>
+</div>
+<h3>📅 ¿Qué semanas cuentan en cada mes?</h3>
+<p class="sub">Se cuentan <b>semanas completas</b> (de lunes a domingo), no del día 1 al 30. Si una semana está entre dos meses, cuenta para el mes que tiene <b>más días</b> de esa semana. Truco rápido: mira dónde cae el <b>jueves</b>. Por eso algunos meses tienen <b>5 semanas</b>.</p>
+<div class="caja">
+  <div class="botones" id="calB"></div>
+  <div class="cal" id="cal"></div>
+  <div class="veredicto meh" id="calV" style="margin-top:10px"></div>
+</div>
+</section>
+
+<!-- NIVEL 5 -->
+<section id="n5">
+<h2><span class="paso">NIVEL 4</span>Reto final</h2>
+<p class="sub">Ahora te toca a ti. Mira cada caso y responde. Jornada completa salvo que se diga lo contrario.</p>
+<div id="casos"></div>
+<div class="marcador">Puntos: <span class="pts" id="retoP">0 / 0</span></div>
+<div class="medalla" id="medalla"></div>
+</section>
+
+<!-- CALCULADORA -->
+<section id="calc" class="calcsec">
+<h2><span class="paso">🧮 CALCULADORA</span>¿A qué escalón llego este mes?</h2>
+<p class="sub">Mete los datos de cada semana y la calculadora hace la división por ti: plazas totales ÷ slots abiertos × 100.</p>
+<div class="caja cpasos2">
+  <p><b>Dos formas de rellenarla:</b></p>
+  <p>🧩 <b>Por piezas:</b> cuántos slots tuviste de cada tipo (vacíos, individuales, parejas, tríos y grupos). Los slots y las plazas se calculan solos. Primero elige si es <b>piscina</b> o <b>multideporte</b>: en piscina los grupos de 4 y de 5 se llevan entre 2 profesionales, así que sus plazas se dividen entre 2. Recuerda: las pruebas gratuitas y las recuperaciones van como <b>vacíos</b>, y los LT, traslados y GA <b>no se cuentan</b>.</p>
+  <p>🔢 <b>Ya tengo mis totales:</b> si ya sabes tus slots abiertos y tus plazas de cada semana, escríbelos directamente. Si tienes grupos compartidos con otro profesional, divide sus plazas entre los profesionales (un grupo de 5 entre 2 = 2,5 plazas para ti). Admite medios (0,5).</p>
+</div>
+<div class="caja">
+  <div class="modal"><span>¿Dónde trabajas?</span><div class="vista" id="qMod"><button type="button" data-z="pis">🏊 Piscina</button><button type="button" data-z="mul" class="on">⚽ Multideporte</button></div><small id="qModT"></small></div>
+  <div class="cbar">
+    <div class="vista" id="qModo"><button type="button" data-m="p" class="on">🧩 Por piezas</button><button type="button" data-m="t">🔢 Ya tengo mis totales</button></div>
+    <div class="vista" id="qSem"><button type="button" data-n="4" class="on">4 semanas</button><button type="button" data-n="5">5 semanas</button></div>
+    <label class="q21"><input type="checkbox" id="q21"> Jornada de 21 h</label>
+    <button type="button" class="btn" id="qEj">Cargar ejemplo</button><button type="button" class="btn" id="qVac">Vaciar</button>
+  </div>
+  <div class="ksem" id="qW"></div>
+  <div class="qres" id="qRes"></div>
+  <div class="barra" id="qBar"></div>
+  <div class="peld" id="qPeld"></div>
+  <div class="kwhy" id="qWhy"></div>
+  <div class="total" id="qTot"></div>
+  <div class="cobro"><b class="ct">📅 ¿Cuándo lo cobro?</b>
+  <p>El plus se cobra <b>a mes vencido</b>. ¿Por qué? Para calcularlo hay que esperar a que se cierre el mes, y las nóminas se mandan a la gestoría antes de que el mes termine.</p>
+  <p>Por ejemplo: tu agenda de <b>septiembre</b> se cierra el <b>1 de octubre</b>. Ese día calculamos los pluses y los repasamos con vosotros por si hay algún error que ajustar. Para entonces, la nómina de septiembre ya está preparada con la gestoría.</p>
+  <p>Así que el plus de septiembre te llega en la <b>nómina de octubre</b>, que en Pegasus cobras <b>entre el 1 y el 5 de noviembre</b>.</p>
+</div>
+</div>
+</section>
+
+<!-- PENDIENTE -->
+<section id="pend">
+<h2><span class="paso" style="background:#e2a400">PENDIENTE</span>Mínimo 1 pareja</h2>
+<div class="pend">
+  <span class="tag">🕓 Medida pendiente de aplicación</span>
+  <p style="margin:10px 0 0">Desde que se creó este sistema de pluses, en <b>verano de 2025</b>, existe esta medida pendiente: para optar a los pluses, habría que tener <b>al menos una pareja</b>, <b>siempre que el triaje de los usuarios lo permita</b>. Si por triaje no se puede hacer ninguna pareja, sí se podría optar a los pluses.</p>
+  <ul>
+    <li>Habrá formación y apoyo para crear parejas y grupos.</li>
+    <li>Se evaluará y registrará el triaje de todos los usuarios.</li>
+    <li>Los coordinadores supervisarán los casos en los que no sea posible hacer parejas.</li>
+  </ul>
+  <p style="margin:10px 0 0;color:var(--suave)">Ahora mismo no se aplica y los cálculos de esta formación no la tienen en cuenta, pero lleva tiempo pendiente y es posible que se aplique más adelante.</p>
+</div>
+</section>
+
+<footer>Fundación Pegasus · La escalera de la ocupación · Inclusive Sport · Octubre 2026</footer>
+</div>
+<div id="pal" role="menu"></div>
+
+<script>
+const T={
+ vac:{l:'Vacío',p:0,d:1},ind:{l:'Individual',p:1,d:1},par:{l:'Pareja',p:2,d:2,k:'P'},tri:{l:'Trío',p:3,d:3,k:'T'},gru:{l:'Grupo 4',p:4,d:4,k:'G'},
+ lt:{l:'LT',p:null,d:1},tra:{l:'Traslado',p:null,d:1},ga:{l:'GA',p:null,d:1}};
+const ABIERTOS=['ind','par','tri','gru','vac'],CERRADOS=['lt','tra','ga'];
+const DIAS=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const divs=t=>{let h='';for(let k=1;k<T[t].d;k++)h+='<b class="dv" style="left:'+(k*100/T[t].d)+'%"></b>';return h};
+const clone=o=>JSON.parse(JSON.stringify(o));
+const pct=x=>(Math.round(x*10)/10).toString().replace('.',',')+' %';
+const eur=x=>(x%1?x.toFixed(2).replace('.',','):x)+' €';
+const nec=(a,f)=>Math.ceil(a*f-1e-9);
+let J21=false;
+const imp=()=>[106,J21?66.5:75,J21?66.5:75];
+const tramo=(a,p)=>!a?0:10*p>=13*a?3:10*p>=12*a?2:p>=a?1:0;
+const cobro=(n,j)=>{const v=[106,j?66.5:75,j?66.5:75];let s=0;for(let k=0;k<n;k++)s+=v[k];return s};
+const vis=new Set(),hecho=new Set();
+function marcaNav(){[...nav.children].forEach(a=>{const id=a.getAttribute('href').slice(1);a.classList.toggle('vis',vis.has(id));a.classList.toggle('ok',hecho.has(id))})}
+proyb.onclick=()=>{document.body.classList.toggle('proy');proyb.textContent=document.body.classList.contains('proy')?'🖥️ Salir de proyector':'🖥️ Modo proyector'};
+
+/* NIVEL 0 */
+function pintaNeg(){const v=+negR.value;negV.textContent=v+'/48';const [r,a,g]=neg.children;
+ r.classList.toggle('on',v<=38);a.classList.toggle('on',v>38&&v<44);g.classList.toggle('on',v>=44)}
+negR.oninput=pintaNeg;pintaNeg();
+
+/* NIVEL 1 */
+ley.innerHTML=[['vac','0','Vacío','Slot abierto sin nadie: 0 plazas. Cuenta como slot, pero no suma plazas.'],['ind','1','Individual','1 persona en el slot: 1 plaza.'],['par','2','Pareja','2 personas en el mismo slot: 2 plazas.'],['tri','3','Trío','3 personas en el mismo slot: 3 plazas.'],['gru','4','Grupo de 4','4 personas en el mismo slot: 4 plazas. Un grupo más grande suma tantas plazas como personas.']]
+ .map(([t,b,n,s])=>'<div class="t-'+t+'">'+divs(t)+'<b>'+b+'</b><span>'+n+'</span><small>'+s+'</small></div>').join('');
+const R1=[['gru','4','4 personas: 4 plazas.'],['vac','0','Abierto y sin nadie: 0 plazas (pero sí cuenta como slot).'],['ind','1','1 persona: 1 plaza.'],['lt','No cuenta','Libre temporal: slot cerrado, no cuenta ni como slot.'],['par','2','2 personas: 2 plazas.'],['tra','No cuenta','Traslado: slot cerrado.']];
+const OPS=['0','1','2','3','4','No cuenta'];let r1ok=0;
+reto1.innerHTML=R1.map(([t],i)=>'<div class="pieza" id="p'+i+'"><div class="muestra t-'+t+'">'+divs(t)+'<span>'+T[t].l+'</span></div><div class="ops">'+OPS.map(o=>'<button type="button" data-i="'+i+'">'+o+'</button>').join('')+'</div><div class="fb"></div></div>').join('');
+reto1.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i,p=document.getElementById('p'+i);if(p.classList.contains('ok'))return;
+ if(b.textContent===R1[i][1]){b.classList.add('bien');p.classList.add('ok');p.querySelector('.fb').textContent='✅ '+R1[i][2];r1ok++;reto1P.textContent=r1ok+' / 6';if(r1ok===6){hecho.add('n1');marcaNav();reto1P.textContent='6 / 6 · ¡Nivel superado! 🎉'}}
+ else{b.classList.add('mal');p.querySelector('.fb').textContent='Casi. Prueba otra.'}});
+
+/* barra y escalones */
+function pintaPeld(el,a,p){const v=imp(),n=tramo(a,p);
+ el.innerHTML=['100 %','120 %','130 %'].map((t,k)=>'<div class="pl'+(n>k?' on':'')+'"><b>'+(k?'+':'')+eur(v[k])+'</b>Plus '+(k+1)+'<small>desde el '+t+'</small></div>').join('');
+ return cobro(n,J21)}
+function pintaBarra(el,a,p){if(!a){el.innerHTML='';return}const max=Math.max(a*1.45,p*1.03),x=n=>Math.min(100,n/max*100);
+ el.innerHTML='<div class="fill" style="width:'+x(p)+'%;background:'+(p>=a?'linear-gradient(90deg,#08B75B,#007EC3)':'linear-gradient(90deg,#f0a1c5,#D6191B)')+'"></div>'+
+ [[1,'100 % = '+a],[1.2,'120 % = '+nec(a,1.2)],[1.3,'130 % = '+nec(a,1.3)]].map(([f,t],k)=>'<div class="mk'+(k===1?' b':'')+'" style="left:'+x(a*f)+'%"><em>'+t+'</em></div>').join('')}
+function siguiente(a,p){const n=tramo(a,p);if(!a)return'—';if(n===3)return'¡Arriba del todo!';const obj=[a,nec(a,1.2),nec(a,1.3)][n];return'+'+(obj-p)+' para el '+['100','120','130'][n]+' %'}
+
+/* NIVEL 2 · semana */
+function g0(open){return DIAS.map((_,d)=>Array(8).fill(0).map((_,r)=>open(d,r)?'ind':'lt'))}
+function pre(open,m){const g=g0(open);m.forEach(([d,r,t])=>g[d][r]=t);return g}
+const LV=d=>d<5;
+const PRESETS={
+ 'Ejemplo 1 · justo 100 %':pre(LV,[[1,3,'vac'],[3,5,'par']]),
+ 'Ejemplo 2 · con sábado':pre(()=>true,[[0,2,'par'],[1,4,'par'],[2,1,'tri'],[4,6,'par'],[5,0,'par'],[5,3,'tri'],[3,7,'vac']]),
+ 'Ejemplo 3 · pocos slots':pre((d,r)=>d<4&&r<4,[[0,1,'par'],[1,2,'tri'],[2,0,'par']]),
+ 'Ejemplo 4 · al 130 %':pre(LV,[[0,2,'gru'],[3,5,'gru'],[1,1,'tri'],[2,6,'tri'],[4,0,'par'],[4,4,'par']]),
+ 'Ejemplo 5 · con huecos':pre(LV,[[0,1,'vac'],[1,6,'vac'],[2,3,'vac'],[3,0,'vac'],[4,5,'vac'],[2,6,'par']])};
+let PN='Ejemplo 2 · con sábado',G=clone(PRESETS[PN]),busy=false;
+function celHTML(t){return divs(t)+'<span class="l">'+T[t].l+'</span>'+(T[t].p!==null?'<span class="s">'+T[t].p+'</span>':'')}
+function cuentas(g){let a=0,p=0;g.forEach(c=>c.forEach(t=>{if(T[t].p!==null){a++;p+=T[t].p}}));return{a,p}}
+function pintaDatos(a,p,aTot){sA.textContent=aTot;sP.textContent=p;sO.textContent=aTot?pct(p/aTot*100):'—';sN.textContent=siguiente(aTot,p);pintaBarra(sBar,aTot,p);pintaPeld(sPeld,aTot,p)}
+function pintaSemana(){
+ semana.innerHTML='';tmsg.textContent='';
+ G.forEach((col,d)=>{const c=document.createElement('div');c.className='col';c.innerHTML='<div class="dia">'+DIAS[d]+'</div>';let bd=0;
+  col.forEach((t,r)=>{const b=document.createElement('button');b.type='button';b.className='cel t-'+t;b.dataset.d=d;b.dataset.r=r;b.dataset.t=t;
+   b.innerHTML=celHTML(t);b.setAttribute('aria-label',DIAS[d]+' slot '+(r+1)+': '+T[t].l);
+   b.onclick=e=>{e.stopPropagation();if(!busy)abrePal(b)};c.appendChild(b);if(T[t].p!==null)bd+=T[t].p});
+  const k=document.createElement('div');k.className='bal';k.textContent=bd+' pl.';c.appendChild(k);semana.appendChild(c)});
+ const {a,p}=cuentas(G);pintaDatos(a,p,a);
+ [...presets.children].forEach(b=>b.classList.toggle('on',b.textContent===PN))}
+Object.keys(PRESETS).forEach(n=>{const b=document.createElement('button');b.type='button';b.textContent=n;b.onclick=()=>{if(busy)return;PN=n;G=clone(PRESETS[n]);pintaSemana()};presets.appendChild(b)});
+pal.innerHTML='<div class="tit">Slot abierto</div>'+ABIERTOS.map(t=>'<button type="button" class="t-'+t+'" data-t="'+t+'">'+divs(t)+'<span>'+T[t].l+' ('+T[t].p+')</span></button>').join('')+
+ '<div class="tit">Slot cerrado (no cuenta)</div>'+CERRADOS.map(t=>'<button type="button" class="t-'+t+'" data-t="'+t+'"><span>'+T[t].l+'</span></button>').join('');
+let celAct=null;
+function abrePal(b){celAct=b;const r=b.getBoundingClientRect();pal.classList.add('on');
+ let x=r.left+window.scrollX;if(x+230>document.documentElement.clientWidth-8)x=document.documentElement.clientWidth-238;
+ pal.style.left=Math.max(8,x)+'px';pal.style.top=(r.bottom+window.scrollY+6)+'px'}
+pal.onclick=e=>{const b=e.target.closest('button');if(!b||!celAct)return;G[+celAct.dataset.d][+celAct.dataset.r]=b.dataset.t;PN=null;cierraPal();pintaSemana()};
+function cierraPal(){pal.classList.remove('on');celAct=null}
+document.addEventListener('click',e=>{if(!pal.contains(e.target))cierraPal()});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const espera=ms=>new Promise(r=>setTimeout(r,ms));
+btnContar.onclick=async()=>{
+ if(busy)return;cierraPal();pintaSemana();busy=true;btnContar.disabled=true;
+ const cels=[...semana.querySelectorAll('.cel')],{a}=cuentas(G);
+ cels.forEach(c=>{if(T[c.dataset.t].p===null)c.classList.add('usada');else c.classList.add('pnd')});
+ let p=0,n=0;pintaDatos(0,0,a);tmsg.textContent='Contando plazas…';
+ for(const c of cels){if(T[c.dataset.t].p===null)continue;
+  p+=T[c.dataset.t].p;c.classList.remove('pnd');c.classList.add('contado');
+  const nn=tramo(a,p);pintaDatos(0,p,a);
+  if(nn>n){n=nn;tmsg.innerHTML='🎉 ¡Escalón! Plus '+n+' ('+['','100','120','130'][n]+' %)';await espera(reduce?0:700)}
+  await espera(reduce?0:55)}
+ const o=pct(p/a*100);
+ tmsg.innerHTML=n===0?'🟥 '+p+' plazas ÷ '+a+' slots = '+o+'. No llega al 100 %: faltan '+(a-p)+' plaza'+(a-p>1?'s':'')+'.':
+  n===3?'🏆 '+p+' plazas ÷ '+a+' slots = '+o+'. ¡Tres escalones!':
+  '🪜 '+p+' plazas ÷ '+a+' slots = '+o+'. Llegas al Plus '+n+'. '+siguiente(a,p)+'.';
+ if(n>0){hecho.add('n2');marcaNav()}
+ busy=false;btnContar.disabled=false};
+btnReset.onclick=()=>{if(!busy)pintaSemana()};
+pintaSemana();
+
+/* tabla de escalones */
+function pintaEsc(){const tu=+escR.value;escV.textContent=tu;
+ const fila=(a,cl)=>'<tr'+(cl?' class="'+cl+'"':'')+'><td><b>'+a+'</b> slots'+(cl?' <small>(los tuyos)</small>':'')+'</td>'+[1,1.2,1.3].map(f=>{const p=nec(a,f);return'<td><b>'+p+'</b> plazas'+(p>a?' <small>(+'+(p-a)+')</small>':'')+'</td>'}).join('')+'</tr>';
+ escT.innerHTML='<thead><tr><th>Slots abiertos</th><th>100 % · Plus 1</th><th>120 % · Plus 2</th><th>130 % · Plus 3</th></tr></thead><tbody>'+fila(36)+fila(40)+fila(48)+fila(tu,'tuyo')+'</tbody>'}
+escR.oninput=pintaEsc;pintaEsc();
+
+/* NIVEL 3 · mes */
+const MP={'Sube al 120 %':[[40,48],[40,50],[40,46],[40,49],[40,45]],'Se compensa':[[40,37],[40,46],[40,41],[40,40],[40,42]],'No llega':[[40,38],[40,41],[40,39],[40,39],[40,40]],'Al 130 %':[[32,42],[32,41],[32,43],[32,42],[32,40]]};
+let W=clone(MP['Sube al 120 %']),NS=4,MN='Sube al 120 %';
+function pintaMes(){
+ mes.className='semanas'+(NS===5?' c5':'');
+ mes.innerHTML=W.slice(0,NS).map((w,k)=>'<div class="sem"><h4>Semana '+(k+1)+'</h4><label>Slots abiertos</label><input type="number" min="0" data-k="'+k+'" data-i="0" value="'+w[0]+'"><label>Plazas</label><input type="number" min="0" data-k="'+k+'" data-i="1" value="'+w[1]+'"><div class="pc">'+(w[0]?pct(w[1]/w[0]*100):'—')+'</div></div>').join('');
+ mes.querySelectorAll('input').forEach(i=>i.oninput=()=>{W[i.dataset.k][i.dataset.i]=Math.max(0,+i.value||0);MN=null;marcaM();calcMes();i.closest('.sem').querySelector('.pc').textContent=W[i.dataset.k][0]?pct(W[i.dataset.k][1]/W[i.dataset.k][0]*100):'—'});
+ marcaM();calcMes()}
+function marcaM(){[...mPresets.children].forEach(b=>b.classList.toggle('on',b.textContent===MN))}
+function calcMes(){
+ const ws=W.slice(0,NS),a=ws.reduce((s,w)=>s+w[0],0),p=ws.reduce((s,w)=>s+w[1],0),o=a?p/a*100:0;
+ mSuma.innerHTML='Slots del mes: <b>'+a+'</b> · Plazas del mes: <b>'+p+'</b> → <b style="color:#007EC3">'+p+' ÷ '+a+' = '+pct(o)+'</b>';
+ pintaBarra(mBar,a,p);const tot=pintaPeld(mPeld,a,p);
+ mVer.className='veredicto '+(tot?'si':'no');
+ mVer.innerHTML=tot?'💰 Plus del mes: <b>'+eur(tot)+'</b> brutos'+(J21?' (jornada de 21 h)':''):'Por debajo del 100 %: este mes no hay plus (faltan '+Math.max(0,a-p)+' plazas para llegar)'}
+Object.keys(MP).forEach(n=>{const b=document.createElement('button');b.type='button';b.textContent=n;b.onclick=()=>{MN=n;W=clone(MP[n]);pintaMes()};mPresets.appendChild(b)});
+document.querySelectorAll('input[name=ns]').forEach(r=>r.onchange=()=>{NS=+r.value;pintaMes()});
+j21.onchange=()=>{J21=j21.checked;pintaSemana();calcMes()};
+pintaMes();
+
+/* calendario */
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const CALM=[[2026,8],[2026,9],[2026,10],[2026,11],[2027,0],[2027,1],[2027,2],[2027,3],[2027,4],[2027,5],[2027,6]];
+let calSel=1;
+function pintaCal(){
+ const [y,m]=CALM[calSel];const d1=new Date(y,m,1),dl=new Date(y,m+1,0);
+ let lun=new Date(d1);lun.setDate(1-((d1.getDay()+6)%7));
+ let h='<div></div>'+['L','M','X','J','V','S','D'].map(x=>'<div class="h">'+x+'</div>').join('')+'<div></div>';let n=0;
+ while(lun<=dl){const ju=new Date(lun);ju.setDate(lun.getDate()+3);const cuenta=ju.getMonth()===m;if(cuenta)n++;
+  let fila='';for(let k=0;k<7;k++){const d=new Date(lun);d.setDate(lun.getDate()+k);fila+='<div class="d'+(d.getMonth()===m?' en':'')+(d.getMonth()===m&&cuenta?' cu':'')+(k===3?' ju':'')+'">'+d.getDate()+'</div>'}
+  h+='<div class="num">'+(cuenta?'S'+n:'')+'</div>'+fila+'<div class="etq '+(cuenta?'si':'no')+'">'+(cuenta?'✓ cuenta':'→ '+MESES[ju.getMonth()])+'</div>';
+  lun.setDate(lun.getDate()+7)}
+ cal.innerHTML=h;
+ calV.innerHTML='📆 '+MESES[m][0].toUpperCase()+MESES[m].slice(1)+' '+y+' tiene <b>'+n+' semanas</b>: se suman los slots y las plazas de esas '+n+' semanas.';
+ [...calB.children].forEach((b,i)=>b.classList.toggle('on',i===calSel))}
+CALM.forEach(([y,m],i)=>{const b=document.createElement('button');b.type='button';b.textContent=MESES[m].slice(0,3)+' '+String(y).slice(2);b.onclick=()=>{calSel=i;pintaCal()};calB.appendChild(b)});
+pintaCal();
+
+/* NIVEL 5 · reto final */
+const R100='<b>% ocupación = plazas totales ÷ slots abiertos × 100</b>. No hay hueco permitido: el Plus 1 empieza justo en el 100 %.';
+const RNEC='<b>Plazas necesarias = slots abiertos × 1,2 (para el 120 %) o × 1,3 (para el 130 %)</b>, redondeando hacia arriba.';
+const RTR='Escalones: <b>100 % → 106 € · 120 % → +75 € · 130 % → +75 €</b> (se acumulan; con jornada de 21 h, el 2 y el 3 son de 66,50 €).';
+const RANG=['Menos del 100 %','100 – 119 %','120 – 129 %','130 % o más'];
+const ESC=['Ninguno','Plus 1 (100 %)','Plus 2 (120 %)','Plus 3 (130 %)'];
+const CASOS=[
+ {tit:'Caso 1 · Semana de Lucía (L‑V, 40 slots)',sem:pre(LV,[[0,2,'vac'],[2,4,'vac'],[3,1,'par'],[1,5,'tri']])},
+ {tit:'Caso 2 · Semana de Pablo (L‑V, 40 slots)',sem:pre(LV,[[2,3,'vac']]),solo:true},
+ {tit:'Caso 3 · Marta tiene 36 slots abiertos a la semana',nec:[36,1.2]},
+ {tit:'Caso 4 · Andrés tiene 48 slots abiertos a la semana',nec:[48,1.3]},
+ {tit:'Caso 5 · Mes de Irene (4 semanas)',mes:[[40,44],[40,47],[40,46],[40,49]]},
+ {tit:'Caso 6 · Mes de Hugo (jornada de 21 h, 4 semanas)',mes:[[24,30],[24,29],[24,28],[24,30]],j21:true},
+ {tit:'Caso 7 · Mes de Sara (5 semanas)',mes:[[40,41],[40,38],[40,40],[40,39],[40,42]]}];
+const QS=CASOS.map(c=>{
+ if(c.sem){const {a,p}=cuentas(c.sem),n=tramo(a,p);
+  if(c.solo)return[['¿Llega al Plus 1 esta semana?',['Sí','No'],n?'Sí':'No',p+' plazas ÷ '+a+' slots = '+pct(p/a*100)+'. '+(n?'Llega.':'Un solo hueco vacío ya deja por debajo del 100 %.'),R100]];
+  const ops=[p-2,p-1,p,p+1].map(String);
+  return[['¿Cuántas plazas totales tiene la semana?',ops,String(p),'Cuenta personas: los individuales suman 1, la pareja 2, el trío 3 y los vacíos 0. Total: '+p+' plazas.','Cada slot suma tantas plazas como personas hay en él. Los vacíos suman 0 y los cerrados no cuentan.'],
+   ['¿A qué escalón llega?',ESC,ESC[n],p+' ÷ '+a+' = '+pct(p/a*100)+'. '+(n<3?'Para el siguiente escalón necesitaría '+[a,nec(a,1.2),nec(a,1.3)][n]+' plazas.':''),R100]]}
+ if(c.nec){const [a,f]=c.nec,p=nec(a,f),ops=[Math.floor(a*f)-2,Math.floor(a*f),p,p+2].map(String);
+  return[['¿Cuántas plazas necesita para el '+(f===1.2?'120':'130')+' %?',ops,String(p),a+' × '+String(f).replace('.',',')+' = '+String(Math.round(a*f*10)/10).replace('.',',')+' → redondeando hacia arriba, <b>'+p+' plazas</b> (+'+(p-a)+' por encima de sus slots).',RNEC]]}
+ const a=c.mes.reduce((s,w)=>s+w[0],0),p=c.mes.reduce((s,w)=>s+w[1],0),n=tramo(a,p),o=p/a*100,t=cobro(n,c.j21);
+ const ops=c.j21?['0 €','106 €','172,50 €','239 €']:['0 €','106 €','181 €','256 €'];
+ return[['¿Qué ocupación tiene el mes?',RANG,RANG[n],p+' plazas ÷ '+a+' slots = '+pct(o)+'.'+(c.mes.length===5?' Una semana floja se compensa con las demás.':''),R100],
+  ['¿Cuánto cobra de plus este mes?',ops,ops[n],n?'Llega al '+['','100','120','130'][n]+' % → '+(c.j21?['','106 €','106 € + 66,50 €','106 € + 66,50 € + 66,50 €'][n]:['','106 €','106 € + 75 €','106 € + 75 € + 75 €'][n])+(n>1?' = '+eur(t):'')+'.':'No llega al 100 %: no hay plus.',RTR]]});
+let pts=0,resp=0;const tot=QS.reduce((s,q)=>s+q.length,0);retoP.textContent='0 / '+tot;
+casos.innerHTML=CASOS.map((c,i)=>{let vis='';
+ if(c.sem)vis='<div class="gridm g6">'+c.sem.map(col=>'<div>'+col.map(t=>'<i class="t-'+t+'">'+divs(t)+'<span>'+(T[t].p===null?T[t].l:T[t].p)+'</span></i>').join('')+'</div>').join('')+'</div>';
+ else if(c.mes)vis='<div class="semanas'+(c.mes.length===5?' c5':'')+'">'+c.mes.map((w,k)=>'<div class="sem"><h4>Semana '+(k+1)+'</h4><div class="mini2">'+w[0]+' slots<br><b>'+w[1]+' plazas</b></div><div class="bal">?</div></div>').join('')+'</div>';
+ return '<div class="caso" id="c'+i+'"><h4>'+c.tit+'</h4>'+vis+QS[i].map((q,j)=>'<div class="q">'+q[0]+'</div><div class="ops">'+q[1].map(o=>'<button type="button" data-c="'+i+'" data-q="'+j+'">'+o+'</button>').join('')+'</div><div class="exp" id="e'+i+'_'+j+'"></div>').join('')+'</div>'}).join('');
+casos.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.c,j=+b.dataset.q,q=QS[i][j];
+ const grp=b.parentElement;if(grp.dataset.done)return;grp.dataset.done=1;resp++;
+ const ok=b.textContent===q[2];if(ok)pts++;
+ [...grp.children].forEach(x=>{if(x.textContent===q[2])x.classList.add('bien');else if(x===b)x.classList.add('mal')});
+ const ex=document.getElementById('e'+i+'_'+j);ex.classList.add('on');
+ ex.innerHTML=(ok?'✅ <b>¡Bien!</b> ':'❌ <b>La respuesta es «'+q[2]+'».</b> ')+q[3]+'<div class="rec">📌 Recuerda: '+q[4]+'</div>';
+ if(CASOS[i].mes&&j===0)[...document.querySelectorAll('#c'+i+' .bal')].forEach((x,k)=>{const w=CASOS[i].mes[k];x.textContent=pct(w[1]/w[0]*100)});
+ retoP.textContent=pts+' / '+tot;
+ if(resp===tot){const m=pts===tot?['🥇','¡Medalla de oro!','Dominas la escalera de la ocupación.']:pts>=tot-2?['🥈','¡Medalla de plata!','Casi perfecto. Repasa los casos que has fallado.']:['🥉','Medalla de bronce','Vuelve a los niveles 1 a 3 y repite el reto.'];
+  medalla.className='medalla on';medalla.innerHTML='<div class="m">'+m[0]+'</div><b>'+m[1]+'</b>'+pts+' de '+tot+' aciertos · '+m[2];
+  if(pts>=tot-2){hecho.add('n5');marcaNav()}}});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){vis.add(e.target.id);if(['n0','n3','n4','calc','pend'].includes(e.target.id))hecho.add(e.target.id);marcaNav()}}),{threshold:.25});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+
+/* CALCULADORA IS */
+(()=>{
+const QP=[['vac','Vacíos',0],['ind','Individuales',1],['par','Parejas',2],['tri','Tríos',3],['gru','Grupos de 4',4],['g5','Grupos de 5',5]];
+const QT=[['sa','Slots abiertos'],['pl','Plazas totales']];
+const EJP=[{vac:1,ind:30,par:4,tri:2,gru:1},{vac:2,ind:28,par:5,tri:2,gru:1},{ind:31,par:3,tri:3,gru:1},{vac:1,ind:29,par:4,tri:2,gru:2},{}];
+const EJT=[{sa:40,pl:48},{sa:40,pl:50},{sa:40,pl:46},{sa:40,pl:49},{}];
+let M='p',N=4,J=false,Z='mul',WP=EJP.map(x=>({...x})),WT=EJT.map(x=>({...x}));
+const g=(w,k)=>+(w[k]||0);
+const div=k=>Z==='pis'&&(k==='gru'||k==='g5')?2:1;
+const sp=w=>M==='p'?[QP.reduce((s,[k])=>s+g(w,k),0),QP.reduce((s,[k,,v])=>s+v*g(w,k)/div(k),0)]:[g(w,'sa'),g(w,'pl')];
+const fx=x=>String(Math.round(x*100)/100).replace('.',',');
+const QP_g=()=>WP.slice(0,N).some(w=>g(w,'gru')||g(w,'g5'));
+const vals=()=>[106,J?66.5:75,J?66.5:75];
+function pinta(){
+ const W=M==='p'?WP:WT,F=M==='p'?QP:QT;
+ qW.className='ksem'+(N===5?' c5':'');
+ qW.innerHTML=W.slice(0,N).map((w,i)=>{const [a,p]=sp(w);
+  return '<div class="kw"><h4>Semana '+(i+1)+'</h4>'+F.map(([k,l])=>'<div class="kf '+(M==='p'?'t-'+(k==='g5'?'gru':k):'t-tot')+'"><label>'+l+(M==='p'&&div(k)>1?' <small>(÷ 2)</small>':'')+'</label><button type="button" data-i="'+i+'" data-k="'+k+'" data-d="-1" aria-label="Menos">−</button><input type="number" min="0" step="'+(k==='pl'?'0.5':'1')+'" data-i="'+i+'" data-k="'+k+'" value="'+g(w,k)+'" aria-label="'+l+' semana '+(i+1)+'"><button type="button" data-i="'+i+'" data-k="'+k+'" data-d="1" aria-label="Más">+</button></div>').join('')+
+  '<div class="res">'+(M==='p'?a+' slots · '+fx(p)+' plazas<br>':'')+(a?pct(p/a*100):'—')+'</div></div>'}).join('');
+ calc()}
+function calc(){
+ const W=(M==='p'?WP:WT).slice(0,N);let a=0,p=0;W.forEach(w=>{const [x,y]=sp(w);a+=x;p+=y});
+ const o=a?p/a*100:0,n=tramo(a,p),v=vals(),tot=v.slice(0,n).reduce((s,x)=>s+x,0);
+ qRes.innerHTML='<div><span>Slots abiertos del mes</span><b>'+a+'</b></div><div><span>Plazas totales del mes</span><b>'+fx(p)+'</b></div><div class="big"><span>Ocupación</span><b>'+(a?pct(o):'—')+'</b></div>';
+ pintaBarra(qBar,a,p);
+ qPeld.innerHTML=['100 %','120 %','130 %'].map((t,k)=>'<div class="pl'+(n>k?' on':'')+'"><b>'+(k?'+':'')+eur(v[k])+'</b>Plus '+(k+1)+'<small>desde el '+t+'</small></div>').join('');
+ let w='';
+ if(!a)w='<p>Rellena tus datos para ver el resultado.</p>';
+ else{w='<p>🧮 '+fx(p)+' plazas ÷ '+a+' slots × 100 = <b>'+pct(o)+'</b></p>';
+  if(n===0)w+='<p>❌ <b>No llegas al Plus 1</b> porque estás por debajo del 100 %. Necesitas '+a+' plazas (tantas como slots) y tienes '+fx(p)+': te faltan <b>'+fx(a-p)+'</b>. Recuerda que en IS no hay hueco permitido.</p>';
+  else w+='<p>✅ <b>Llegas al Plus '+n+'</b> porque pasas del '+['','100','120','130'][n]+' %.</p>';
+  if(n>0&&n<3){const obj=[a,nec(a,1.2),nec(a,1.3)][n];w+='<p>🪜 Para el siguiente escalón ('+['','120','130'][n]+' %) necesitas <b>'+obj+' plazas</b>: te '+(obj-p>1?'faltan':'falta')+' <b>'+fx(obj-p)+'</b>.</p>'}
+  if(n===3)w+='<p>🏆 Estás en el escalón más alto.</p>';
+  if(M==='p'&&Z==='pis'&&QP_g())w+='<p>🏊 Piscina: tus grupos de 4 y de 5 cuentan la mitad de plazas, porque los llevas con otro profesional.</p>';
+  if(N===5)w+='<p>📅 Mes de 5 semanas: se suman las 5 semanas antes de dividir.</p>'}
+ qWhy.innerHTML=w;
+ qTot.innerHTML='Plus de este mes: <b>'+eur(tot)+'</b> brutos'+(J?' <small>(jornada de 21 h)</small>':'')}
+qW.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const w=(M==='p'?WP:WT)[+b.dataset.i],k=b.dataset.k;w[k]=Math.max(0,Math.min(400,g(w,k)+ +b.dataset.d));pinta()});
+qW.addEventListener('change',e=>{const i=e.target;if(i.tagName!=='INPUT')return;(M==='p'?WP:WT)[+i.dataset.i][i.dataset.k]=Math.max(0,Math.min(400,i.dataset.k==='pl'?Math.round((+String(i.value).replace(',','.')||0)*2)/2:Math.floor(+i.value||0)));pinta()});
+qMod.querySelectorAll('button').forEach(b=>b.onclick=()=>{Z=b.dataset.z;qMod.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));modT();pinta()});
+function modT(){qModT.innerHTML=Z==='pis'?'Grupos de 4 y de 5: plazas ÷ 2 (los llevan 2 profesionales).':'Los grupos no se dividen: cuentan todas sus personas.'}modT();
+qModo.querySelectorAll('button').forEach(b=>b.onclick=()=>{M=b.dataset.m;qModo.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));pinta()});
+qSem.querySelectorAll('button').forEach(b=>b.onclick=()=>{N=+b.dataset.n;qSem.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));pinta()});
+q21.onchange=()=>{J=q21.checked;calc()};
+qEj.onclick=()=>{if(M==='p')WP=EJP.map(x=>({...x}));else WT=EJT.map(x=>({...x}));pinta()};
+qVac.onclick=()=>{if(M==='p')WP=[{},{},{},{},{}];else WT=[{},{},{},{},{}];pinta()};
+pinta();
+})();
+</script>
+</body>
+</html>
