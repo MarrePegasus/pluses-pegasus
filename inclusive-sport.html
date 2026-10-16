@@ -259,6 +259,16 @@ nav.barra-niv a.calcbtn.ok{background:#14232c;color:#fff;box-shadow:0 0 0 2px #0
 .modal{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin:0 0 14px;padding:12px;border-radius:18px;background:#14232c;font-weight:800;font-size:17px}
 .modal small{flex-basis:100%;text-align:center;font-weight:600;color:#c6d8e2;font-size:14px}
 .kf label small{font-weight:700;color:#0b5e8f}
+.qtabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.qtabs button{border:2px solid #5fd3a0;background:transparent;color:#fff;border-radius:999px;padding:6px 16px;font:800 15px 'Barlow',sans-serif;cursor:pointer;line-height:1.1}
+.qtabs button small{display:block;font-weight:600;font-size:12px;opacity:.85}
+.qtabs button.on{background:#08B75B;border-color:#08B75B}
+.qdgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.dz{display:flex;gap:4px;justify-content:center;margin:0 0 6px;flex-wrap:wrap}
+.dz button{border:2px solid #08B75B;background:#fff;color:var(--tinta);border-radius:999px;padding:3px 9px;font:800 13px 'Barlow',sans-serif;cursor:pointer}
+.dz button.on{background:#08B75B;color:#fff}.dz button[data-z=pis].on{background:var(--azul);border-color:var(--azul)}
+.qcopy{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:12px;text-align:center}
+@media(max-width:760px){.qdgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 section.calcsec .pl{color:var(--tinta)}section.calcsec .pl small{color:var(--suave)}section.calcsec .pl:not(.on){opacity:.6}
 section.calcsec .cobro{margin-top:16px;border-radius:20px;padding:14px 18px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);font-size:16px}
 section.calcsec .cobro .ct{display:block;font-size:19px;margin-bottom:2px}
@@ -419,11 +429,10 @@ section.calcsec .cobro p{margin:6px 0}
 <p class="sub">Mete los datos de cada semana y la calculadora hace la división por ti: plazas totales ÷ slots abiertos × 100.</p>
 <div class="caja cpasos2">
   <p><b>Dos formas de rellenarla:</b></p>
-  <p>🧩 <b>Por piezas:</b> cuántos slots tuviste de cada tipo (vacíos, individuales, parejas, tríos y grupos). Los slots y las plazas se calculan solos. Primero elige si es <b>piscina</b> o <b>multideporte</b>: en piscina los grupos de 4 y de 5 se llevan entre 2 profesionales, así que sus plazas se dividen entre 2. Recuerda: las pruebas gratuitas y las recuperaciones van como <b>vacíos</b>, y los LT, traslados y GA <b>no se cuentan</b>.</p>
+  <p>🧩 <b>Por piezas:</b> en cada semana salen los días de lunes a sábado. En cada día eliges 🏊 <b>Piscina</b> o 🏀 <b>Multideporte</b> y rellenas sus casillas: cuántos slots tuviste de cada tipo (vacíos, individuales, parejas, tríos y grupos). Los grupos de piscina se dividen entre 2 solo en ese día. Los slots y las plazas se calculan solos. Los días que no trabajas, déjalos vacíos. Si tus semanas se parecen, rellena una y pulsa <b>«Copiar a las demás»</b>. Recuerda: las pruebas gratuitas y las recuperaciones van como <b>vacíos</b>, y los LT, traslados y GA <b>no se cuentan</b>.</p>
   <p>🔢 <b>Ya tengo mis totales:</b> si ya sabes tus slots abiertos y tus plazas de cada semana, escríbelos directamente. Si tienes grupos compartidos con otro profesional, divide sus plazas entre los profesionales (un grupo de 5 entre 2 = 2,5 plazas para ti). Admite medios (0,5).</p>
 </div>
 <div class="caja">
-  <div class="modal"><span>¿Dónde trabajas?</span><div class="vista" id="qMod"><button type="button" data-z="pis">🏊 Piscina</button><button type="button" data-z="mul" class="on">⚽ Multideporte</button></div><small id="qModT"></small></div>
   <div class="cbar">
     <div class="vista" id="qModo"><button type="button" data-m="p" class="on">🧩 Por piezas</button><button type="button" data-m="t">🔢 Ya tengo mis totales</button></div>
     <div class="vista" id="qSem"><button type="button" data-n="4" class="on">4 semanas</button><button type="button" data-n="5">5 semanas</button></div>
@@ -654,21 +663,39 @@ document.querySelectorAll('section').forEach(s=>io.observe(s));
 (()=>{
 const QP=[['vac','Vacíos',0],['ind','Individuales',1],['par','Parejas',2],['tri','Tríos',3],['gru','Grupos de 4',4],['g5','Grupos de 5',5]];
 const QT=[['sa','Slots abiertos'],['pl','Plazas totales']];
-const EJP=[{vac:1,ind:30,par:4,tri:2,gru:1},{vac:2,ind:28,par:5,tri:2,gru:1},{ind:31,par:3,tri:3,gru:1},{vac:1,ind:29,par:4,tri:2,gru:2},{}];
+const DIAS=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const dM=o=>({z:'mul',...o}),dP=o=>({z:'pis',...o}),vacW=()=>DIAS.map(()=>({z:'mul'}));
+const EJP=[
+ [dM({ind:6,par:1,tri:1}),dP({vac:1,ind:5,gru:2}),dM({ind:7,par:1}),dP({ind:5,gru:1,g5:1}),dM({vac:1,ind:6,tri:1}),{z:'mul'}],
+ [dM({ind:6,par:1,tri:1}),dP({vac:2,ind:4,gru:2}),dM({ind:6,par:2}),dP({ind:5,gru:1,g5:1}),dM({ind:7,tri:1}),{z:'mul'}],
+ [dM({ind:7,tri:1}),dP({ind:6,gru:2}),dM({vac:1,ind:6,par:1}),dP({ind:5,gru:1,g5:1}),dM({ind:6,par:1,tri:1}),{z:'mul'}],
+ [dM({ind:6,par:1,tri:1}),dP({vac:1,ind:5,gru:2}),dM({ind:7,par:1}),dP({vac:1,ind:4,gru:1,g5:2}),dM({ind:6,par:2}),{z:'mul'}],
+ null];
+const cpEJ=()=>EJP.map(w=>w?w.map(d=>({...d})):vacW());
 const EJT=[{sa:40,pl:48},{sa:40,pl:50},{sa:40,pl:46},{sa:40,pl:49},{}];
-let M='p',N=4,J=false,Z='mul',WP=EJP.map(x=>({...x})),WT=EJT.map(x=>({...x}));
+let M='p',N=4,J=false,S=0,WP=cpEJ(),WT=EJT.map(x=>({...x}));
 const g=(w,k)=>+(w[k]||0);
-const div=k=>Z==='pis'&&(k==='gru'||k==='g5')?2:1;
-const sp=w=>M==='p'?[QP.reduce((s,[k])=>s+g(w,k),0),QP.reduce((s,[k,,v])=>s+v*g(w,k)/div(k),0)]:[g(w,'sa'),g(w,'pl')];
+const dv=(d,k)=>d.z==='pis'&&(k==='gru'||k==='g5')?2:1;
+const sd=d=>[QP.reduce((s,[k])=>s+g(d,k),0),QP.reduce((s,[k,,v])=>s+v*g(d,k)/dv(d,k),0)];
+const sp=w=>{if(M!=='p')return[g(w,'sa'),g(w,'pl')];let a=0,p=0;w.forEach(d=>{const[x,y]=sd(d);a+=x;p+=y});return[a,p]};
 const fx=x=>String(Math.round(x*100)/100).replace('.',',');
-const QP_g=()=>WP.slice(0,N).some(w=>g(w,'gru')||g(w,'g5'));
+const QP_g=()=>WP.slice(0,N).some(w=>w.some(d=>d.z==='pis'&&(g(d,'gru')||g(d,'g5'))));
 const vals=()=>[106,J?66.5:75,J?66.5:75];
+const fld=(o,k,l,att,c,dn,aria)=>'<div class="kf '+c+'"><label>'+l+(dn>1?' <small>(÷ 2)</small>':'')+'</label><button type="button" '+att+' data-k="'+k+'" data-d="-1" aria-label="Menos">−</button><input type="number" min="0" step="'+(k==='pl'?'0.5':'1')+'" '+att+' data-k="'+k+'" value="'+g(o,k)+'" aria-label="'+l+' '+aria+'"><button type="button" '+att+' data-k="'+k+'" data-d="1" aria-label="Más">+</button></div>';
 function pinta(){
- const W=M==='p'?WP:WT,F=M==='p'?QP:QT;
- qW.className='ksem'+(N===5?' c5':'');
- qW.innerHTML=W.slice(0,N).map((w,i)=>{const [a,p]=sp(w);
-  return '<div class="kw"><h4>Semana '+(i+1)+'</h4>'+F.map(([k,l])=>'<div class="kf '+(M==='p'?'t-'+(k==='g5'?'gru':k):'t-tot')+'"><label>'+l+(M==='p'&&div(k)>1?' <small>(÷ 2)</small>':'')+'</label><button type="button" data-i="'+i+'" data-k="'+k+'" data-d="-1" aria-label="Menos">−</button><input type="number" min="0" step="'+(k==='pl'?'0.5':'1')+'" data-i="'+i+'" data-k="'+k+'" value="'+g(w,k)+'" aria-label="'+l+' semana '+(i+1)+'"><button type="button" data-i="'+i+'" data-k="'+k+'" data-d="1" aria-label="Más">+</button></div>').join('')+
-  '<div class="res">'+(M==='p'?a+' slots · '+fx(p)+' plazas<br>':'')+(a?pct(p/a*100):'—')+'</div></div>'}).join('');
+ if(S>=N)S=N-1;
+ if(M==='p'){
+  const w=WP[S],[a,p]=sp(w);
+  qW.className='qpz';
+  qW.innerHTML='<div class="qtabs">'+WP.slice(0,N).map((x,i)=>{const[b,q]=sp(x);return'<button type="button" data-s="'+i+'"'+(i===S?' class="on"':'')+'>Semana '+(i+1)+'<small>'+(b?pct(q/b*100):'—')+'</small></button>'}).join('')+'</div>'+
+  '<div class="qdgrid">'+w.map((d,j)=>{const[b,q]=sd(d);return'<div class="kw"><h4>'+DIAS[j]+'</h4><div class="dz"><button type="button" data-j="'+j+'" data-z="pis"'+(d.z==='pis'?' class="on"':'')+'>🏊 Piscina</button><button type="button" data-j="'+j+'" data-z="mul"'+(d.z==='mul'?' class="on"':'')+'>🏀 Multideporte</button></div>'+
+   QP.map(([k,l])=>fld(d,k,l,'data-j="'+j+'"','t-'+(k==='g5'?'gru':k),dv(d,k),DIAS[j].toLowerCase()+' semana '+(S+1))).join('')+
+   '<div class="res">'+(b?b+' slots · '+fx(q)+' plazas':'Sin datos')+'</div></div>'}).join('')+'</div>'+
+  '<div class="qcopy"><span>Semana '+(S+1)+': <b>'+a+' slots · '+fx(p)+' plazas · '+(a?pct(p/a*100):'—')+'</b></span>'+(N>1?'<button type="button" class="btn" data-copy="1">📋 Copiar la semana '+(S+1)+' a las demás</button>':'')+'</div>';
+ }else{
+  qW.className='ksem'+(N===5?' c5':'');
+  qW.innerHTML=WT.slice(0,N).map((w,i)=>{const [a,p]=sp(w);
+   return '<div class="kw"><h4>Semana '+(i+1)+'</h4>'+QT.map(([k,l])=>fld(w,k,l,'data-i="'+i+'"','t-tot',1,'semana '+(i+1))).join('')+'<div class="res">'+(a?pct(p/a*100):'—')+'</div></div>'}).join('')}
  calc()}
 function calc(){
  const W=(M==='p'?WP:WT).slice(0,N);let a=0,p=0;W.forEach(w=>{const [x,y]=sp(w);a+=x;p+=y});
@@ -683,19 +710,22 @@ function calc(){
   else w+='<p>✅ <b>Llegas al Plus '+n+'</b> porque pasas del '+['','100','120','130'][n]+' %.</p>';
   if(n>0&&n<3){const obj=[a,nec(a,1.2),nec(a,1.3)][n];w+='<p>🪜 Para el siguiente escalón ('+['','120','130'][n]+' %) necesitas <b>'+obj+' plazas</b>: te '+(obj-p>1?'faltan':'falta')+' <b>'+fx(obj-p)+'</b>.</p>'}
   if(n===3)w+='<p>🏆 Estás en el escalón más alto.</p>';
-  if(M==='p'&&Z==='pis'&&QP_g())w+='<p>🏊 Piscina: tus grupos de 4 y de 5 cuentan la mitad de plazas, porque los llevas con otro profesional.</p>';
+  if(M==='p'&&QP_g())w+='<p>🏊 Los días de piscina, tus grupos de 4 y de 5 cuentan la mitad de plazas, porque los llevas con otro profesional.</p>';
   if(N===5)w+='<p>📅 Mes de 5 semanas: se suman las 5 semanas antes de dividir.</p>'}
  qWhy.innerHTML=w;
  qTot.innerHTML='Plus de este mes: <b>'+eur(tot)+'</b> brutos'+(J?' <small>(jornada de 21 h)</small>':'')}
-qW.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const w=(M==='p'?WP:WT)[+b.dataset.i],k=b.dataset.k;w[k]=Math.max(0,Math.min(400,g(w,k)+ +b.dataset.d));pinta()});
-qW.addEventListener('change',e=>{const i=e.target;if(i.tagName!=='INPUT')return;(M==='p'?WP:WT)[+i.dataset.i][i.dataset.k]=Math.max(0,Math.min(400,i.dataset.k==='pl'?Math.round((+String(i.value).replace(',','.')||0)*2)/2:Math.floor(+i.value||0)));pinta()});
-qMod.querySelectorAll('button').forEach(b=>b.onclick=()=>{Z=b.dataset.z;qMod.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));modT();pinta()});
-function modT(){qModT.innerHTML=Z==='pis'?'Grupos de 4 y de 5: plazas ÷ 2 (los llevan 2 profesionales).':'Los grupos no se dividen: cuentan todas sus personas.'}modT();
+qW.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.s!==undefined){S=+b.dataset.s;return pinta()}
+ if(b.dataset.copy){const src=WP[S];WP=WP.map((w,i)=>i===S?w:src.map(d=>({...d})));return pinta()}
+ if(b.dataset.z){WP[S][+b.dataset.j].z=b.dataset.z;return pinta()}
+ if(!b.dataset.k)return;
+ const o=M==='p'?WP[S][+b.dataset.j]:WT[+b.dataset.i],k=b.dataset.k;o[k]=Math.max(0,Math.min(M==='p'?60:400,g(o,k)+ +b.dataset.d));pinta()});
+qW.addEventListener('change',e=>{const i=e.target;if(i.tagName!=='INPUT')return;const o=M==='p'?WP[S][+i.dataset.j]:WT[+i.dataset.i];o[i.dataset.k]=Math.max(0,Math.min(M==='p'?60:400,i.dataset.k==='pl'?Math.round((+String(i.value).replace(',','.')||0)*2)/2:Math.floor(+i.value||0)));pinta()});
 qModo.querySelectorAll('button').forEach(b=>b.onclick=()=>{M=b.dataset.m;qModo.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));pinta()});
 qSem.querySelectorAll('button').forEach(b=>b.onclick=()=>{N=+b.dataset.n;qSem.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));pinta()});
 q21.onchange=()=>{J=q21.checked;calc()};
-qEj.onclick=()=>{if(M==='p')WP=EJP.map(x=>({...x}));else WT=EJT.map(x=>({...x}));pinta()};
-qVac.onclick=()=>{if(M==='p')WP=[{},{},{},{},{}];else WT=[{},{},{},{},{}];pinta()};
+qEj.onclick=()=>{if(M==='p'){WP=cpEJ();S=0}else WT=EJT.map(x=>({...x}));pinta()};
+qVac.onclick=()=>{if(M==='p')WP=[0,0,0,0,0].map(vacW);else WT=[{},{},{},{},{}];pinta()};
 pinta();
 })();
 </script>
