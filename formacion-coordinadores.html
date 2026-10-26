@@ -190,7 +190,7 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
 
 <header id="inicio">
   <button class="proyb" id="proyb" type="button">🖥️ Modo proyector</button>
-  <span class="eti">💰 Pluses de productividad · Coordinadores · Hoja v4</span>
+  <span class="eti">💰 Pluses de productividad · Coordinadores · Hoja v4.2</span>
   <h1>La hoja de pluses</h1>
   <p>Tu trabajo es que el horario esté bien el viernes y revisar el resultado a primeros de mes. Las cuentas las hace la hoja.</p>
   <div class="prot">📘 <b>Protocolo 9 · Pluses de productividad</b> · Está en el archivo de protocolos que os envía Marre por correo (menú lateral → Pluses de productividad). Esta formación y el protocolo dicen lo mismo.</div>
@@ -212,8 +212,8 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
   <a href="#s1"><span class="n">1</span><b>El flujo en una imagen</b><small>Del horario a la nómina.</small></a>
   <a href="#s2"><span class="n">2</span><b>Calendario</b><small>Cada semana y cada mes.</small></a>
   <a href="#s3"><span class="n">3</span><b>Mapa de la hoja</b><small>Pestaña a pestaña.</small></a>
-  <a href="#s4"><span class="n">4</span><b>Las 2 pestañas que tocas</b><small>CONTROL y CIERRE.</small></a>
-  <a href="#s5"><span class="n">5</span><b>Casos prácticos</b><small>Seis casos y cómo se arreglan.</small></a>
+  <a href="#s4"><span class="n">4</span><b>Las 2 pestañas que tocas</b><small>CONTROL (también las horas) y CIERRE.</small></a>
+  <a href="#s5"><span class="n">5</span><b>Casos prácticos</b><small>Nueve casos y cómo se arreglan.</small></a>
   <a href="#s6"><span class="n">6</span><b>Avisos que vais a ver</b><small>Qué significan y qué hacer.</small></a>
   <a href="#s7"><span class="n">7</span><b>Correos automáticos</b><small>Semanal y mensual.</small></a>
   <a href="#s8" class="hoy"><span class="n">✓</span><b>Revisar el mes</b><small>Paso a paso, para marcar.</small></a>
@@ -251,10 +251,17 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
   <div class="hito"><span class="d">Lunes 13 h</span><b>Correo semanal</b><small>Automático (en prueba hasta el 9-nov).</small></div>
 </div></div>
 <div class="ok"><b class="t">🙌 Ya no hay que validar cada semana</b>No marcas nada semana a semana. Solo entras en ✅ CONTROL SEMANAL si algo está mal.</div>
+<div class="caja"><b style="font-size:20px">✏️ Cómo escribir en el horario (lo que lee la hoja)</b>
+<ul style="margin:8px 0 0">
+<li><b>Prueba gratuita:</b> <span class="am">PG - … 22/10</span> → la <b>fecha de la prueba siempre como última palabra</b>, separada por un espacio. Cuenta en la semana de esa fecha. Laura deja el PG hasta el <b>lunes siguiente</b> a la prueba.</li>
+<li><b>PG en T-LT / A-LT</b> = hora complementaria (40 min; 30 en Fisio): no es slot, pero suma horas. <b>PG en T0 / A0</b> = slot abierto normal.</li>
+<li><b>Códigos de gestión</b> (no son slots, sí son horas): <b>GT</b> 30 min · <b>GA</b> 1 h · <b>GH</b> 10 min <i>(nuevo)</i> · <b>M</b> metodología · <b>X</b> hueco no disponible. En IS, solo <b>T-LT / A-LT</b>.</li>
+<li>⏰ <b>Manda siempre la franja horaria</b> que pone el horario. Los minutos de arriba solo se usan si no hay franja.</li>
+</ul></div>
 <h3>🗓️ Cada mes</h3>
 <div class="linea mes"><div class="eje">
   <div class="hito"><span class="d">Día 2</span><b>Se prepara el CIERRE</b><small>Automático, con el mes anterior.</small></div>
-  <div class="hito tu"><span class="d">Días 2 a 6</span><b>Revisas y, al final, marcas 🟨 Revisado</b><small>Correcciones en CONTROL, Iberext, Sin plus IS.</small></div>
+  <div class="hito tu"><span class="d">Días 2 a 6</span><b>Revisas y, al final, marcas 🟨 Revisado</b><small>Correcciones en CONTROL, horas, Iberext, sin plus.</small></div>
   <div class="hito prof"><span class="d">Días 10 a 20</span><b>El profesional puede pedir revisión</b><small>Si hay que corregir: desmarcar, corregir, volver a marcar.</small></div>
   <div class="hito tu"><span class="d">Como tarde el 20</span><b>€ TOTAL al Control de Horas</b><small>La nómina va a la asesoría el 20.</small></div>
 </div></div>
@@ -273,16 +280,23 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
 <p class="sub">La hoja «Pluses Productividad» tiene muchas pestañas, pero tú solo escribes en dos.</p>
 <div class="oro"><span class="ic">🟨</span><div><b>Regla de oro: solo se tocan las celdas AMARILLAS.</b>Todo lo demás lo rellena la hoja. Si intentas cambiar otra celda, sale un aviso para que no se borre nada sin querer.</div></div>
 <div class="mapa">
-  <div class="tarj toca"><span class="tag">✏️ Celdas amarillas</span><h4>✅ CONTROL SEMANAL</h4><p><b>Qué es:</b> una fila por profesional, centro, servicio y semana. Es la foto del viernes.</p><p><b>Cuándo:</b> cuando una semana está mal. <b>Todas las correcciones se hacen aquí.</b></p></div>
-  <div class="tarj toca"><span class="tag">✏️ Celdas amarillas</span><h4>💰 CIERRE MES</h4><p><b>Qué es:</b> una fila por profesional y mes. Calcula el plus y el € TOTAL.</p><p><b>Cuándo:</b> cada mes, días 2-6. Revisado es lo último.</p></div>
+  <div class="tarj toca"><span class="tag">✏️ Celdas amarillas</span><h4>✅ CONTROL SEMANAL</h4><p><b>Qué es:</b> una fila por profesional, centro, servicio y semana. Es la foto del viernes.</p><p><b>Cuándo:</b> cuando una semana está mal. <b>Todas las correcciones se hacen aquí.</b></p><p>➡️ A la derecha, el <b>control de jornada</b>: horas del horario frente al contrato.</p><p>🔗 Fila 2: enlace a las copias «Completas».</p></div>
+  <div class="tarj toca"><span class="tag">✏️ Celdas amarillas</span><h4>💰 CIERRE MES</h4><p><b>Qué es:</b> una fila por profesional y mes. Calcula el plus y el € TOTAL.</p><p><b>Cuándo:</b> cada mes, días 2-6. Revisado es lo último.</p><p>🔗 Fila 2: enlace a las copias «Completas».</p></div>
   <div class="tarj lee"><span class="tag">👀 Solo leer</span><h4>📖 LÉEME</h4><p>Instrucciones resumidas de la hoja.</p></div>
   <div class="tarj lee"><span class="tag">👀 Solo si algo sale raro</span><h4>🗒️ REGISTRO</h4><p>Diario de cargas, correos y avisos.</p></div>
   <div class="tarj no"><span class="tag">🚫 Automático</span><h4>📥 FOTOS CARGADAS</h4><p>Qué foto se usó cada semana.</p></div>
   <div class="tarj no"><span class="tag">🚫 Ya no se usa</span><h4>🟨 AJUSTES SM-B-SS</h4><p>Ha desaparecido (está oculta). Las marcas SM, B o SS olvidadas ahora se corrigen en ✅ CONTROL.</p></div>
-  <div class="tarj no ancha"><span class="tag">🚫 Solo Marre</span><h4>⚙️ CONFIG · PESTAÑAS · PROFESIONALES · COORDINADORES</h4><p>Precios e importes, qué pestañas del horario se leen, ficha de cada profesional y datos de los correos. Si un profesional cambia de centro o falta algo aquí, <b>avisa a Marre</b>.</p></div>
+  <div class="tarj no ancha"><span class="tag">🚫 Solo Marre</span><h4>⚙️ CONFIG · PESTAÑAS · PROFESIONALES · COORDINADORES · SUSTITUCIONES</h4><p>Precios e importes, qué pestañas del horario se leen, ficha de cada profesional, datos de los correos y quién trabaja cada semana cuando el horario aún pone otro nombre. Si un profesional cambia de centro o falta algo aquí, <b>avisa a Marre</b>.</p></div>
 </div>
-<div class="info"><b class="t">🖱️ Pasa el ratón por el título</b>Cada columna amarilla, y también 🎯 y 🚦, tiene una nota en el título con qué poner y qué no. Si dudas, ponte encima del título y léela.</div>
+<div class="info"><b class="t">🔗 Las copias de cada semana, a un clic</b>En la <b>fila 2</b> de ✅ CONTROL y de 💰 CIERRE hay un enlace a la carpeta <b>«Completas (con nombres)»</b>: la foto de cada viernes, con nombres. Ábrela para comparar una semana con su fila de CONTROL. Es solo de lectura y de ese momento: el horario bueno es siempre el oficial.</div>
+<div class="info"><b class="t">🖱️ Pasa el ratón por el título</b>Cada columna amarilla, y también 🎯, 🚦 y ⏱️, tiene una nota en el título con qué poner y qué no. Si dudas, ponte encima del título y léela.</div>
 <div class="ojo"><b class="t">🔧 El menú 🟣 Pluses es solo de Marre</b>Volver a cargar una semana, reparar… lo hace Marre. Tú escribes en tus celdas amarillas y, si hace falta volver a cargar una semana, le avisas.</div>
+<div class="caja"><b style="font-size:20px">🔁 Si entra o sale un profesional</b>
+<ol style="margin:8px 0 0">
+<li>Cambia la cabecera del horario (<span class="am">PROFE N - NOMBRE</span>) <b>el primer día</b>.</li>
+<li><b>Avisa a Marre</b>: ella lo da de alta o de baja en ⚙️ PROFESIONALES y, si hace falta, en ⚙️ SUSTITUCIONES (esa pestaña no la tocas tú).</li>
+<li>En el cierre de ese mes, marca <span class="am">W · Sin plus por decisión coordi.</span> a quien entra o sale.</li>
+</ol></div>
 <h3>🔍 Tu vista de filtro</h3>
 <p class="sub">Así ves solo a tus profesionales, sin estropear lo que ven los demás. Ahora puedes <b>ordenar y filtrar</b> CONTROL y CIERRE sin problema.</p>
 <div class="vistas"><span>Datos</span><em>→</em><span>Vistas de filtro</span><em>→</em><span>Tu nombre</span></div>
@@ -296,28 +310,52 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
 <p class="sub">Siempre en la fila de <b>esa semana</b>. Se pone el <b>TOTAL correcto</b>, no la diferencia. Vacía = vale lo del horario.</p>
 <div class="cols">
   <div><b class="l">T</b><b>Incidencia:</b> por qué corriges algo. Solo texto. Siempre.</div>
-  <div><b class="l">U</b><b>Corrección slots:</b> el TOTAL correcto de slots abiertos de esa semana.</div>
+  <div><b class="l">U</b><b>Corrección slots abiertos:</b> el TOTAL correcto de slots abiertos de esa semana.</div>
   <div><b class="l">V</b><b>Corrección plazas:</b> el TOTAL correcto de plazas. En Psico y Fisio el ingreso se recalcula solo (cada plaza al precio anual).</div>
-  <div><b class="l">X Y Z</b><b>Corr. S. Mensual · Bonos · S. Sueltas</b> (solo Psico y Fisio): cuántas personas de ese tipo hubo esa semana, si faltaba la marca en el horario. 0 = ninguna. El ingreso se recalcula solo.</div>
+  <div><b class="l">W</b><b>Corr. slots sin plaza</b> <i>(nueva)</i>: el TOTAL de slots abiertos que se quedaron sin nadie. No cambia el plus: hace que cuadren los correos.</div>
+  <div><b class="l">Y Z AA</b><b>Corr. S. Mensual · Bonos · S. Sueltas</b> (solo Psico y Fisio): cuántas personas de ese tipo hubo esa semana, si faltaba la marca en el horario. 0 = ninguna. El ingreso se recalcula solo.</div>
+  <div><b class="l">AK</b><b>Corr. horas:</b> el TOTAL de horas correcto de esa fila, solo si están mal (ver control de jornada, más abajo).</div>
 </div>
-<div class="nota-w">⬜ <b>W · Corrección ingreso</b> ya no es amarilla: <b>no se toca</b> (solo Marre, en algún caso muy raro).</div>
+<div class="nota-w">⬜ <b>X · Corrección ingreso</b> no es amarilla: <b>no se toca</b> (solo Marre, en algún caso muy raro).</div>
+<div class="oro" style="background:linear-gradient(120deg,#e2a400,#E45E9B)"><span class="ic">☝️</span><div><b>Si corriges plazas (V), revisa también U y W.</b>Las tres columnas están juntas para eso. Si dejas W vacía, se calcula sola y suele acertar, pero <span style="font-weight:800">falla si el cambio es dentro de un slot que sigue ocupado</span> (pareja ↔ individual, grupo de 4 ↔ 5): ahí pon tú el número (caso 7).</div></div>
 <div class="hoja"><table>
-<thead><tr class="let"><th>D</th><th>E</th><th>H</th><th>I</th><th class="a">T</th><th class="a">U</th><th class="a">V</th><th class="g">W</th><th class="a">X</th><th class="a">Y</th><th class="a">Z</th></tr>
-<tr><th>Profesional</th><th>Semana</th><th>Slots</th><th>Plazas</th><th class="a">🟨 Incidencia</th><th class="a">🟨 Corr. slots</th><th class="a">🟨 Corr. plazas</th><th class="g">Corr. ingreso</th><th class="a">🟨 S. Mensual</th><th class="a">🟨 Bonos</th><th class="a">🟨 S. Sueltas</th></tr></thead>
+<thead><tr class="let"><th>D</th><th>E</th><th>H</th><th>I</th><th class="a">T</th><th class="a">U</th><th class="a">V</th><th class="a">W</th><th class="g">X</th><th class="a">Y</th><th class="a">Z</th><th class="a">AA</th></tr>
+<tr><th>Profesional</th><th>Semana</th><th>Slots</th><th>Plazas</th><th class="a">🟨 Incidencia</th><th class="a">🟨 Corr. slots abiertos</th><th class="a">🟨 Corr. plazas</th><th class="a">🟨 Corr. slots sin plaza</th><th class="g">Corr. ingreso</th><th class="a">🟨 S. Mensual</th><th class="a">🟨 Bonos</th><th class="a">🟨 S. Sueltas</th></tr></thead>
 <tbody>
-<tr><td>AIDA</td><td>31/08</td><td>26</td><td>25</td><td class="a t">Quitar 1 sesión anual individual</td><td class="a"></td><td class="cambio">24</td><td class="g"></td><td class="a"></td><td class="a"></td><td class="a"></td></tr>
-<tr><td>LUCÍA</td><td>14/09</td><td>22</td><td>21</td><td class="a t">2 mensuales sin «SM» en el horario</td><td class="a"></td><td class="a"></td><td class="g"></td><td class="cambio">2</td><td class="a"></td><td class="a"></td></tr>
+<tr><td>AIDA</td><td>31/08</td><td>26</td><td>25</td><td class="a t">Quitar 1 sesión anual individual</td><td class="a"></td><td class="cambio">24</td><td class="a"></td><td class="g"></td><td class="a"></td><td class="a"></td><td class="a"></td></tr>
+<tr><td>LUCÍA</td><td>14/09</td><td>22</td><td>21</td><td class="a t">2 mensuales sin «SM» en el horario</td><td class="a"></td><td class="a"></td><td class="a"></td><td class="g"></td><td class="cambio">2</td><td class="a"></td><td class="a"></td></tr>
 </tbody></table></div>
-<div class="ok"><b class="t">💶 Psico y Fisio: el ingreso se arregla solo</b>AIDA: con V = 24 el ingreso baja solo de 680,80 € a 654,85 € (una sesión anual de psico, 25,95 €). LUCÍA: con X = 2 el ingreso sube solo, porque 2 de sus plazas pasan de anual a mensual. No hace falta tocar nada más.</div>
-<div class="ojo"><b class="t">📆 Semana a semana</b>Ya no se puede corregir «todo el mes de golpe»: si una marca faltaba las 4 semanas, se corrige en las 4 filas. En septiembre no tienes que hacer nada: lo que había en AJUSTES ya está pasado a X-Z, y en Incidencia pone «SM/B/SS corregidos (venía de 🟨 AJUSTES)».</div>
+<div class="ok"><b class="t">💶 Psico y Fisio: el ingreso se arregla solo</b>AIDA: con V = 24 el ingreso baja solo de 680,80 € a 654,85 € (una sesión anual de psico, 25,95 €). LUCÍA: con Y = 2 el ingreso sube solo, porque 2 de sus plazas pasan de anual a mensual. No hace falta tocar nada más.</div>
+<div class="ojo"><b class="t">📆 Semana a semana</b>Ya no se puede corregir «todo el mes de golpe»: si una marca faltaba las 4 semanas, se corrige en las 4 filas. En septiembre no tienes que hacer nada: lo que había en AJUSTES ya está pasado a las columnas de SM, bonos y sueltas, y en Incidencia pone «SM/B/SS corregidos (venía de 🟨 AJUSTES)».</div>
+
+<h3>⏱️ CONTROL SEMANAL · control de jornada (columnas de la derecha)</h3>
+<p class="sub">Desde la carga del viernes 23 de octubre, cada fila de CONTROL trae también las <b>horas</b>: las del horario frente a su contrato. Así ves las <b>horas complementarias</b> sin hacer cuentas.</p>
+<div class="cols">
+  <div><b class="l">AJ</b><b>⏱️ Horas horario:</b> slots abiertos + GT + GA + GH + M + pruebas en hora cerrada. Manda la franja horaria.</div>
+  <div><b class="l">AK</b><b>🟨 Corr. horas:</b> solo si las horas de esa fila están mal. El TOTAL correcto (con decimales) y el motivo en Incidencia.</div>
+  <div><b class="l">AM AN</b><b>Contrato y diferencia:</b> horas de contrato a la semana (del Control de Horas) y cuántas hace de más o de menos.</div>
+  <div><b class="l">AO</b><b>⏱️ Aviso jornada:</b> la que miras tú.</div>
+</div>
+<div class="afs">
+  <div class="rojo"><b>⚠️ Más horas que su contrato</b>Revísalo y, si es correcto, apúntalo en el Control de Horas como horas complementarias.</div>
+  <div><b>ℹ️ Menos horas que su contrato</b>Mira si falta algo que no está en el horario.</div>
+  <div><b>✅ Cuadra</b>Nada que hacer.</div>
+  <div><b>⚪ No se encuentra su contrato</b>Avisa a Marre (falta el nombre completo o no coincide con el Control de Horas).</div>
+</div>
+<div class="ojo"><b class="t">🏊 Inclusive Sport</b>Un T3 de piscina a veces dura 45 min y las horas pueden salir mal. Si pasa, corrígelo en <span class="am">AK</span> y explícalo en Incidencia.</div>
 
 <h3>💰 CIERRE MES · tu revisión de cada mes</h3>
 <div class="cols">
   <div><b class="l">O</b><b>🟨 Sesiones Iberext realizadas:</b> Psico/Fisio con Iberext. <b>Las canceladas fuera de tiempo cuentan como realizadas.</b></div>
-  <div><b class="l">W</b><b>🟨 Sin plus IS:</b> si no le corresponde el plus (bajas o GT sin hacer). Se siguen viendo los datos; importe 0.</div>
+  <div><b class="l">W</b><b>🟨 Sin plus por decisión coordi.:</b> solo si <b>llega</b> al plus pero coordinación decide que no lo cobra (todos los programas). Ver el cuadro de abajo.</div>
   <div><b class="l">AA</b><b>€ TOTAL a nómina:</b> lo que pasas al Control de Horas. No se escribe: sale solo.</div>
   <div><b class="l">AE</b><b>🟨 Revisado:</b> el <b>último paso</b>. Penúltima columna, justo antes del Correo mensual.</div>
 </div>
+<div class="cols">
+  <div style="background:#fde2e2"><b>❌ No llega al plus</b><br>No marques nada. La hoja ya lo calcula: 🚦 🔴 o 🟡 y 0 €.</div>
+  <div style="background:#e8f8ef"><b>✅ Llega, pero coordinación decide que no cobra → marca W</b><br>Empezó a mitad de mes · se va (salvo decisión interna) · IS sin los condicionantes (bajas &gt; 4 % o GT) · otra decisión interna (avisa a Marre).</div>
+</div>
+<p style="font-size:16px">Con W marcada: todos los € a 0, 🚦 pone por ejemplo «🟢 Cumple (sin plus · decisión coordi.)» y el <b>correo mensual no habla del plus</b>: solo su ocupación, sus horas, el desglose de las semanas y «Si tienes cualquier duda, de lo que sea, escríbeme 💜».</p>
 <p><b>Estado (columna AB), en orden:</b></p>
 <div class="estados"><span>⏳ Sin datos</span><i>→</i><span>⚠️ Completar método</span><i>→</i><span>⚠️ Falta meter sesiones Iberext</span><i>→</i><span>👀 Pendiente de revisar</span><i>→</i><span>✅ Listo</span></div>
 <p style="font-size:15px;color:var(--suave)">«Sin datos» o «Completar método»: avisa a Marre. «Falta meter sesiones Iberext»: rellena la columna O.</p>
@@ -332,6 +370,7 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
   <div style="background:#e8f8ef"><b>🟢 Cumple</b>Llega al plus.</div>
   <div style="background:#fff6e0"><b>🟡 Cerca</b>Logo, T.O., Fisio y Psico: le faltan <b>6 plazas o menos</b> en el mes · IS: 95-99,9 % · Sabaderos: 125-129,9 %.</div>
   <div style="background:#fde2e2"><b>🔴 Lejos</b>Le falta más.</div>
+  <div style="background:#f1f3f5;grid-column:1/-1"><b>Con W marcada</b>🎯 y 🚦 añaden «sin plus · decisión coordi.».</div>
 </div>
 <p><b>📧 Correo mensual (columna AF)</b>, lo que puedes ver:</p>
 <div class="afs">
@@ -344,11 +383,13 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
 <h3>🧭 ¿Dónde corrijo?</h3>
 <table class="dc">
 <tr><th>Problema</th><th>Dónde</th><th>Qué pongo</th></tr>
-<tr><td>Sobra o falta una plaza</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">V</span> = total correcto · <span class="am">T</span> = motivo</td></tr>
-<tr><td>Sobra o falta un slot abierto</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">U</span> = total correcto · <span class="am">T</span> = motivo</td></tr>
-<tr><td>SM, bono o sesión suelta sin marcar (Psico/Fisio)</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">X</span> / <span class="am">Y</span> / <span class="am">Z</span> = cuántas personas de ese tipo · <span class="am">T</span> = motivo</td></tr>
+<tr><td>Sobra o falta una plaza</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">V</span> = total correcto · revisa <span class="am">U</span> y <span class="am">W</span> · <span class="am">T</span> = motivo</td></tr>
+<tr><td>Sobra o falta un slot abierto</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">U</span> = total correcto · revisa <span class="am">W</span> · <span class="am">T</span> = motivo</td></tr>
+<tr><td>Slots sin plaza mal (pareja ↔ individual…)</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">W</span> = total correcto · <span class="am">T</span> = motivo</td></tr>
+<tr><td>SM, bono o sesión suelta sin marcar (Psico/Fisio)</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">Y</span> / <span class="am">Z</span> / <span class="am">AA</span> = cuántas personas de ese tipo · <span class="am">T</span> = motivo</td></tr>
+<tr><td>Las horas de la fila están mal</td><td>✅ CONTROL, fila de esa semana</td><td><span class="am">AK</span> = total de horas · <span class="am">T</span> = motivo</td></tr>
 <tr><td>Sesiones de Iberext</td><td>💰 CIERRE MES</td><td><span class="am">O</span></td></tr>
-<tr><td>IS sin plus (bajas o GT)</td><td>💰 CIERRE MES</td><td><span class="am">W</span></td></tr>
+<tr><td>Llega al plus pero coordinación decide que no cobra</td><td>💰 CIERRE MES</td><td><span class="am">W</span> · Sin plus por decisión coordi.</td></tr>
 <tr><td>El mes está bien</td><td>💰 CIERRE MES</td><td><span class="am">AE</span> Revisado, lo último</td></tr>
 </table>
 <div class="info"><b class="t">✏️ Y además, el horario</b>Si el error venía del horario, corrígelo también allí para que las semanas siguientes salgan bien.</div>
@@ -357,7 +398,7 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
 <!-- 5 CASOS -->
 <section id="s5">
 <h2><span class="paso">5</span>Casos prácticos</h2>
-<p class="sub">Seis casos diferentes. Lee la situación, elige qué harías y luego mira qué se mira, qué se hace y qué resultado da. <i>(Nombres inventados.)</i></p>
+<p class="sub">Nueve casos diferentes. Lee la situación, elige qué harías y luego mira qué se mira, qué se hace y qué resultado da. <i>(Nombres inventados.)</i></p>
 
 <div class="caso" id="c1">
   <div class="cab"><span class="num">Caso 1</span><span class="serv" style="background:var(--morado)">Logopedia</span><b>La hora que se quedó vacía</b></div>
@@ -400,10 +441,10 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
   <div class="sol">
     <div class="pasos3">
       <div><b>👀 Qué mira</b>Las sesiones de Iberext del mes y, en ✅ CONTROL, las 4 semanas de Hugo: la columna S. Mensual está vacía, pero tiene 2 mensuales.</div>
-      <div><b>✏️ Qué hace</b>💰 CIERRE: <span class="am">O</span> = <b>8</b>. ✅ CONTROL, en sus <b>4 filas</b>: <span class="am">X</span> = <b>2</b> · <span class="am">T</span> = «2 mensuales sin SM en el horario». En el horario: <b>SM - Nombre</b>.</div>
+      <div><b>✏️ Qué hace</b>💰 CIERRE: <span class="am">O</span> = <b>8</b>. ✅ CONTROL, en sus <b>4 filas</b>: <span class="am">Y</span> = <b>2</b> · <span class="am">T</span> = «2 mensuales sin SM en el horario». En el horario: <b>SM - Nombre</b>.</div>
       <div><b>📊 Resultado</b>Iberext suma 320 € (8 × 10 € de reserva + 8 × 30 €). Las mensuales suman +64 € (+8 € × 2 × 4 semanas). <b>1.564,00 € → ✅ 65 €</b>.</div>
     </div>
-    <div class="res"><div class="antes"><b>Solo con Iberext</b>1.500,00 € &lt; 1.516,20 € → ❌ le faltan 16,20 €</div><div class="despues"><b>Con Iberext + X = 2</b>1.564,00 € ≥ 1.516,20 € → ✅ 65 €</div></div>
+    <div class="res"><div class="antes"><b>Solo con Iberext</b>1.500,00 € &lt; 1.516,20 € → ❌ le faltan 16,20 €</div><div class="despues"><b>Con Iberext + Y = 2</b>1.564,00 € ≥ 1.516,20 € → ✅ 65 €</div></div>
     <p>💡 Hacían falta los dos arreglos. Sin las mensuales, Hugo se quedaba sin plus por 16 €.</p>
   </div>
 </div>
@@ -415,7 +456,7 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
   <p class="preg">❓ ¿Qué es lo mejor?</p>
   <div class="opts" data-ok="0">
     <button type="button">A · Combinar la celda en el horario y avisar a Marre para que vuelva a cargar esa semana</button>
-    <button type="button">B · Marcar «Sin plus IS» a Paula</button>
+    <button type="button">B · Marcar «Sin plus por decisión coordi.» a Paula</button>
     <button type="button">C · No hacer nada: el grupo lo han llevado entre los dos igualmente</button>
   </div>
   <div class="fb"></div>
@@ -424,7 +465,7 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
     <div class="pasos3">
       <div><b>👀 Qué mira</b>El aviso y el horario del martes. Paula cuenta las 4 plazas; Mario, ni el slot ni las plazas.
       <div class="hoja"><table><thead><tr><th></th><th>Ahora</th><th>Correcto</th></tr></thead><tbody><tr><td>PAULA</td><td class="malo">12 · 16</td><td>12 · 14</td></tr><tr><td>MARIO</td><td class="malo">10 · 11</td><td>11 · 13</td></tr></tbody></table></div><small>(slots · plazas)</small></div>
-      <div><b>✏️ Qué hace</b>Combina la celda de usuarios del martes sobre Paula y Mario (solo en piscina) y avisa a Marre para que <b>vuelva a cargar la semana</b>. Lo escrito en amarillo no se borra. <b>Plan B:</b> Paula <span class="am">V</span> = 14; Mario <span class="am">U</span> = 11 y <span class="am">V</span> = 13; motivo en <span class="am">T</span>.</div>
+      <div><b>✏️ Qué hace</b>Combina la celda de usuarios del martes sobre Paula y Mario (solo en piscina) y avisa a Marre para que <b>vuelva a cargar la semana</b>. Lo escrito en amarillo no se borra. <b>Plan B:</b> Paula <span class="am">V</span> = 14; Mario <span class="am">U</span> = 11 y <span class="am">V</span> = 13 (revisa también <span class="am">W</span> de los dos); motivo en <span class="am">T</span>.</div>
       <div><b>📊 Resultado</b>Paula: de 131,3 % (Plus 3) a 127,1 % (Plus 2). Mario: de 117,9 % (Plus 1) a 120,0 % (Plus 2).</div>
     </div>
     <p>💡 Un error puede beneficiar a uno y perjudicar a otro. Por eso hay que mirar los avisos aunque el semáforo salga en verde.</p>
@@ -438,15 +479,15 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
   <p class="preg">❓ ¿Dónde lo corriges?</p>
   <div class="opts" data-ok="2">
     <button type="button">A · En 💰 CIERRE, escribiendo el ingreso bueno</button>
-    <button type="button">B · En ✅ CONTROL, columna W · Corrección ingreso</button>
-    <button type="button">C · En ✅ CONTROL, columna X · Corr. S. Mensual = 2, en esas dos semanas</button>
+    <button type="button">B · En ✅ CONTROL, columna X · Corrección ingreso</button>
+    <button type="button">C · En ✅ CONTROL, columna Y · Corr. S. Mensual = 2, en esas dos semanas</button>
   </div>
   <div class="fb"></div>
   <button class="btn" type="button">👀 Ver la solución</button>
   <div class="sol">
     <div class="pasos3">
       <div><b>👀 Qué mira</b>En ✅ CONTROL, las filas del 14/09 y del 21/09: la columna S. Mensual está vacía y en el horario esos dos usuarios no llevaban «SM».</div>
-      <div><b>✏️ Qué hace</b>En esas dos filas: <span class="am">X</span> = <b>2</b> · <span class="am">T</span> = «2 mensuales sin SM en el horario». En el horario: <b>SM - Nombre</b> para las semanas siguientes. La W no se toca.</div>
+      <div><b>✏️ Qué hace</b>En esas dos filas: <span class="am">Y</span> = <b>2</b> · <span class="am">T</span> = «2 mensuales sin SM en el horario». En el horario: <b>SM - Nombre</b> para las semanas siguientes. La X no se toca.</div>
       <div><b>📊 Resultado</b>Cada mensual factura 33,95 € en vez de 25,95 €: +8 € × 2 × 2 semanas = <b>+32 €</b>. De 2.160,00 € a 2.192,00 € → 🎯 «le sobran 12,20 €» · <b>✅ 65 €</b> · 🟢.</div>
     </div>
     <div class="res"><div class="antes"><b>Antes</b>2.160,00 € → le faltan 19,80 € · 🟡</div><div class="despues"><b>Después</b>2.192,00 € → le sobran 12,20 € · 🟢</div></div>
@@ -497,6 +538,71 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
     <p>💡 🟡 no quiere decir «no llega»: quiere decir «revísalo bien». La C nunca: V es para corregir plazas reales, no para regalarlas.</p>
   </div>
 </div>
+
+<div class="caso" id="c7">
+  <div class="cab"><span class="num">Caso 7</span><span class="serv" style="background:var(--morado)">Logopedia</span><b>La pareja que esa semana fue individual</b></div>
+  <h3>Sara · semana del 12/10</h3>
+  <p>Sara tiene una pareja los martes. La semana del 12/10 uno de los dos niños faltó toda la semana y no se recuperó: ese slot fue, en realidad, <b>individual</b>. En ✅ CONTROL la foto dice <b>25 slots abiertos · 26 plazas · 1 slot sin plaza</b>.</p>
+  <p class="preg">❓ ¿Qué pones?</p>
+  <div class="opts" data-ok="2">
+    <button type="button">A · Solo V = 25: el resto se arregla solo</button>
+    <button type="button">B · V = 25 y U = 24</button>
+    <button type="button">C · V = 25, U vacía (no cambia) y W = 1 a mano</button>
+  </div>
+  <div class="fb"></div>
+  <button class="btn" type="button">👀 Ver la solución</button>
+  <div class="sol">
+    <div class="pasos3">
+      <div><b>👀 Qué mira</b>Las tres columnas juntas: plazas (V), slots abiertos (U) y slots sin plaza (W). El slot del martes <b>sigue ocupado</b> (con 1 niño en vez de 2): no hay ningún slot nuevo vacío.</div>
+      <div><b>✏️ Qué hace</b><span class="am">V</span> = <b>25</b> · <span class="am">U</span> vacía · <span class="am">W</span> = <b>1</b> (lo que ya había) · <span class="am">T</span> = «Pareja del martes fue individual (faltó 1)». Si dejara W vacía, la hoja pondría 2: cree que la plaza que baja deja un hueco libre.</div>
+      <div><b>📊 Resultado</b>Plazas del mes: de 97 a 96. Con 100 slots en 4 semanas el objetivo es 96 → <b>sigue llegando, justo</b> (✅ 65 €). Y el correo dice bien «1 slot sin plaza».</div>
+    </div>
+    <p>💡 Corregir plazas siempre lleva a mirar U y W. Aquí el automático de W fallaba porque el cambio era dentro de un slot ocupado.</p>
+  </div>
+</div>
+
+<div class="caso" id="c8">
+  <div class="cab"><span class="num">Caso 8</span><span class="serv" style="background:var(--azul)">Inclusive Sport</span><b>La profesional que entra a mitad de mes</b></div>
+  <h3>Elena · empieza el miércoles 14 de octubre</h3>
+  <p>Elena entra el día 14 a cubrir un grupo de multideporte. En octubre trabaja sus semanas y en 💰 CIERRE llega al <b>108 %</b>: 🚦 <b>🟢 Cumple</b>, Plus 1 = 106 €.</p>
+  <p class="preg">❓ ¿Qué tenías que hacer y qué haces en el cierre?</p>
+  <div class="opts" data-ok="1">
+    <button type="button">A · Nada: si llega, cobra</button>
+    <button type="button">B · Cabecera nueva el día 14, aviso a Marre y, en el cierre, marcar W · Sin plus por decisión coordi.</button>
+    <button type="button">C · Escribir su nombre en ⚙️ SUSTITUCIONES</button>
+  </div>
+  <div class="fb"></div>
+  <button class="btn" type="button">👀 Ver la solución</button>
+  <div class="sol">
+    <div class="pasos3">
+      <div><b>👀 Qué mira</b>Que la cabecera del horario diga <span class="am">PROFE N - ELENA</span> desde el día 14, y que en CIERRE salga su fila (si no sale, Marre aún no la ha dado de alta).</div>
+      <div><b>✏️ Qué hace</b>El día 14 cambia la cabecera y <b>avisa a Marre</b> (alta en ⚙️ PROFESIONALES y, si hace falta, ⚙️ SUSTITUCIONES: esa pestaña la lleva Marre). En el cierre de octubre marca <span class="am">W</span> · Sin plus por decisión coordi.: empezó a mitad de mes.</div>
+      <div><b>📊 Resultado</b>🚦 «🟢 Cumple (sin plus · decisión coordi.)» · € TOTAL = 0. Su correo mensual solo habla de su ocupación y sus horas.</div>
+    </div>
+    <p>💡 ¿Y si se hubiera quedado en el <b>96 %</b>? Entonces <b>no se marca nada</b>: no llega, así que la hoja ya pone 0 €. W solo es para quien llega y no cobra.</p>
+  </div>
+</div>
+
+<div class="caso" id="c9">
+  <div class="cab"><span class="num">Caso 9</span><span class="serv" style="background:var(--azul)">Inclusive Sport · Piscina</span><b>Llega al plus, pero se va de Pegasus</b></div>
+  <h3>Raúl · cierre de octubre</h3>
+  <p>Raúl llega al <b>104 %</b> en octubre: 🚦 <b>🟢 Cumple</b>, Plus 1 = 106 €. Pero deja Pegasus a final de mes, y coordinación decide que ese último mes no cobra el plus.</p>
+  <p class="preg">❓ ¿Qué haces?</p>
+  <div class="opts" data-ok="0">
+    <button type="button">A · Marcar W · Sin plus por decisión coordi. y, al final, Revisado</button>
+    <button type="button">B · Poner menos plazas en V para que no llegue</button>
+    <button type="button">C · No marcar Revisado para que no le llegue el correo</button>
+  </div>
+  <div class="fb"></div>
+  <button class="btn" type="button">👀 Ver la solución</button>
+  <div class="sol">
+    <div class="pasos3">
+      <div><b>👀 Qué mira</b>Que los números estén bien (sus semanas en CONTROL): llega de verdad al 104 %.</div>
+      <div><b>✏️ Qué hace</b>💰 CIERRE: marca <span class="am">W</span> · Sin plus por decisión coordi. y, como último paso, <span class="am">AE</span> Revisado. Nunca se tocan las plazas para «quitar» un plus.</div>
+      <div><b>📊 Resultado</b>🚦 «🟢 Cumple (sin plus · decisión coordi.)» · € TOTAL = 0. El correo mensual le cuenta su ocupación (104 %), sus horas y el desglose de sus semanas, <b>sin hablar del plus</b>, y termina con «Si tienes cualquier duda, de lo que sea, escríbeme 💜».</div>
+    </div>
+  </div>
+</div>
 </section>
 
 <!-- 6 AVISOS -->
@@ -509,6 +615,7 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
   <div class="av"><b>IS · slots compartidos</b><span class="msg">ℹ️ N slot(s) compartidos</span><p>Información, no error.</p><p>👉 Comprueba que el número coincide con los grupos compartidos de ese profesional esa semana.</p></div>
   <div class="av"><b>Iberext sin sesiones</b><span class="msg">⚠️ Falta meter sesiones Iberext</span><p>Profesional de Psico/Fisio con slots de Iberext.</p><p>👉 Columna O del CIERRE (como en el caso 2).</p></div>
   <div class="av"><b>Sin datos o sin método</b><span class="msg">⏳ Sin datos · ⚠️ Completar servicio/método</span><p>Falta algo en la configuración.</p><p>👉 Avisa a Marre.</p></div>
+  <div class="av"><b>⏱️ Aviso jornada (CONTROL, columna AO)</b><span class="msg">⚠️ · ℹ️ · ✅ · ⚪</span><p>⚠️ más horas que su contrato · ℹ️ menos · ⚪ no encuentra su contrato.</p><p>👉 ⚠️: revisa y, si es correcto, al Control de Horas. ⚪: avisa a Marre.</p></div>
   <div class="av"><b>Casos especiales TPT</b><span class="msg">T0 / A0 que no debería contar</span><p>Prueba gratuita en una hora nueva (fuera de sus slots), hora complementaria sin usuario o LT mal puesto.</p><p>👉 En el horario, <b>T-LT / A-LT</b> antes del viernes. Si ya pasó, columna U (casos 1 y 6).</p></div>
 </div>
 </section>
@@ -518,8 +625,8 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
 <h2><span class="paso">7</span>Correos automáticos</h2>
 <div class="ojo"><b class="t">🧪 Ahora mismo están en MODO PRUEBA</b>Solo le llegan a Marre. Pasan solos a modo real el <b>lunes 9 de noviembre</b>: lo primero que recibirán los profesionales es el correo semanal de la semana del 2 de noviembre (la primera que cuenta para noviembre). El cierre de octubre, que revisáis del 2 al 6 de noviembre, todavía va en prueba.</div>
 <div class="mails">
-  <div class="mail"><div class="top"><b>📅 Correo semanal</b>Lunes ~13 h · al profesional, contigo en copia</div><div class="cuerpo"><p>• Su semana anterior y cómo va el mes.</p><p>• Una frase de «cómo vas» según su plus.</p><p>• Enlace a la copia del horario de esa semana.</p><p>• Si corriges una semana después, este correo <b>no se reenvía</b>.</p></div></div>
-  <div class="mail"><div class="top"><b>💜 Correo mensual</b>5-10 minutos después de marcar 🟨 Revisado, si el estado es ✅ Listo</div><div class="cuerpo"><p>• Empieza con una frase distinta cada mes (sale sola).</p><p>• Resultado del mes e importe, con las cifras ya corregidas semana a semana.</p><p>• Si no llega, un mensaje de apoyo.</p><p>• Mientras AF está en rojo (⏳), desmarcar lo cancela. Si ya salió, al volver a marcar sale una <b>versión actualizada</b>.</p></div></div>
+  <div class="mail"><div class="top"><b>📅 Correo semanal</b>Lunes ~13 h · al profesional, contigo en copia</div><div class="cuerpo"><p>• Empieza «Holiii Nombre 👋».</p><p>• Su semana anterior y el acumulado del mes, con la fila <b>Slots sin plaza</b>.</p><p>• <b>Previsión a final de mes</b>: «Si el resto del mes va como hasta ahora, te quedarías a N plazas del plus…». Si le faltan más de 6, un texto suave sin cifras.</p><p>• En IS con dos servicios, tabla <b>Piscina / Multideporte</b>.</p><p>• Sus <b>horas</b> de la semana frente a su contrato.</p><p>• Enlace a la copia del horario. Si corriges una semana después, este correo <b>no se reenvía</b>.</p></div></div>
+  <div class="mail"><div class="top"><b>💜 Correo mensual</b>5-10 minutos después de marcar 🟨 Revisado, si el estado es ✅ Listo</div><div class="cuerpo"><p>• Empieza con una frase distinta cada mes (sale sola).</p><p>• Resultado del mes e importe, con las cifras ya corregidas semana a semana y una columna de <b>Horas</b>.</p><p>• Con <b>W · Sin plus por decisión coordi.</b> no habla del plus: solo ocupación, horas y «escríbeme 💜».</p><p>• Si no llega, un mensaje de apoyo.</p><p>• Mientras AF está en rojo (⏳), desmarcar lo cancela. Si ya salió, al volver a marcar sale una <b>versión actualizada</b>.</p></div></div>
 </div>
 <div class="info"><b class="t">✍️ ¿Quién firma?</b>El coordinador con más slots de ese profesional en el mes. Si trabaja en zonas de dos coordinadores, el otro va en copia. Si el profesional responde, la respuesta te llega a ti.</div>
 </section>
@@ -528,21 +635,22 @@ footer{color:var(--suave);font-size:14px;text-align:center;margin-top:36px}
 <section id="s8" class="hoy">
 <h2><span class="paso" style="background:var(--amarillo);color:var(--tinta)">✓</span>Revisar el mes, paso a paso</h2>
 <p class="sub">Del día 2 al 6 de cada mes (ejemplo: septiembre, revisado en octubre). Marca cada paso al terminarlo.</p>
-<div class="barrap"><i id="bp"></i></div><div class="cont" id="cp">0 de 8</div>
+<div class="barrap"><i id="bp"></i></div><div class="cont" id="cp">0 de 9</div>
 <ul class="check" id="chk">
   <li><span class="bx"></span><div><b>1 · Abre 💰 CIERRE MES con tu vista de filtro</b><span>Datos → Vistas de filtro → tu nombre. Puedes ordenar y filtrar sin problema.</span></div></li>
   <li><span class="bx"></span><div><b>2 · Mira a TODOS tus profesionales</b><span>🚦 Semáforo (AD) y 🎯 Le falta / le sobra (AC) de cada uno.</span></div></li>
-  <li><span class="bx"></span><div><b>3 · Revisa sus semanas en ✅ CONTROL SEMANAL</b><span>Con más calma los 🟡, por arriba o por abajo. Compara con el horario: códigos de slot, cerrados (LT, T-LT / A-LT, GA, traslado), marcas SM / B / SS, grupos IS compartidos y avisos.</span></div></li>
-  <li><span class="bx"></span><div><b>4 · Corrige en CONTROL lo que esté mal</b><span><span class="am">U</span> slots · <span class="am">V</span> plazas · <span class="am">X</span> <span class="am">Y</span> <span class="am">Z</span> SM, bonos y sueltas (Psico/Fisio), siempre el total de la semana, y el motivo en <span class="am">T</span>. La W no se toca.</span></div></li>
-  <li><span class="bx"></span><div><b>5 · Psico y Fisio con Iberext</b><span>Sesiones realizadas en la columna <span class="am">O</span> del CIERRE, incluidas las canceladas fuera de tiempo.</span></div></li>
-  <li><span class="bx"></span><div><b>6 · IS con bajas o GT sin hacer</b><span>Marca <span class="am">Sin plus IS</span> (columna W del CIERRE) si aplica.</span></div></li>
-  <li><span class="bx"></span><div><b>7 · Por último, marca 🟨 Revisado (AE)</b><span>Comprueba que el Estado (AB) está en 👀 Pendiente de revisar. Al marcar, AF se pone en rojo y el correo sale a los 5-10 minutos. Si te has equivocado de fila, desmarca mientras esté en rojo.</span></div></li>
-  <li><span class="bx"></span><div><b>8 · € TOTAL al Control de Horas</b><span>El € TOTAL (columna AA) va a la hoja del mes en curso, columna «Pluses Productividad (mes anterior)». Como tarde el día 20.</span></div></li>
+  <li><span class="bx"></span><div><b>3 · Revisa sus semanas en ✅ CONTROL SEMANAL</b><span>Con más calma los 🟡, por arriba o por abajo. Abre la copia de cada semana desde el <b>enlace de la fila 2 («Completas»)</b> y compárala: códigos de slot, cerrados (LT, T-LT / A-LT, GA, traslado), marcas SM / B / SS, pruebas PG, grupos IS compartidos y avisos.</span></div></li>
+  <li><span class="bx"></span><div><b>4 · Corrige en CONTROL lo que esté mal</b><span><span class="am">U</span> slots abiertos · <span class="am">V</span> plazas · <span class="am">W</span> slots sin plaza · <span class="am">Y</span> <span class="am">Z</span> <span class="am">AA</span> SM, bonos y sueltas (Psico/Fisio), siempre el total de la semana, y el motivo en <span class="am">T</span>. <b>Si corriges V, revisa U y W.</b> La X no se toca.</span></div></li>
+  <li><span class="bx"></span><div><b>5 · Mira el ⏱️ Aviso jornada (columna AO)</b><span>⚠️ más horas → revisa y, si es correcto, al Control de Horas · ℹ️ menos horas → mira si falta algo · ⚪ → avisa a Marre. Si las horas están mal, <span class="am">AK</span>.</span></div></li>
+  <li><span class="bx"></span><div><b>6 · Psico y Fisio con Iberext</b><span>Sesiones realizadas en la columna <span class="am">O</span> del CIERRE, incluidas las canceladas fuera de tiempo.</span></div></li>
+  <li><span class="bx"></span><div><b>7 · ¿Llega pero no cobra?</b><span>Solo entonces marca <span class="am">W · Sin plus por decisión coordi.</span> (empezó a mitad de mes, se va, IS sin condicionantes u otra decisión). Si no llega, no marques nada.</span></div></li>
+  <li><span class="bx"></span><div><b>8 · Por último, marca 🟨 Revisado (AE)</b><span>Comprueba que el Estado (AB) está en 👀 Pendiente de revisar. Al marcar, AF se pone en rojo y el correo sale a los 5-10 minutos. Si te has equivocado de fila, desmarca mientras esté en rojo.</span></div></li>
+  <li><span class="bx"></span><div><b>9 · € TOTAL al Control de Horas</b><span>El € TOTAL (columna AA) va a la hoja del mes en curso, columna «Pluses Productividad (mes anterior)». Como tarde el día 20.</span></div></li>
 </ul>
 <div class="fin">🙋 ¿Te atascas o algo no cuadra? Escribe el motivo en Incidencia y avisa a Marre. Mejor preguntar que dejar un plus mal.</div>
 </section>
 
-<footer>Fundación Pegasus · La hoja de pluses · Formación para coordinadores · Hoja v4 · 21-oct-2026</footer>
+<footer>Fundación Pegasus · La hoja de pluses · Formación para coordinadores · Hoja v4.2 · 26-oct-2026</footer>
 </div>
 
 <script>
